@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 
 const contactSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    trim: true,
+  },
   name: {
     type: String,
     required: [true, "Name is required"],
@@ -16,9 +24,54 @@ const contactSchema = new mongoose.Schema({
     default: "General Inquiry",
     trim: true,
   },
+  phone: {
+    type: String,
+    trim: true,
+  },
+  company: {
+    type: String,
+    trim: true,
+  },
+  companyType: {
+    type: String,
+    trim: true,
+  },
+  support: {
+    type: [String],
+    default: [],
+  },
+  summary: {
+    type: String,
+    trim: true,
+  },
+  reference: {
+    type: String,
+    trim: true,
+  },
+  attachmentName: {
+    type: String,
+    trim: true,
+  },
+  deadline: {
+    type: String,
+    trim: true,
+  },
+  budget: {
+    type: String,
+    trim: true,
+  },
+  comments: {
+    type: String,
+    trim: true,
+  },
   message: {
     type: String,
     required: [true, "Message is required"],
+  },
+  source: {
+    type: String,
+    default: "website",
+    trim: true,
   },
   read: {
     type: Boolean,

@@ -19,7 +19,7 @@ export function AppHeader() {
           </a>
 
           <div
-            className="relative"
+            className="relative py-5"
             onMouseEnter={() => setIsServicesOpen(true)}
             onMouseLeave={() => setIsServicesOpen(false)}
           >
@@ -33,7 +33,7 @@ export function AppHeader() {
             </button>
 
             {isServicesOpen && (
-              <div className="absolute left-1/2 top-8 w-[720px] -translate-x-1/2 rounded-lg border border-slate-200 bg-white p-5 shadow-2xl">
+              <div className="absolute left-1/2 top-full w-[720px] -translate-x-1/2 rounded-2xl border border-slate-200 bg-white p-5 shadow-2xl">
                 <div className="grid grid-cols-2 gap-x-10 gap-y-3">
                   {services.map((service) => (
                     <a

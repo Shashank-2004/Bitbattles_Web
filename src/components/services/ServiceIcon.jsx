@@ -82,6 +82,12 @@ const iconPaths = {
       <path d="M12 20h8" />
     </>
   ),
+  shield: (
+    <>
+      <path d="M12 3 20 7v5c0 5-3.4 8.5-8 9-4.6-.5-8-4-8-9V7Z" />
+      <path d="m9.5 12 1.7 1.7 3.8-4" />
+    </>
+  ),
 };
 
 export function ServiceIcon({ name }) {

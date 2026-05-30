@@ -30,9 +30,8 @@ export function ServicesPage() {
           variants={staggerContainer}
         >
           {services.map((service) => (
-            <motion.a
+            <motion.article
               className="group rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:border-bitOrange/50 hover:shadow-xl"
-              href={service.href}
               key={service.id}
               variants={fadeUp}
               whileHover={{ y: -7 }}
@@ -42,7 +41,18 @@ export function ServicesPage() {
               </div>
               <h2 className="mt-6 text-xl font-black">{service.title}</h2>
               <p className="mt-3 text-sm leading-7 text-slate-600">{service.description}</p>
-            </motion.a>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a className="text-sm font-black text-bitOrange hover:text-bitCharcoal" href={service.href}>
+                  View service &rarr;
+                </a>
+                <a
+                  className="text-sm font-black text-bitCharcoal hover:text-bitOrange"
+                  href={`/proposal?service=${service.id}`}
+                >
+                  Request service &rarr;
+                </a>
+              </div>
+            </motion.article>
           ))}
         </motion.div>
       </section>

@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import { BrandLogo } from "../brand/BrandLogo";
 import { Reveal } from "../common/Reveal";
 import { ServiceIcon } from "../services/ServiceIcon";
 import { company } from "../../data/company";
-import { projects } from "../../data/site";
+import { projects, sectors } from "../../data/site";
 import { services } from "../../data/services";
 import { fadeUp, staggerContainer } from "../../lib/motion";
 import { HomeHero } from "./HomeHero";
@@ -116,6 +115,35 @@ export function HomePage() {
                 </div>
                 <h3 className="mt-5 text-lg font-black text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-300">{text}</p>
+              </motion.article>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="sectors" className="bg-white py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <SectionTitle eyebrow="Sectors">Where BitBattles can build</SectionTitle>
+
+          <motion.div
+            className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {sectors.map((sector, index) => (
+              <motion.article
+                className="group rounded-2xl border border-slate-200 bg-[#fff8f4] p-6 shadow-sm"
+                key={sector.title}
+                variants={fadeUp}
+                whileHover={{ y: -6 }}
+              >
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-bitCharcoal text-sm font-black text-bitOrange">
+                  0{index + 1}
+                </div>
+                <h3 className="text-xl font-black text-bitCharcoal">{sector.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{sector.description}</p>
               </motion.article>
             ))}
           </motion.div>
@@ -253,31 +281,6 @@ export function HomePage() {
         </div>
       </section>
 
-      <footer className="bg-white py-14">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 md:grid-cols-[1.2fr_2fr] lg:px-8">
-          <div>
-            <BrandLogo />
-            <p className="mt-5 max-w-sm text-sm leading-6 text-slate-600">{company.description}</p>
-          </div>
-
-          <div className="grid gap-8 sm:grid-cols-3">
-            {[
-              ["Company", ["About us", "Portfolio", "Blog", "Careers"]],
-              ["Services", ["AI Development", "Web Development", "App Development", "UI/UX Design"]],
-              ["Contact", [company.location, company.website, "hello@bitbattles.in"]],
-            ].map(([title, links]) => (
-              <div key={title}>
-                <h3 className="text-sm font-black text-bitCharcoal">{title}</h3>
-                <ul className="mt-5 space-y-3 text-sm text-slate-600">
-                  {links.map((link) => (
-                    <li key={link}>{link}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }

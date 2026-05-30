@@ -29,7 +29,17 @@ NODE_ENV=development
 MONGO_URI=mongodb+srv://bitbattles-admin:<ask-shashank-for-password>@cluster0.oioqpcf.mongodb.net/bitbattles?appName=Cluster0
 JWT_SECRET=<ask-shashank-for-secret>
 JWT_EXPIRE=7d
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=http://localhost:5173,http://localhost:5174
+
+# Optional email settings. Leave blank until company email/SMTP is ready.
+SMTP_HOST=
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=
+SMTP_PASS=
+MAIL_FROM=
+CONTACT_TO_EMAIL=
+AUTO_REPLY_ENABLED=false
 ```
 
 ### 4. Start the Server
@@ -54,8 +64,10 @@ Here are the active endpoints you can `fetch` from the React frontend.
 
 ### 📞 Contact
 * **Submit Form (Public):** `POST /api/contact`
-  * **Body:** `{ "name": "...", "email": "...", "subject": "...", "message": "..." }`
-  * **Note:** This is currently integrated into `ContactPage.jsx`.
+  * **Body:** supports the full website intake form, including `firstName`, `lastName`, `email`, `phone`, `company`, `companyType`, `support`, `summary`, `reference`, `attachmentName`, `deadline`, `budget`, and `comments`.
+  * **Fallback Body:** `{ "name": "...", "email": "...", "subject": "...", "message": "..." }`
+  * **Spam Protection:** includes IP rate limiting plus a hidden honeypot field named `website`.
+  * **Email:** MongoDB storage works now. Email notifications and auto-replies activate only when SMTP env values are provided.
 
 ### 💼 Portfolio
 * **Get All Projects (Public):** `GET /api/portfolio`

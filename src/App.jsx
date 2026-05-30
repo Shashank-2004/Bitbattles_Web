@@ -1,10 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { AppHeader } from "./components/layout/AppHeader";
+import { ProposalCta } from "./components/layout/ProposalCta";
+import { SiteFooter } from "./components/layout/SiteFooter";
 import { HomePage } from "./components/home/HomePage";
 import { AboutPage } from "./pages/AboutPage";
 import { CareersPage } from "./pages/CareersPage";
 import { ContactPage } from "./pages/ContactPage";
 import { PortfolioPage } from "./pages/PortfolioPage";
+import { ProposalPage } from "./pages/ProposalPage";
 import { services } from "./data/services";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
@@ -27,6 +30,7 @@ function App() {
     "/services": <ServicesPage />,
     "/about": <AboutPage />,
     "/portfolio": <PortfolioPage />,
+    "/proposal": <ProposalPage />,
     "/careers": <CareersPage />,
     "/contact": <ContactPage />,
   };
@@ -46,6 +50,8 @@ function App() {
           {page}
         </motion.div>
       </AnimatePresence>
+      {pathname !== "/proposal" && <ProposalCta />}
+      <SiteFooter />
     </div>
   );
 }

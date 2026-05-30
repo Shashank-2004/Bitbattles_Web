@@ -3,6 +3,8 @@ import { Reveal } from "../components/common/Reveal";
 import { defaultHeroImage } from "../data/services";
 
 export function ServicePage({ service }) {
+  const proposalHref = `/proposal?service=${service.id}`;
+
   return (
     <main className="bg-bitCharcoal">
       <section className="relative overflow-hidden">
@@ -23,10 +25,10 @@ export function ServicePage({ service }) {
             <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center">
               <motion.a
                 className="service-card-focus inline-flex w-fit items-center justify-center gap-2 rounded-md bg-bitOrange px-8 py-4 text-base font-black uppercase tracking-[0.08em] text-white transition hover:-translate-y-0.5 hover:bg-orange-600"
-                href="#contact"
+                href={proposalHref}
                 whileHover={{ y: -3, scale: 1.02 }}
               >
-                Consult Our Experts <span aria-hidden="true">&rarr;</span>
+                Request Service <span aria-hidden="true">&rarr;</span>
               </motion.a>
 
               <div className="flex flex-wrap items-center gap-3 text-white" aria-label="Service delivery approach">
@@ -58,6 +60,33 @@ export function ServicePage({ service }) {
                 Create. Innovate. Dominate.
               </p>
             </div>
+          </Reveal>
+        </div>
+      </section>
+      <section className="bg-white px-5 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-[0.8fr_1.2fr]">
+          <Reveal>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-bitOrange">
+              Proposal ready
+            </p>
+            <h2 className="mt-3 text-4xl font-black tracking-normal text-bitCharcoal">
+              Need this service scoped for your company?
+            </h2>
+          </Reveal>
+          <Reveal className="rounded-3xl border border-slate-200 bg-[#fff8f4] p-7">
+            <p className="text-base leading-8 text-slate-700">
+              Share your requirements and BitBattles will use your selected service as context for
+              the proposal request. You can add budget, deadline, and project details on the next
+              page.
+            </p>
+            <motion.a
+              className="mt-6 inline-flex rounded-xl bg-bitCharcoal px-6 py-3 text-sm font-black text-white transition hover:bg-bitOrange"
+              href={proposalHref}
+              whileHover={{ y: -3, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Request a Proposal
+            </motion.a>
           </Reveal>
         </div>
       </section>

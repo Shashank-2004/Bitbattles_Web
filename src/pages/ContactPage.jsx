@@ -4,12 +4,12 @@ import { Reveal } from "../components/common/Reveal";
 import { company } from "../data/company";
 
 const supportOptions = [
-  "AI",
-  "Blockchain",
-  "XR",
-  "Web / App Development",
-  "Partnership",
-  "Staff Augmentation",
+  "AI Solutions",
+  "SaaS Development",
+  "Web Development",
+  "Mobile Apps",
+  "Cyber Security",
+  "Automation",
 ];
 
 const companyTypes = ["Startup", "Growing Business", "Agency / Partner"];
@@ -42,6 +42,7 @@ const initialFormData = {
   summary: "",
   reference: "",
   attachmentName: "",
+  website: "",
   deadline: "",
   budget: "Please select",
   comments: "",
@@ -61,25 +62,7 @@ function Field({ label, required, children }) {
 const inputClass =
   "mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none transition placeholder:text-slate-400 focus:border-bitOrange focus:bg-white/[0.14]";
 
-function buildBackendPayload(formData) {
-  const name = `${formData.firstName} ${formData.lastName}`.trim();
-  const selectedServices = formData.support.length ? formData.support.join(", ") : "Not specified";
-  const subject = selectedServices === "Not specified" ? "Website inquiry" : selectedServices;
-  const message = [
-    `Phone: ${formData.phone || "Not provided"}`,
-    `Company: ${formData.company || "Not provided"}`,
-    `Company type: ${formData.companyType || "Not selected"}`,
-    `Support needed: ${selectedServices}`,
-    `Summary: ${formData.summary}`,
-    `Reference: ${formData.reference || "Not provided"}`,
-    `Attachment: ${formData.attachmentName || "Not attached"}`,
-    `Deadline: ${formData.deadline || "Not selected"}`,
-    `Budget: ${formData.budget}`,
-    `Comments: ${formData.comments || "None"}`,
-  ].join("\n");
-
-  return { name, email: formData.email, subject, message };
-}
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export function ContactPage() {
   const [formData, setFormData] = useState(initialFormData);
@@ -113,10 +96,10 @@ export function ContactPage() {
     setErrorMessage("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(buildBackendPayload(formData)),
+        body: JSON.stringify({ ...formData, source: "website-contact-page" }),
       });
 
       const data = await response.json();
@@ -154,6 +137,15 @@ export function ContactPage() {
             className="mt-12 rounded-3xl border border-white/10 bg-white/10 p-6 shadow-2xl shadow-black/20 backdrop-blur md:p-8"
             onSubmit={handleSubmit}
           >
+            <input
+              autoComplete="off"
+              className="hidden"
+              name="website"
+              onChange={handleChange}
+              tabIndex="-1"
+              value={formData.website}
+            />
+
             {status === "success" && (
               <div className="mb-6 rounded-xl border border-green-500/50 bg-green-500/20 p-4 text-green-200">
                 <p className="font-bold">Message sent successfully.</p>
@@ -202,7 +194,6 @@ export function ContactPage() {
                   className={inputClass}
                   name="phone"
                   onChange={handleChange}
-                  placeholder="+91 98765 43210"
                   required
                   value={formData.phone}
                 />
