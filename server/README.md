@@ -91,7 +91,7 @@ server/
 
 ## 🛠️ Next Steps / Proceedings for Teammates
 
-**@Krrish & Frontend Team:**
+**@Sannidhya & Frontend Team:**
 1. Now that the backend is running, you can connect the **Portfolio Page** and **Blog Page** (when ready) to fetch real data from these APIs instead of using static hardcoded arrays.
 2. The **Contact Page** is already wired up as an example! Look at `src/pages/ContactPage.jsx` to see how we used `fetch()` to send data to the backend.
 
