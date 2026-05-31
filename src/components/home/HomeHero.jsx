@@ -8,7 +8,7 @@ const splineSceneUrl = import.meta.env.VITE_SPLINE_SCENE_URL || "undefined";
 
 const floatingCards = [
   { label: "AI Solutions", className: "left-6 top-8", path: { x: [0, 16, -8, 0], y: [0, -18, 8, 0] } },
-  { label: "SaaS Development", className: "right-8 top-16", path: { x: [0, -14, 10, 0], y: [0, 14, -10, 0] } },
+  { label: "QA & Testing", className: "right-8 top-16", path: { x: [0, -14, 10, 0], y: [0, 14, -10, 0] } },
   { label: "Web Development", className: "left-10 top-1/2", path: { x: [0, 12, -10, 0], y: [0, 18, -8, 0] } },
   { label: "Mobile Apps", className: "right-4 top-[48%]", path: { x: [0, -18, 8, 0], y: [0, -12, 14, 0] } },
   { label: "Cyber Security", className: "left-16 bottom-12", path: { x: [0, 18, -12, 0], y: [0, -10, 16, 0] } },
@@ -44,13 +44,13 @@ export function HomeHero() {
       <div className="relative mx-auto grid min-h-[720px] max-w-7xl items-center gap-12 px-5 py-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
         <Reveal className="relative z-20">
           <p className="inline-flex rounded-full border border-bitOrange/30 bg-white/10 px-5 py-2 text-xs font-black uppercase tracking-[0.14em] text-orange-200 backdrop-blur">
-            AI, SaaS, Software & Security
+            AI, Software, Apps & Security
           </p>
           <h1 className="mt-6 max-w-xl text-5xl font-black leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
             We Build. You Scale. We Win.
           </h1>
           <p className="mt-7 max-w-xl text-base font-medium leading-8 text-slate-300">
-            BitBattles builds SaaS products, websites, mobile apps, cybersecurity interfaces,
+            BitBattles builds websites, mobile apps, AI solutions, cybersecurity interfaces,
             security systems, and automation workflows for modern teams.
           </p>
 

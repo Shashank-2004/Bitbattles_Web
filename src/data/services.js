@@ -13,19 +13,6 @@ export const services = [
     color: "#ff6a2a",
   },
   {
-    id: "saas-development",
-    title: "SaaS Development",
-    heroTitle: "SaaS Development Services",
-    heroDescription:
-      "Product architecture, dashboards, subscriptions, and scalable SaaS experiences for early-stage teams.",
-    description:
-      "Subscription platforms, admin dashboards, user workflows, and scalable SaaS product foundations.",
-    icon: "enterprise",
-    href: "/services/saas-development",
-    emoji: "🏗️",
-    color: "#6366f1",
-  },
-  {
     id: "web-development",
     title: "Web Development",
     heroTitle: "Web Development Services",

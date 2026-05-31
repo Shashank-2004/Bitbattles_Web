@@ -37,7 +37,7 @@ const offerings = [
   {
     icon: "📐",
     title: "Product Design",
-    desc: "End-to-end product design from concept to pixel-perfect specs — dashboards, SaaS, e-commerce, and internal tools.",
+    desc: "End-to-end product design from concept to pixel-perfect specs — dashboards, web apps, e-commerce, and internal tools.",
     tags: ["Figma", "Prototyping", "Design Systems"],
   },
   {
@@ -79,7 +79,7 @@ const faqs = [
   },
   {
     q: "How long does a typical UI/UX design project take?",
-    a: "A landing page design takes 1–2 weeks. A full product design (SaaS, app) typically takes 4–10 weeks depending on scope. We'll scope your project precisely in our first call.",
+    a: "A landing page design takes 1–2 weeks. A full product design (web app, mobile app) typically takes 4–10 weeks depending on scope. We'll scope your project precisely in our first call.",
   },
   {
     q: "Do you provide design files I can hand off to developers?",
@@ -103,7 +103,7 @@ const otherServices = [
   { emoji: "🧠", title: "AI Solutions", desc: "Intelligent AI workflows & assistants", href: "/services/ai-solutions", color: "#ff6a2a" },
   { emoji: "🌐", title: "Web Development", desc: "High-performance websites & apps", href: "/services/web-development", color: "#0ea5e9" },
   { emoji: "📱", title: "Mobile Apps", desc: "iOS & Android app development", href: "/services/mobile-apps", color: "#10b981" },
-  { emoji: "🏗️", title: "SaaS Development", desc: "Subscription platforms & dashboards", href: "/services/saas-development", color: "#6366f1" },
+  { emoji: "✅", title: "QA & Testing", desc: "Quality assurance & automated testing", href: "/services/qa-testing", color: "#14b8a6" },
   { emoji: "🛡️", title: "Cyber Security", desc: "Secure digital product experiences", href: "/services/cyber-security", color: "#ef4444" },
   { emoji: "⚡", title: "Automation", desc: "Workflow automation & AI pipelines", href: "/services/automation", color: "#f59e0b" },
   { emoji: "✅", title: "QA & Testing", desc: "Rigorous quality assurance", href: "/services/qa-testing", color: "#14b8a6" },

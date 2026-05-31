@@ -87,7 +87,7 @@ const aiSolutions = [
       "Already have a product? We integrate AI capabilities into your existing stack — adding intelligent features without disrupting your workflows or architecture.",
     features: [
       "REST & GraphQL API wrappers",
-      "Plug-in AI modules for SaaS",
+      "Plug-in AI modules for apps",
       "Legacy system AI augmentation",
       "Zero-downtime integration",
     ],
@@ -95,7 +95,7 @@ const aiSolutions = [
     reverse: true,
     visualContent: {
       title: "Integration Hub",
-      items: ["Your SaaS", "AI Engine", "Database", "Dashboard"],
+      items: ["Your App", "AI Engine", "Database", "Dashboard"],
     },
   },
   {
@@ -178,7 +178,7 @@ const approachSteps = [
 ];
 
 const otherServices = [
-  { id: "saas-development", icon: "🏗️", title: "SaaS Development", href: "/services/saas-development" },
+  { id: "ui-ux-design", icon: "🎨", title: "UI/UX Design", href: "/services/ui-ux-design" },
   { id: "web-development", icon: "🌐", title: "Web Development", href: "/services/web-development" },
   { id: "mobile-apps", icon: "📱", title: "Mobile Apps", href: "/services/mobile-apps" },
   { id: "cyber-security", icon: "🛡️", title: "Cyber Security", href: "/services/cyber-security" },

@@ -5,7 +5,7 @@ import { company } from "../data/company";
 
 const supportOptions = [
   "AI Solutions",
-  "SaaS Development",
+  "UI/UX Design",
   "Web Development",
   "Mobile Apps",
   "Cyber Security",
