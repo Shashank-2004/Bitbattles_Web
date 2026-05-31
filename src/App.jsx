@@ -12,6 +12,17 @@ import { services } from "./data/services";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { AiSolutionsPage } from "./pages/AiSolutionsPage";
+import { UiUxDesignPage } from "./pages/UiUxDesignPage";
+import { WebDevelopmentPage } from "./pages/WebDevelopmentPage";
+import { AppDevelopmentPage } from "./pages/AppDevelopmentPage";
+
+// Map service IDs to their dedicated page components
+const dedicatedServicePages = {
+  "ai-solutions": <AiSolutionsPage />,
+  "ui-ux-design": <UiUxDesignPage />,
+  "web-development": <WebDevelopmentPage />,
+  "mobile-apps": <AppDevelopmentPage />,
+};
 
 function getActiveService() {
   const [, section, serviceId] = window.location.pathname.split("/");
@@ -20,12 +31,13 @@ function getActiveService() {
     return null;
   }
 
-  return services.find((service) => service.id === serviceId) ?? services[0];
+  return services.find((service) => service.id === serviceId) ?? null;
 }
 
 function App() {
   const pathname = window.location.pathname;
   const activeService = getActiveService();
+
   const routeMap = {
     "/": <HomePage />,
     "/services": <ServicesPage />,
@@ -36,12 +48,11 @@ function App() {
     "/contact": <ContactPage />,
   };
 
-  // Render dedicated AI Solutions page for /services/ai-solutions
+  // Determine which page to render
   let page;
-  if (activeService?.id === "ai-solutions") {
-    page = <AiSolutionsPage />;
-  } else if (activeService) {
-    page = <ServicePage service={activeService} />;
+  if (activeService) {
+    // Use dedicated page if available, otherwise fall back to generic ServicePage
+    page = dedicatedServicePages[activeService.id] ?? <ServicePage service={activeService} />;
   } else {
     page = routeMap[pathname] ?? <HomePage />;
   }
