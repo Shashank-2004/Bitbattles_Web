@@ -15,6 +15,8 @@ import { AiSolutionsPage } from "./pages/AiSolutionsPage";
 import { UiUxDesignPage } from "./pages/UiUxDesignPage";
 import { WebDevelopmentPage } from "./pages/WebDevelopmentPage";
 import { AppDevelopmentPage } from "./pages/AppDevelopmentPage";
+import { QaTestingPage } from "./pages/QaTestingPage";
+import { CyberSecurityPage } from "./pages/CyberSecurityPage";
 
 // Map service IDs to their dedicated page components
 const dedicatedServicePages = {
@@ -22,6 +24,8 @@ const dedicatedServicePages = {
   "ui-ux-design": <UiUxDesignPage />,
   "web-development": <WebDevelopmentPage />,
   "mobile-apps": <AppDevelopmentPage />,
+  "qa-testing": <QaTestingPage />,
+  "cyber-security": <CyberSecurityPage />,
 };
 
 function getActiveService() {

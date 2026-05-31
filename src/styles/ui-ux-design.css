@@ -1,22 +1,24 @@
 /* ============================================================
-   UI/UX Design Page — Dedicated Stylesheet
+   UI/UX Design Page — Dedicated Stylesheet (Home Page Theme)
+   bitOrange: #ff6a2a | bitCharcoal: #243237
    ============================================================ */
 
 :root {
-  --ux-purple: #a855f7;
-  --ux-purple-dark: #7c3aed;
-  --ux-pink: #ec4899;
-  --ux-charcoal: #1a1a2e;
-  --ux-deep: #0f0f1a;
-  --ux-glow-purple: rgba(168, 85, 247, 0.3);
-  --ux-glow-pink: rgba(236, 72, 153, 0.2);
+  --ux-accent: #ff6a2a;
+  --ux-accent-dark: #e85a1e;
+  --ux-charcoal: #243237;
+  --ux-deep: #10191d;
+  --ux-glow: rgba(255, 106, 42, 0.28);
+  --ux-glow-2: rgba(53, 93, 104, 0.18);
 }
 
 /* ---------- Hero ---------- */
 .ux-hero {
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f1a 0%, #1a1230 50%, #0a0a14 100%);
+  background: radial-gradient(circle at 72% 16%, rgba(255,106,42,0.22), transparent 28%),
+              radial-gradient(circle at 15% 80%, rgba(53,93,104,0.14), transparent 32%),
+              linear-gradient(120deg, #243237 0%, #10191d 100%);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -26,9 +28,9 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(168, 85, 247, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 85, 247, 0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
+    linear-gradient(rgba(255,255,255,0.034) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.034) 1px, transparent 1px);
+  background-size: 72px 72px;
   pointer-events: none;
 }
 
@@ -41,21 +43,21 @@
 
 .ux-hero__orb--1 {
   width: 500px; height: 500px;
-  background: radial-gradient(circle, var(--ux-glow-purple), transparent 70%);
+  background: radial-gradient(circle, var(--ux-glow), transparent 70%);
   top: -100px; right: -60px;
   animation: uxOrbDrift 10s ease-in-out infinite;
 }
 
 .ux-hero__orb--2 {
   width: 350px; height: 350px;
-  background: radial-gradient(circle, var(--ux-glow-pink), transparent 70%);
+  background: radial-gradient(circle, var(--ux-glow-2), transparent 70%);
   bottom: -80px; left: -40px;
   animation: uxOrbDrift 13s ease-in-out infinite reverse;
 }
 
 .ux-hero__orb--3 {
   width: 220px; height: 220px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(255,106,42,0.12), transparent 70%);
   top: 40%; left: 38%;
   animation: uxOrbDrift 8s ease-in-out infinite;
   animation-delay: -3s;
@@ -72,22 +74,22 @@
   align-items: center;
   gap: 8px;
   padding: 8px 18px;
-  border: 1px solid rgba(168, 85, 247, 0.35);
+  border: 1px solid rgba(255,106,42,0.35);
   border-radius: 999px;
-  background: rgba(168, 85, 247, 0.08);
+  background: rgba(255,106,42,0.08);
   backdrop-filter: blur(12px);
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #d8b4fe;
+  color: #fdba8c;
 }
 
 .ux-hero__badge-dot {
   width: 7px; height: 7px;
-  background: var(--ux-purple);
+  background: var(--ux-accent);
   border-radius: 50%;
-  box-shadow: 0 0 14px rgba(168, 85, 247, 0.9);
+  box-shadow: 0 0 14px rgba(255,106,42,0.9);
   animation: uxPulseDot 2s ease-in-out infinite;
 }
 
@@ -106,7 +108,7 @@
 }
 
 .ux-hero__title-accent {
-  background: linear-gradient(90deg, var(--ux-purple) 0%, var(--ux-pink) 100%);
+  background: linear-gradient(90deg, #ff6a2a 0%, #ffb347 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -132,41 +134,42 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--ux-purple), var(--ux-pink));
+  background: #ff6a2a;
   color: #fff;
   font-size: 14px;
   font-weight: 900;
   padding: 14px 28px;
-  border-radius: 10px;
+  border-radius: 8px;
   text-decoration: none;
   transition: all 0.25s ease;
-  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 8px 28px rgba(255,106,42,0.35);
 }
 
 .ux-hero__cta-primary:hover {
+  background: #e85a1e;
   transform: translateY(-3px);
-  box-shadow: 0 14px 44px rgba(168, 85, 247, 0.55);
+  box-shadow: 0 14px 40px rgba(255,106,42,0.5);
 }
 
 .ux-hero__cta-secondary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
   color: #fff;
   font-size: 14px;
   font-weight: 900;
   padding: 14px 28px;
-  border-radius: 10px;
+  border-radius: 8px;
   text-decoration: none;
   backdrop-filter: blur(8px);
   transition: all 0.25s ease;
 }
 
 .ux-hero__cta-secondary:hover {
-  border-color: var(--ux-purple);
-  color: #d8b4fe;
+  border-color: rgba(255,106,42,0.6);
+  color: #fdba8c;
   transform: translateY(-3px);
 }
 
@@ -175,7 +178,7 @@
   position: relative;
   min-height: 480px;
   border-radius: 28px;
-  border: 1px solid rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(255,106,42,0.15);
   background: rgba(255,255,255,0.03);
   backdrop-filter: blur(16px);
   overflow: hidden;
@@ -191,7 +194,7 @@
   gap: 10px;
   padding: 12px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(255,106,42,0.22);
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(12px);
   color: #fff;
@@ -214,8 +217,8 @@
 .ux-center-circle {
   width: 160px; height: 160px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(168,85,247,0.3), rgba(236,72,153,0.2));
-  border: 2px solid rgba(168, 85, 247, 0.4);
+  background: linear-gradient(135deg, rgba(255,106,42,0.25), rgba(255,179,71,0.15));
+  border: 2px solid rgba(255,106,42,0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,8 +230,8 @@
 }
 
 @keyframes uxPulseCircle {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0.3); }
-  50% { box-shadow: 0 0 0 20px rgba(168,85,247,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,106,42,0.3); }
+  50% { box-shadow: 0 0 0 20px rgba(255,106,42,0); }
 }
 
 /* ---------- Shared Section Styles ---------- */
@@ -236,10 +239,10 @@
   padding: 96px 0;
 }
 
-.ux-section--dark { background: #0f0f1a; }
+.ux-section--dark { background: #243237; }
 .ux-section--light { background: #fff; }
-.ux-section--soft { background: #faf7ff; }
-.ux-section--gray { background: #f8f9fa; }
+.ux-section--soft { background: #fff8f4; }
+.ux-section--gray { background: #f6f7f7; }
 
 .ux-container {
   max-width: 1280px;
@@ -255,7 +258,7 @@
   font-weight: 900;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ux-purple);
+  color: #ff6a2a;
   display: block;
 }
 
@@ -267,7 +270,7 @@
 }
 
 .ux-section-title--light { color: #fff; }
-.ux-section-title--dark { color: #1a1a2e; }
+.ux-section-title--dark  { color: #243237; }
 
 .ux-divider {
   display: flex;
@@ -281,7 +284,7 @@
   height: 4px;
   flex: 1;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--ux-purple), var(--ux-pink));
+  background: #ff6a2a;
 }
 
 .ux-divider__dot {
@@ -290,7 +293,7 @@
 }
 
 .ux-divider__dot--light { background: rgba(255,255,255,0.2); }
-.ux-divider__dot--dark { background: rgba(168,85,247,0.15); }
+.ux-divider__dot--dark  { background: rgba(36,50,55,0.18); }
 
 /* ---------- Design Approach (Section 2) ---------- */
 .ux-approach-grid {
@@ -308,8 +311,8 @@
   padding: 28px;
   border-radius: 20px;
   background: #fff;
-  border: 1px solid #f1e8ff;
-  box-shadow: 0 4px 24px rgba(168,85,247,0.06);
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 24px rgba(255,106,42,0.06);
   transition: all 0.3s ease;
   overflow: hidden;
 }
@@ -319,15 +322,15 @@
   position: absolute;
   inset: 0;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(168,85,247,0.07), transparent 60%);
+  background: linear-gradient(135deg, rgba(255,106,42,0.07), transparent 60%);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
 .ux-approach-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(168,85,247,0.3);
-  box-shadow: 0 20px 48px rgba(168,85,247,0.15);
+  border-color: rgba(255,106,42,0.25);
+  box-shadow: 0 20px 48px rgba(255,106,42,0.12);
 }
 
 .ux-approach-card:hover::before { opacity: 1; }
@@ -335,7 +338,7 @@
 .ux-approach-card__step {
   font-size: 48px;
   font-weight: 900;
-  color: rgba(168,85,247,0.12);
+  color: rgba(255,106,42,0.12);
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
@@ -349,7 +352,7 @@
   margin-top: 14px;
   font-size: 16px;
   font-weight: 900;
-  color: #1a1a2e;
+  color: #243237;
 }
 
 .ux-approach-card__desc {
@@ -373,8 +376,8 @@
 .ux-offer-card {
   padding: 28px;
   border-radius: 20px;
-  border: 1px solid rgba(168,85,247,0.12);
-  background: rgba(168,85,247,0.03);
+  border: 1px solid rgba(255,106,42,0.1);
+  background: rgba(255,106,42,0.02);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -385,7 +388,7 @@
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--ux-purple), var(--ux-pink));
+  background: #ff6a2a;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.35s ease;
@@ -393,9 +396,9 @@
 
 .ux-offer-card:hover {
   transform: translateY(-7px);
-  border-color: rgba(168,85,247,0.35);
-  box-shadow: 0 20px 48px rgba(168,85,247,0.12);
-  background: rgba(168,85,247,0.05);
+  border-color: rgba(255,106,42,0.28);
+  box-shadow: 0 20px 48px rgba(255,106,42,0.1);
+  background: rgba(255,106,42,0.04);
 }
 
 .ux-offer-card:hover::after { transform: scaleX(1); }
@@ -403,21 +406,21 @@
 .ux-offer-card__icon {
   width: 52px; height: 52px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(236,72,153,0.1));
+  background: linear-gradient(135deg, #fff4ee, #ffe8d6);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  transition: transform 0.3s;
+  transition: all 0.3s;
 }
 
-.ux-offer-card:hover .ux-offer-card__icon { transform: scale(1.1) rotate(-5deg); }
+.ux-offer-card:hover .ux-offer-card__icon { transform: scale(1.1) rotate(-5deg); background: linear-gradient(135deg, #ff6a2a, #ffb347); }
 
 .ux-offer-card__title {
   margin-top: 18px;
   font-size: 16px;
   font-weight: 900;
-  color: #1a1a2e;
+  color: #243237;
 }
 
 .ux-offer-card__desc {
@@ -437,8 +440,8 @@
 .ux-offer-card__tag {
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(168,85,247,0.1);
-  color: var(--ux-purple);
+  background: rgba(255,106,42,0.1);
+  color: #ff6a2a;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -470,15 +473,16 @@
   gap: 14px;
   padding: 14px 20px;
   border-radius: 16px;
-  background: linear-gradient(135deg, var(--ux-purple), var(--ux-pink));
-  box-shadow: 0 8px 32px rgba(168,85,247,0.5), 0 2px 8px rgba(0,0,0,0.2);
+  background: #243237;
+  border: 1px solid rgba(255,106,42,0.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 20px rgba(255,106,42,0.2);
   color: #fff;
   animation: uxTabPulse 3s ease-in-out infinite;
 }
 
 @keyframes uxTabPulse {
-  0%, 100% { box-shadow: 0 8px 32px rgba(168,85,247,0.5), 0 2px 8px rgba(0,0,0,0.2); }
-  50% { box-shadow: 0 12px 48px rgba(168,85,247,0.7), 0 2px 8px rgba(0,0,0,0.2); }
+  0%, 100% { box-shadow: 0 8px 28px rgba(0,0,0,0.3), 0 0 16px rgba(255,106,42,0.2); }
+  50%       { box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 28px rgba(255,106,42,0.38); }
 }
 
 .ux-floating-tab__text {
@@ -492,9 +496,8 @@
   align-items: center;
   gap: 6px;
   padding: 8px 16px;
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 8px;
+  background: #ff6a2a;
+  border-radius: 7px;
   color: #fff;
   font-size: 12px;
   font-weight: 900;
@@ -504,7 +507,7 @@
 }
 
 .ux-floating-tab__cta:hover {
-  background: rgba(255,255,255,0.3);
+  background: #e85a1e;
   transform: translateY(-2px);
 }
 
@@ -547,15 +550,15 @@
 
 .ux-faq-item {
   border-radius: 16px;
-  border: 1px solid #f1e8ff;
+  border: 1px solid #f1f5f9;
   background: #fff;
   overflow: hidden;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .ux-faq-item--open {
-  border-color: rgba(168,85,247,0.3);
-  box-shadow: 0 8px 32px rgba(168,85,247,0.1);
+  border-color: rgba(255,106,42,0.3);
+  box-shadow: 0 8px 28px rgba(255,106,42,0.09);
 }
 
 .ux-faq-item__trigger {
@@ -574,15 +577,15 @@
 .ux-faq-item__question {
   font-size: 15px;
   font-weight: 800;
-  color: #1a1a2e;
+  color: #243237;
   flex: 1;
 }
 
 .ux-faq-item__icon {
   width: 32px; height: 32px;
   border-radius: 50%;
-  background: rgba(168,85,247,0.1);
-  color: var(--ux-purple);
+  background: rgba(255,106,42,0.1);
+  color: #ff6a2a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -593,7 +596,7 @@
 }
 
 .ux-faq-item--open .ux-faq-item__icon {
-  background: var(--ux-purple);
+  background: #ff6a2a;
   color: #fff;
 }
 
@@ -630,8 +633,8 @@
 
 .ux-other-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(168,85,247,0.25);
-  box-shadow: 0 12px 32px rgba(168,85,247,0.1);
+  border-color: rgba(255,106,42,0.22);
+  box-shadow: 0 12px 32px rgba(255,106,42,0.1);
 }
 
 .ux-other-card__icon {
@@ -652,7 +655,7 @@
 .ux-other-card__title {
   font-size: 14px;
   font-weight: 900;
-  color: #1a1a2e;
+  color: #243237;
 }
 
 .ux-other-card__desc {
@@ -663,7 +666,7 @@
 
 .ux-other-card__arrow {
   font-size: 16px;
-  color: var(--ux-purple);
+  color: #ff6a2a;
   transition: transform 0.25s;
 }
 
