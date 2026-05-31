@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">BitBattles logo</title>
+  <desc id="desc">Orange B mark inside a dark hexagonal shield.</desc>
+  <rect width="220" height="220" fill="#ffffff"/>
+  <path d="M110 12 185 55v110l-75 43-75-43V55z" fill="#24282b"/>
+  <path d="M41 57h88c25 0 43 14 43 36 0 14-7 25-20 31 17 6 27 19 27 38 0 25-20 42-50 42H41v-30h83c14 0 22-6 22-16s-8-16-22-16H41v-29h80c12 0 19-6 19-15s-7-15-19-15H41z" fill="#ff6428"/>
+  <path d="M41 87h82c11 0 17 5 17 13 0 9-6 14-17 14H41zM41 144h86c13 0 20 6 20 16 0 11-7 16-20 16H41z" fill="#ffffff"/>
+</svg>
