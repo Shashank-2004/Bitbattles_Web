@@ -1,11 +1,3 @@
-@import "./styles/service-theme.css";
-@import "./styles/ai-solutions.css";
-@import "./styles/web-development.css";
-@import "./styles/app-development.css";
-@import "./styles/cyber-security.css";
-@import "./styles/ui-ux-design.css";
-@import "./styles/qa-testing.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

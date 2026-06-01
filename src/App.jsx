@@ -11,17 +11,6 @@ import { ProposalPage } from "./pages/ProposalPage";
 import { services } from "./data/services";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
-import { AiSolutionsPage } from "./pages/AiSolutionsPage";
-import { WebDevelopmentPage } from "./pages/WebDevelopmentPage";
-import { AppDevelopmentPage } from "./pages/AppDevelopmentPage";
-import { CyberSecurityPage } from "./pages/CyberSecurityPage";
-
-const dedicatedServicePages = {
-  "ai-solutions": <AiSolutionsPage />,
-  "web-development": <WebDevelopmentPage />,
-  "mobile-apps": <AppDevelopmentPage />,
-  "cyber-security": <CyberSecurityPage />,
-};
 
 function getActiveService() {
   const [, section, serviceId] = window.location.pathname.split("/");
@@ -47,9 +36,7 @@ function App() {
     "/contact": <ContactPage />,
   };
 
-  const page = activeService
-    ? dedicatedServicePages[activeService.id] ?? <ServicePage service={activeService} />
-    : routeMap[pathname] ?? <HomePage />;
+  const page = activeService ? <ServicePage service={activeService} /> : routeMap[pathname] ?? <HomePage />;
 
   return (
     <div className="min-h-screen overflow-hidden bg-white">
