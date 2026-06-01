@@ -282,7 +282,7 @@ function HeroSection() {
             </p>
 
             <div ref={ctaRef} className="ai-hero__cta-group" style={{ opacity: 0 }}>
-              <a href="/proposal?service=ai-solutions" className="ai-hero__cta-primary">
+              <a href="/contact?service=ai-solutions" className="ai-hero__cta-primary">
                 Start Your AI Project →
               </a>
               <a href="#ai-services" className="ai-hero__cta-secondary">
@@ -564,7 +564,7 @@ function AiSolutionsSection() {
                   ))}
                 </div>
                 <a
-                  href="/proposal?service=ai-solutions"
+                  href="/contact?service=ai-solutions"
                   className="mt-6 inline-flex items-center gap-2 text-xs font-black text-bitOrange hover:gap-3 transition-all"
                   style={{ color: "var(--ai-orange)" }}
                 >
@@ -809,7 +809,7 @@ function ApproachSection() {
               </p>
             </div>
             <a
-              href="/proposal?service=ai-solutions"
+              href="/contact?service=ai-solutions"
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-bitOrange px-8 py-4 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-orange-600"
               style={{ background: "var(--ai-orange)" }}
             >

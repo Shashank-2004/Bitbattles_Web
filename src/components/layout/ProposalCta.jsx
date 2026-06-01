@@ -20,11 +20,11 @@ export function ProposalCta() {
         </div>
         <motion.a
           className="inline-flex rounded-xl bg-bitOrange px-7 py-3.5 text-sm font-black text-white shadow-lg shadow-orange-500/20 transition hover:bg-white hover:text-bitCharcoal"
-          href="/proposal"
+          href="/contact"
           whileHover={{ y: -3, scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          Open Proposal Page
+          Contact Us
         </motion.a>
       </Reveal>
     </section>

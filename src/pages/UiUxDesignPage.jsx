@@ -181,7 +181,7 @@ function HeroSection() {
               into loyal users — with research-backed design that actually works.
             </p>
             <div className="ux-hero__cta-group" style={{ opacity: 0 }}>
-              <a href="/proposal?service=ui-ux-design" className="ux-hero__cta-primary">
+              <a href="/contact?service=ui-ux-design" className="ux-hero__cta-primary">
                 Start Your Design Project →
               </a>
               <a href="#ux-approach" className="ux-hero__cta-secondary">
@@ -332,7 +332,7 @@ function FloatingCta() {
       <div className="ux-floating-tab__card">
         <span style={{ fontSize: "20px" }}>🎨</span>
         <span className="ux-floating-tab__text">Ready to upgrade your designs?</span>
-        <a href="/proposal?service=ui-ux-design" className="ux-floating-tab__cta">
+        <a href="/contact?service=ui-ux-design" className="ux-floating-tab__cta">
           Discuss Your Idea →
         </a>
         <button

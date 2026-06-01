@@ -26,6 +26,26 @@ export function AppHeader() {
   }, []);
 
   useEffect(() => {
+    let lastPathname = window.location.pathname;
+    const checkPathname = () => {
+      if (window.location.pathname !== lastPathname) {
+        lastPathname = window.location.pathname;
+        setIsServicesOpen(false);
+        setIsMobileOpen(false);
+        setIsMobileServicesOpen(false);
+      }
+    };
+    window.addEventListener("click", checkPathname);
+    window.addEventListener("popstate", checkPathname);
+    const interval = setInterval(checkPathname, 100);
+    return () => {
+      window.removeEventListener("click", checkPathname);
+      window.removeEventListener("popstate", checkPathname);
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = isMobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [isMobileOpen]);
@@ -95,6 +115,7 @@ export function AppHeader() {
                           className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-slate-700 transition-all hover:bg-orange-50 hover:text-bitOrange"
                           href={service.href}
                           key={service.id}
+                          onClick={() => setIsServicesOpen(false)}
                         >
                           <span
                             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-base transition"
@@ -224,7 +245,10 @@ export function AppHeader() {
                                 key={service.id}
                                 href={service.href}
                                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-orange-50 hover:text-bitOrange"
-                                onClick={() => setIsMobileOpen(false)}
+                                onClick={() => {
+                                  setIsMobileOpen(false);
+                                  setIsMobileServicesOpen(false);
+                                }}
                               >
                                 <span className="text-sm">{service.emoji}</span>
                                 {service.title}

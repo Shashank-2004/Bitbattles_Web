@@ -107,7 +107,7 @@ function HeroSection() {
             <h1 className="svc-hero__title" style={{ opacity: 0 }}>Protect Your <span className="svc-hero__title-accent">Digital Assets</span></h1>
             <p className="svc-hero__desc" style={{ opacity: 0 }}>Enterprise-grade cyber security services — penetration testing, threat monitoring, and compliance readiness to keep your business safe from evolving threats.</p>
             <div className="cy-hero__cta-group" style={{ opacity: 0, display: "flex", gap: "14px", flexWrap: "wrap", marginTop: "40px" }}>
-              <a href="/proposal?service=cyber-security" className="svc-hero__cta-primary">Get Security Audit →</a>
+              <a href="/contact?service=cyber-security" className="svc-hero__cta-primary">Get Security Audit →</a>
               <a href="#cy-services" className="svc-hero__cta-secondary">Our Services ↓</a>
             </div>
           </div>
@@ -373,7 +373,7 @@ function FloatingCta() {
       <div className="svc-float__card">
         <span className="svc-float__emoji">🛡️</span>
         <span className="svc-float__text">Protect your systems from cybersecurity threats</span>
-        <a href="/proposal?service=cyber-security" className="svc-float__cta">Discuss Now</a>
+        <a href="/contact?service=cyber-security" className="svc-float__cta">Discuss Now</a>
         <button className="svc-float__close" onClick={() => { setDismissed(true); setVisible(false); }} aria-label="Close">✕</button>
       </div>
     </div>

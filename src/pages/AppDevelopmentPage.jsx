@@ -85,7 +85,7 @@ function HeroSection() {
             <h1 className="app-hero__title" style={{ opacity: 0 }}>Apps That Users <span className="app-hero__title-accent">Can't Put Down</span></h1>
             <p className="app-hero__desc" style={{ opacity: 0 }}>iOS and Android apps crafted for real users — smooth, fast, and built to retain. From MVP to production-ready in weeks, not months.</p>
             <div className="app-hero__cta-group" style={{ opacity: 0 }}>
-              <a href="/proposal?service=mobile-apps" className="app-hero__cta-primary">Build Your App →</a>
+              <a href="/contact?service=mobile-apps" className="app-hero__cta-primary">Build Your App →</a>
               <a href="#app-industries" className="app-hero__cta-secondary">See Industries ↓</a>
             </div>
             <div style={{ marginTop: "40px", display: "flex", gap: "32px", flexWrap: "wrap" }}>
@@ -218,7 +218,7 @@ function FloatingCta() {
       <div className="app-floating-tab__card">
         <span style={{ fontSize: "20px" }}>📱</span>
         <span className="app-floating-tab__text">Ready to build your mobile app?</span>
-        <a href="/proposal?service=mobile-apps" className="app-floating-tab__cta">Discuss Your Idea →</a>
+        <a href="/contact?service=mobile-apps" className="app-floating-tab__cta">Discuss Your Idea →</a>
         <button className="app-floating-tab__close" onClick={() => { setDismissed(true); setVisible(false); }} aria-label="Close">✕</button>
       </div>
     </div>
