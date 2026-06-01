@@ -11,7 +11,7 @@ export function ProposalCta() {
             Ready to scope it?
           </p>
           <h2 className="mt-3 text-3xl font-black tracking-normal">
-            Request a proposal for your next SaaS, software, app, or security build.
+            Request a proposal for your next SaaS, software, app, automation, or security build.
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
             Share your selected service, budget, timeline, and project idea so the team can respond

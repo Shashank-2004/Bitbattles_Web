@@ -1,112 +1,104 @@
-# BitBattles ESP — Backend Server
+# BitBattles ESP Backend Server
 
-This is the Express.js & MongoDB backend for the BitBattles ESP Website. It provides a secure REST API for the frontend to save contact forms, fetch portfolio projects, read blogs, and authenticate admins.
+Express + MongoDB backend for the BitBattles website. It stores contact/proposal submissions, exposes portfolio/blog APIs, and supports admin-protected routes.
 
----
+## Local Setup
 
-## 🚀 How to Run the Backend Locally
-
-If you are working on the frontend and need the backend APIs to work on your local machine, follow these steps:
-
-### 1. Prerequisites
-Make sure you have Node.js installed on your computer.
-
-### 2. Install Dependencies
-Open a terminal, navigate into this `server` folder, and install the required packages:
 ```bash
 cd server
 npm install
 ```
 
-### 3. Setup Environment Variables
-You need a `.env` file to connect to the database.
-1. Create a file named `.env` inside the `server/` folder (DO NOT commit this to GitHub).
-2. Ask **Shashank** for the `MONGO_URI` and `JWT_SECRET` values.
-3. Your `.env` should look like this:
+Create `server/.env` from `server/.env.example`:
+
 ```env
 PORT=5000
 NODE_ENV=development
-MONGO_URI=mongodb+srv://bitbattles-admin:<ask-shashank-for-password>@cluster0.oioqpcf.mongodb.net/bitbattles?appName=Cluster0
-JWT_SECRET=<ask-shashank-for-secret>
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/bitbattles?appName=Cluster0
+JWT_SECRET=replace-with-a-long-random-secret
 JWT_EXPIRE=7d
 CLIENT_URL=http://localhost:5173,http://localhost:5174
 
-# Optional email settings. Leave blank until company email/SMTP is ready.
 SMTP_HOST=
 SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=
 SMTP_PASS=
 MAIL_FROM=
-CONTACT_TO_EMAIL=
+CONTACT_TO_EMAIL=sannidhyast15@gmail.com
 AUTO_REPLY_ENABLED=false
 ```
 
-### 4. Start the Server
-Run the development server using nodemon (it will auto-restart when you save files):
+Start the backend:
+
 ```bash
 npm run dev
 ```
 
-You should see this in your terminal:
-```text
-Server running on port 5000
-MongoDB Connected: cluster0...
-```
-*(Leave this terminal running in the background while you work on the frontend!)*
+Health check:
 
----
-
-## 📡 API Endpoints (For the Frontend Team)
-
-Here are the active endpoints you can `fetch` from the React frontend. 
-**Base URL:** `http://localhost:5000`
-
-### 📞 Contact
-* **Submit Form (Public):** `POST /api/contact`
-  * **Body:** supports the full website intake form, including `firstName`, `lastName`, `email`, `phone`, `company`, `companyType`, `support`, `summary`, `reference`, `attachmentName`, `deadline`, `budget`, and `comments`.
-  * **Fallback Body:** `{ "name": "...", "email": "...", "subject": "...", "message": "..." }`
-  * **Spam Protection:** includes IP rate limiting plus a hidden honeypot field named `website`.
-  * **Email:** MongoDB storage works now. Email notifications and auto-replies activate only when SMTP env values are provided.
-
-### 💼 Portfolio
-* **Get All Projects (Public):** `GET /api/portfolio`
-* **Get Featured Projects (Public):** `GET /api/portfolio/featured`
-
-### 📝 Blog
-* **Get All Published Blogs (Public):** `GET /api/blog`
-* **Get Single Blog (Public):** `GET /api/blog/:slug`
-
-*(Note: Creating, updating, or deleting portfolios/blogs currently requires an Admin JWT Token. For now, Shashank will manage the data directly in MongoDB Atlas until the Admin Dashboard UI is built).*
-
----
-
-## 🏗️ Folder Structure
-
-```text
-server/
-├── config/
-│   └── db.js                 # MongoDB connection setup
-├── controllers/
-│   └── ...                   # Business logic (e.g., authController.js)
-├── middleware/
-│   └── authMiddleware.js     # JWT security guard for admin routes
-├── models/
-│   └── ...                   # Database schemas (User, Contact, Portfolio, Blog)
-├── routes/
-│   └── ...                   # API url definitions
-├── index.js                  # Main server entry point
-└── package.json
+```bash
+curl http://localhost:5000/api/health
 ```
 
----
+## Contact Email Configuration
 
-## 🛠️ Next Steps / Proceedings for Teammates
+`CONTACT_TO_EMAIL` is the recipient for support and service enquiries. It is currently set to:
 
-**@Sannidhya & Frontend Team:**
-1. Now that the backend is running, you can connect the **Portfolio Page** and **Blog Page** (when ready) to fetch real data from these APIs instead of using static hardcoded arrays.
-2. The **Contact Page** is already wired up as an example! Look at `src/pages/ContactPage.jsx` to see how we used `fetch()` to send data to the backend.
+```env
+CONTACT_TO_EMAIL=sannidhyast15@gmail.com
+```
 
-**@Backend Team:**
-1. The next major milestone is building the **Admin Dashboard UI** on the frontend so the client can log in and manage data themselves without needing MongoDB Atlas.
-2. Ensure you never commit the `.env` file!
+To change it for deployment, update `CONTACT_TO_EMAIL` in the deployed server environment or in `server/.env`. Do not edit source files for deployment email changes.
+
+Email sending needs SMTP values:
+
+```env
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=<company-gmail-address>
+SMTP_PASS=<gmail-app-password-or-smtp-password>
+MAIL_FROM=BitBattles ESP <company-gmail-address>
+AUTO_REPLY_ENABLED=true
+```
+
+MongoDB storage works even when SMTP is not configured. In that case, the backend saves the form and skips email notification.
+
+## Main API Endpoints
+
+Base URL: `http://localhost:5000`
+
+- `GET /api/health`
+- `POST /api/contact`
+- `GET /api/contact` admin JWT required
+- `PUT /api/contact/:id/read` admin JWT required
+- `GET /api/portfolio`
+- `GET /api/portfolio/featured`
+- `GET /api/blog`
+- `GET /api/blog/:slug`
+
+## Contact Form Payload
+
+`POST /api/contact` accepts:
+
+```json
+{
+  "firstName": "Sannidhya",
+  "lastName": "Tiwari",
+  "email": "name@example.com",
+  "phone": "9876543210",
+  "company": "Example Co",
+  "companyType": "Startup",
+  "support": ["AI Solutions", "Web Development"],
+  "summary": "Project summary",
+  "reference": "https://example.com",
+  "attachmentName": "scope.pdf",
+  "deadline": "2 months - 4 months",
+  "budget": "Rs. 50,000 - Rs. 2,00,000",
+  "comments": "Extra context",
+  "source": "website-contact-page"
+}
+```
+
+The endpoint validates required name/email/message fields, checks email format, validates budget options, trims/sanitizes text input, rate-limits public submissions, and uses a hidden `website` honeypot field for simple bot filtering.

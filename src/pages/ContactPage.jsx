@@ -127,8 +127,8 @@ export function ContactPage() {
           <h1 className="mt-4 text-5xl font-black tracking-normal sm:text-6xl">Let's Connect</h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300">
             Share the idea, product, or workflow you want BitBattles to help build. This form
-            submits to the current backend contact API and keeps the richer intake details in the
-            message body.
+            submits to the backend contact API, stores the enquiry in MongoDB, and sends the team a
+            notification when SMTP is configured.
           </p>
         </Reveal>
 
@@ -358,7 +358,7 @@ export function ContactPage() {
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <p className="font-black text-white">Email</p>
-            <p className="mt-2">hello@bitbattles.in</p>
+            <p className="mt-2">{company.supportEmail}</p>
           </div>
         </Reveal>
       </section>

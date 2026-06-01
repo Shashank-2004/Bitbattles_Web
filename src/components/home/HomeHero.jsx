@@ -1,33 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import Spline from "@splinetool/react-spline";
 import { GlowBackground } from "../common/GlowBackground";
 import { Reveal } from "../common/Reveal";
 import { services } from "../../data/services";
 
-const splineSceneUrl = import.meta.env.VITE_SPLINE_SCENE_URL || "undefined";
+const splineSceneUrl =
+  import.meta.env.VITE_SPLINE_SCENE_URL ||
+  "https://prod.spline.design/zZlra7VUzTeOU62H/scene.splinecode";
 
 const floatingCards = [
-  { label: "AI Solutions", className: "left-6 top-8", path: { x: [0, 16, -8, 0], y: [0, -18, 8, 0] } },
-  { label: "SaaS Development", className: "right-8 top-16", path: { x: [0, -14, 10, 0], y: [0, 14, -10, 0] } },
-  { label: "Web Development", className: "left-10 top-1/2", path: { x: [0, 12, -10, 0], y: [0, 18, -8, 0] } },
-  { label: "Mobile Apps", className: "right-4 top-[48%]", path: { x: [0, -18, 8, 0], y: [0, -12, 14, 0] } },
-  { label: "Cyber Security", className: "left-16 bottom-12", path: { x: [0, 18, -12, 0], y: [0, -10, 16, 0] } },
-  { label: "Automation", className: "right-14 bottom-10", path: { x: [0, -12, 16, 0], y: [0, 16, -12, 0] } },
+  { label: "AI Solutions", className: "left-4 top-8 sm:left-6", path: { x: [0, 16, -8, 0], y: [0, -18, 8, 0] } },
+  { label: "SaaS Development", className: "right-4 top-16 sm:right-8", path: { x: [0, -14, 10, 0], y: [0, 14, -10, 0] } },
+  { label: "Web Development", className: "left-8 top-1/2 sm:left-10", path: { x: [0, 12, -10, 0], y: [0, 18, -8, 0] } },
+  { label: "Mobile Apps", className: "right-3 top-[48%] sm:right-4", path: { x: [0, -18, 8, 0], y: [0, -12, 14, 0] } },
+  { label: "Cyber Security", className: "left-10 bottom-12 sm:left-16", path: { x: [0, 18, -12, 0], y: [0, -10, 16, 0] } },
+  { label: "Automation", className: "right-8 bottom-10 sm:right-14", path: { x: [0, -12, 16, 0], y: [0, 16, -12, 0] } },
 ];
 
 export function HomeHero() {
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (customElements.get("spline-viewer")) {
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.type = "module";
-    script.src = "https://unpkg.com/@splinetool/viewer@1.12.95/build/spline-viewer.js";
-    document.head.appendChild(script);
-  }, []);
 
   const handleMouseMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -74,32 +66,31 @@ export function HomeHero() {
           </div>
         </Reveal>
 
-        <Reveal>
+        <Reveal className="relative h-[460px] w-full md:h-[580px] lg:h-[640px]">
           <div
-            className="relative z-10 min-h-[440px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/30 backdrop-blur md:min-h-[560px]"
+            className="relative z-10 h-full w-full overflow-visible"
             onMouseMove={handleMouseMove}
             onMouseLeave={() => setParallax({ x: 0, y: 0 })}
           >
             <motion.div
-              className="absolute inset-0"
+              className="absolute inset-0 h-full w-full"
               animate={{ x: parallax.x * 18, y: parallax.y * 18 }}
               transition={{ type: "spring", stiffness: 90, damping: 22 }}
             >
-              <spline-viewer
-                class="block h-full min-h-[440px] w-full md:min-h-[560px]"
-                url={splineSceneUrl}
+              <Spline
+                scene={splineSceneUrl}
+                style={{ display: "block", width: "100%", height: "100%" }}
               />
             </motion.div>
 
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(16,25,29,0.18)_62%,rgba(16,25,29,0.7)_100%)]" />
-            <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(16,25,29,0.08)_62%,rgba(16,25,29,0.48)_100%)]" />
 
             {floatingCards.map((card, index) => {
               const service = services.find((item) => item.title === card.label);
 
               return (
                 <motion.a
-                  className={`absolute ${card.className} z-20 rounded-2xl border border-white/18 bg-white/12 px-4 py-3 text-xs font-black text-white shadow-2xl shadow-orange-500/10 backdrop-blur-xl transition hover:border-bitOrange/70 hover:bg-bitOrange/20 sm:text-sm`}
+                  className={`absolute ${card.className} z-20 rounded-2xl bg-white/12 px-4 py-3 text-xs font-black text-white shadow-2xl shadow-orange-500/15 ring-1 ring-white/18 backdrop-blur-xl transition hover:bg-bitOrange/20 sm:text-sm`}
                   href={service?.href || "/services"}
                   key={card.label}
                   animate={{

@@ -6,19 +6,19 @@ import { services } from "../../data/services";
 const socialLinks = [
   {
     label: "LinkedIn",
-    href: "https://in.linkedin.com/company/bitbattles",
+    href: company.linkedin,
     icon: (
       <path d="M6.9 8.8H3.7V20h3.2ZM5.3 7.3a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6ZM20.3 20h-3.2v-5.8c0-1.4-.5-2.4-1.8-2.4-1 0-1.6.7-1.9 1.3-.1.2-.1.6-.1.9v6h-3.2s.1-9.8 0-10.8h3.2v1.5c.4-.7 1.2-1.8 3-1.8 2.2 0 3.9 1.5 3.9 4.6V20Z" />
     ),
   },
   {
     label: "Facebook",
-    href: "#",
+    href: company.facebook,
     icon: <path d="M14 8.5h2V5h-2.6C10.5 5 9 6.7 9 9.2V12H6v3.5h3V21h3.7v-5.5h2.8L16 12h-3.3V9.6c0-.7.4-1.1 1.3-1.1Z" />,
   },
   {
     label: "Instagram",
-    href: "#",
+    href: company.instagram,
     icon: (
       <>
         <rect x="4" y="4" width="16" height="16" rx="5" />
@@ -97,7 +97,7 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-3 text-sm text-slate-600">
               <li>{company.location}</li>
               <li>{company.website}</li>
-              <li>hello@bitbattles.in</li>
+              <li>{company.supportEmail}</li>
               <li>
                 <a className="font-black text-bitOrange hover:text-bitCharcoal" href="/proposal">
                   Request a proposal

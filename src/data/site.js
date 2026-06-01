@@ -37,9 +37,9 @@ export const sectors = [
 
 export const projects = [
   {
-    title: "AI Operations Dashboard",
+    title: "AI Operations Workflow",
     tag: "AI",
-    description: "A practical dashboard concept for automating repetitive business workflows.",
+    description: "A practical workflow concept for automating repetitive business operations.",
   },
   {
     title: "Mobile Commerce App",

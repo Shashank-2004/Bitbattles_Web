@@ -9,6 +9,8 @@ export const services = [
       "AI tools, assistants, and workflow automation that help teams move faster without adding unnecessary complexity.",
     icon: "brain",
     href: "/services/ai-solutions",
+    emoji: "AI",
+    color: "#ff6a2a",
   },
   {
     id: "saas-development",
@@ -20,6 +22,8 @@ export const services = [
       "Subscription platforms, admin dashboards, user workflows, and scalable SaaS product foundations.",
     icon: "enterprise",
     href: "/services/saas-development",
+    emoji: "S",
+    color: "#14b8a6",
   },
   {
     id: "web-development",
@@ -31,6 +35,8 @@ export const services = [
       "Marketing websites, web applications, landing pages, dashboards, and frontend systems built for clarity.",
     icon: "design",
     href: "/services/web-development",
+    emoji: "W",
+    color: "#0ea5e9",
   },
   {
     id: "mobile-apps",
@@ -42,6 +48,8 @@ export const services = [
       "Mobile application interfaces and product flows that are simple, responsive, and launch-ready.",
     icon: "product",
     href: "/services/mobile-apps",
+    emoji: "M",
+    color: "#10b981",
   },
   {
     id: "cyber-security",
@@ -53,6 +61,8 @@ export const services = [
       "Security-focused interfaces, portals, monitoring workflows, and cyber-aware product experiences.",
     icon: "shield",
     href: "/services/cyber-security",
+    emoji: "CS",
+    color: "#ef4444",
   },
   {
     id: "automation",
@@ -64,6 +74,8 @@ export const services = [
       "Workflow automation, internal tools, data routing, and operational systems that reduce repetitive work.",
     icon: "agent",
     href: "/services/automation",
+    emoji: "A",
+    color: "#f59e0b",
   },
 ];
 
