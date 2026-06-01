@@ -19,9 +19,9 @@ const footerColumns = [
   {
     title: "Solutions",
     links: [
-      ["Startups", "/#solutions"],
-      ["Enterprises", "/#solutions"],
-      ["SaaS Products", "/#solutions"],
+      ["Startups", "/services/digital-transformation"],
+      ["Enterprises", "/services/cloud-solutions"],
+      ["SaaS Products", "/services/web-development"],
       ["Automation", "/services/digital-transformation"],
     ],
   },
@@ -29,24 +29,24 @@ const footerColumns = [
     title: "Resources",
     links: [
       ["Case Studies", "/portfolio"],
-      ["Documentation", "/#"],
-      ["FAQs", "/#"],
-      ["Privacy Policy", "/#"],
+      ["Services", "/services"],
+      ["Terms and Conditions", "/terms"],
+      ["Privacy Policy", "/privacy"],
     ],
   },
 ];
 
 const socialLinks = [
-  ["in", company.linkedin],
-  ["x", company.facebook],
-  ["↗", company.instagram],
-  ["●", `mailto:${company.supportEmail}`],
+  ["LinkedIn", company.linkedin, "Li"],
+  ["Facebook", company.facebook, "Fb"],
+  ["Instagram", company.instagram, "Ig"],
+  ["Email", `mailto:${company.supportEmail}`, "Em"],
 ];
 
 export function SiteFooter() {
   return (
     <footer className="bg-[#0b111c] px-5 py-14 text-white sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.3fr_3fr]">
+      <div className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-[1.3fr_3fr]">
         <div>
           <BrandLogo light />
           <p className="mt-5 max-w-xs text-sm leading-7 text-slate-400">
@@ -54,15 +54,16 @@ export function SiteFooter() {
             and lead.
           </p>
           <div className="mt-6 flex gap-3">
-            {socialLinks.map(([label, href]) => (
+            {socialLinks.map(([label, href, shortLabel]) => (
               <a
+                aria-label={label}
                 className="grid h-9 w-9 place-items-center rounded-md bg-white/8 text-xs font-black text-slate-300 transition hover:bg-bitOrange hover:text-white"
                 href={href}
                 key={label}
                 rel="noreferrer"
                 target={href.startsWith("http") ? "_blank" : undefined}
               >
-                {label}
+                {shortLabel}
               </a>
             ))}
           </div>

@@ -106,7 +106,7 @@ export function ContactPage() {
           </div>
           <div className="mt-8"><Field label="Any other comments?"><textarea className={`${inputClass} min-h-28`} name="comments" onChange={handleChange} value={formData.comments} /></Field></div>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs leading-6 text-slate-500">Attachments are captured by name for now. File upload storage can be added later.</p>
+            <p className="text-xs leading-6 text-slate-500">Your enquiry will be reviewed by the BitBattles team.</p>
             <motion.button className="rounded-md bg-bitOrange px-8 py-3.5 text-sm font-black text-white shadow-lg shadow-orange-500/20 disabled:cursor-not-allowed disabled:opacity-60" disabled={status === "loading"} type="submit" whileHover={{ y: status === "loading" ? 0 : -3 }} whileTap={{ scale: status === "loading" ? 1 : 0.98 }}>
               {status === "loading" ? "Submitting..." : "Submit inquiry"}
             </motion.button>

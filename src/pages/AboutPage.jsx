@@ -22,9 +22,6 @@ export function AboutPage() {
             className="aspect-[4/3] w-full rounded-lg object-cover"
             src="/images/about-visual.svg"
           />
-          <p className="mt-4 text-xs font-semibold text-slate-500">
-            Demo visual path: <span className="text-slate-300">public/images/about-visual.svg</span>
-          </p>
         </div>
       </section>
 

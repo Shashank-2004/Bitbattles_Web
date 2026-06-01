@@ -6,10 +6,12 @@ import { AboutPage } from "./pages/AboutPage";
 import { CareersPage } from "./pages/CareersPage";
 import { ContactPage } from "./pages/ContactPage";
 import { PortfolioPage } from "./pages/PortfolioPage";
+import { PrivacyPage } from "./pages/PrivacyPage";
 import { ProposalPage } from "./pages/ProposalPage";
-import { services } from "./data/services";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
+import { TermsPage } from "./pages/TermsPage";
+import { services } from "./data/services";
 
 function getActiveService() {
   const [, section, serviceId] = window.location.pathname.split("/");
@@ -33,6 +35,9 @@ function App() {
     "/proposal": <ProposalPage />,
     "/careers": <CareersPage />,
     "/contact": <ContactPage />,
+    "/privacy": <PrivacyPage />,
+    "/terms": <TermsPage />,
+    "/terms-and-conditions": <TermsPage />,
   };
 
   const page = activeService ? <ServicePage service={activeService} /> : routeMap[pathname] ?? <HomePage />;

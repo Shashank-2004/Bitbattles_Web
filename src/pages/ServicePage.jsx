@@ -35,33 +35,6 @@ export function ServicePage({ service }) {
               className="aspect-[4/3] w-full rounded-lg object-cover"
               src={service.heroImage ?? defaultHeroImage}
             />
-            <p className="mt-4 text-xs font-semibold text-slate-500">
-              Demo visual path: <span className="text-slate-300">public/images/hero-cube.png</span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-white/8 bg-[#101722] px-5 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-[1180px] gap-6 md:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">
-              Proposal ready
-            </p>
-            <h2 className="mt-3 text-4xl font-black">Need this service scoped?</h2>
-          </div>
-          <div className="rounded-xl border border-bitOrange/35 bg-[#07101c] p-7">
-            <p className="text-sm leading-7 text-slate-400">
-              Share your requirements and BitBattles will use your selected service as context for
-              the proposal request. You can add budget, deadline, and project details on the next
-              page.
-            </p>
-            <a
-              className="mt-6 inline-flex rounded-md bg-bitOrange px-6 py-3 text-sm font-black text-white"
-              href={proposalHref}
-            >
-              Request a Proposal
-            </a>
           </div>
         </div>
       </section>
