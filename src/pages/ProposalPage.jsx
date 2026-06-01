@@ -99,7 +99,7 @@ export function ProposalPage() {
             Got a product idea? Let&apos;s talk.
           </h1>
           <p className="mt-8 max-w-xl text-xl leading-8 text-slate-200">
-            We work as a full-service product partner across SaaS, software, websites, apps,
+            We work as a full-service product partner across software, websites, apps,
             cybersecurity, security systems, and AI automation.
           </p>
 

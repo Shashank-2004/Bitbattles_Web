@@ -11,6 +11,22 @@ import { ProposalPage } from "./pages/ProposalPage";
 import { services } from "./data/services";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
+import { AiSolutionsPage } from "./pages/AiSolutionsPage";
+import { UiUxDesignPage } from "./pages/UiUxDesignPage";
+import { WebDevelopmentPage } from "./pages/WebDevelopmentPage";
+import { AppDevelopmentPage } from "./pages/AppDevelopmentPage";
+import { QaTestingPage } from "./pages/QaTestingPage";
+import { CyberSecurityPage } from "./pages/CyberSecurityPage";
+
+// Map service IDs to their dedicated page components
+const dedicatedServicePages = {
+  "ai-solutions": <AiSolutionsPage />,
+  "ui-ux-design": <UiUxDesignPage />,
+  "web-development": <WebDevelopmentPage />,
+  "mobile-apps": <AppDevelopmentPage />,
+  "qa-testing": <QaTestingPage />,
+  "cyber-security": <CyberSecurityPage />,
+};
 
 function getActiveService() {
   const [, section, serviceId] = window.location.pathname.split("/");
@@ -19,12 +35,13 @@ function getActiveService() {
     return null;
   }
 
-  return services.find((service) => service.id === serviceId) ?? services[0];
+  return services.find((service) => service.id === serviceId) ?? null;
 }
 
 function App() {
   const pathname = window.location.pathname;
   const activeService = getActiveService();
+
   const routeMap = {
     "/": <HomePage />,
     "/services": <ServicesPage />,
@@ -34,7 +51,14 @@ function App() {
     "/careers": <CareersPage />,
     "/contact": <ContactPage />,
   };
-  const page = activeService ? <ServicePage service={activeService} /> : routeMap[pathname] ?? <HomePage />;
+  // Determine which page to render
+  let page;
+  if (activeService) {
+    // Use dedicated page if available, otherwise fall back to generic ServicePage
+    page = dedicatedServicePages[activeService.id] ?? <ServicePage service={activeService} />;
+  } else {
+    page = routeMap[pathname] ?? <HomePage />;
+  }
 
   return (
     <div className="min-h-screen overflow-hidden bg-white">
