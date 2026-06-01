@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Reveal } from "../common/Reveal";
 import { ServiceIcon } from "../services/ServiceIcon";
 import { company } from "../../data/company";
-import { projects, sectors } from "../../data/site";
+import { sectors } from "../../data/site";
 import { services } from "../../data/services";
 import { fadeUp, staggerContainer } from "../../lib/motion";
 import { HomeHero } from "./HomeHero";
@@ -46,6 +47,23 @@ function SectionTitle({ children, eyebrow, light = false }) {
 }
 
 export function HomePage() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      try {
+        const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+        const response = await fetch(`${API_BASE_URL}/api/portfolio/featured`);
+        if (response.ok) {
+          setProjects(await response.json());
+        }
+      } catch (error) {
+        console.error("Error fetching featured projects:", error);
+      }
+    };
+    fetchFeatured();
+  }, []);
+
   return (
     <main className="bg-white">
       <HomeHero />
@@ -204,7 +222,7 @@ export function HomePage() {
                   <div className="absolute right-0 top-0 h-24 w-24 bg-bitOrange" />
                   <div className="relative flex h-full flex-col justify-between rounded-xl bg-bitCharcoal/80 p-5 text-white">
                     <span className="w-fit rounded-full bg-white/10 px-3 py-1 text-xs font-black">
-                      {project.tag}
+                      {project.category ? project.category.substring(0, 3).toUpperCase() : "PROJ"}
                     </span>
                     <div>
                       <div className="mb-3 h-2 w-20 rounded-full bg-bitOrange" />

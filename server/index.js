@@ -12,7 +12,7 @@ connectDB();
 const app = express();
 
 // Middleware
-const allowedOrigins = `${process.env.CLIENT_URL || ""},http://localhost:5173,http://localhost:5174`
+const allowedOrigins = `${process.env.CLIENT_URL || ""},http://localhost:5173,http://localhost:5174,http://127.0.0.1:5173,http://127.0.0.1:5174`
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -36,6 +36,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/contact", require("./routes/contactRoutes"));
 app.use("/api/portfolio", require("./routes/portfolioRoutes"));
 app.use("/api/blog", require("./routes/blogRoutes"));
+app.use("/api/careers", require("./routes/careerRoutes"));
 
 // Health check route
 app.get("/api/health", (req, res) => {

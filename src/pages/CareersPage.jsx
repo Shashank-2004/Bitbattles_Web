@@ -1,9 +1,12 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Reveal } from "../components/common/Reveal";
 import { fadeUp, staggerContainer } from "../lib/motion";
 import "../styles/careers.css";
 
-const internRoles = [
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const oldInternRoles = [
   {
     title: "Web Development Intern",
     department: "Engineering",
@@ -54,7 +57,7 @@ const internRoles = [
   },
 ];
 
-const fulltimeRoles = [
+const oldFulltimeRoles = [
   {
     title: "Flutter Developer",
     department: "Engineering",
@@ -132,7 +135,7 @@ const benefits = [
   },
 ];
 
-const totalRoles = internRoles.length + fulltimeRoles.length;
+// old total roles
 
 function RoleCard({ role, index }) {
   const isIntern = role.type === "Intern";
@@ -187,6 +190,37 @@ function RoleCard({ role, index }) {
 }
 
 export function CareersPage() {
+  const [internJobs, setInternJobs] = useState([]);
+  const [fulltimeJobs, setFulltimeJobs] = useState([]);
+  const [totalJobs, setTotalJobs] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("hr@bitbattles.in");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  useEffect(() => {
+    const fetchCareers = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/careers`);
+        if (response.ok) {
+          const data = await response.json();
+          setInternJobs(data.filter(job => job.type === 'Intern'));
+          setFulltimeJobs(data.filter(job => job.type === 'Full-time'));
+          setTotalJobs(data.length);
+        }
+      } catch (error) {
+        console.error("Error fetching careers:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCareers();
+  }, []);
+
   return (
     <main className="bg-white">
       {/* ====== HERO ====== */}
@@ -208,7 +242,7 @@ export function CareersPage() {
 
             <div className="hero-actions">
               <a className="btn-primary" href="#positions">
-                Explore {totalRoles} Open Roles <span>→</span>
+                Explore {totalJobs} Open Roles <span>→</span>
               </a>
               <a className="btn-secondary" href="/contact">
                 General Application
@@ -243,7 +277,7 @@ export function CareersPage() {
       <section id="positions" className="careers-positions">
         <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
           <Reveal className="section-header">
-            <h2>Open Positions ({totalRoles} Roles)</h2>
+            <h2>Open Positions ({totalJobs} Roles)</h2>
             <p>
               Explore our current openings and find the perfect role to match
               your skills and ambitions.
@@ -262,7 +296,7 @@ export function CareersPage() {
               viewport={{ once: true }}
               variants={staggerContainer}
             >
-              {internRoles.map((role, i) => (
+              {internJobs.map((role, i) => (
                 <RoleCard role={role} index={i} key={role.title} />
               ))}
             </motion.div>
@@ -282,7 +316,7 @@ export function CareersPage() {
               viewport={{ once: true }}
               variants={staggerContainer}
             >
-              {fulltimeRoles.map((role, i) => (
+              {fulltimeJobs.map((role, i) => (
                 <RoleCard role={role} index={i} key={role.title} />
               ))}
             </motion.div>
@@ -361,11 +395,25 @@ export function CareersPage() {
                 <div className="hr-card">
                   <div className="hr-card-icon">✉️</div>
                   <h4>Email Us</h4>
-                  <p>hr@bitbattles.in</p>
-                  <span className="hr-highlight">Click to copy</span>
+                  <p 
+                    onClick={handleCopyEmail} 
+                    style={{ cursor: 'pointer' }} 
+                    title="Click to copy email"
+                  >
+                    hr@bitbattles.in
+                  </p>
+                  <span 
+                    className="hr-highlight" 
+                    onClick={handleCopyEmail}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {copied ? "Copied!" : "Click to copy"}
+                  </span>
                   <a
                     className="btn-send-email"
-                    href="mailto:hr@bitbattles.in"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=hr@bitbattles.in"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Send Email
                   </a>
