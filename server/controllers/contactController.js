@@ -3,6 +3,9 @@ const { sendContactNotifications } = require("../services/emailService");
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+const cleanSelect = (val) =>
+  ["Please select", "Select a Budget Range"].includes(val) ? "" : val;
+
 const buildMessage = (payload) =>
   [
     `Phone: ${payload.phone || "Not provided"}`,
@@ -13,7 +16,7 @@ const buildMessage = (payload) =>
     `Reference: ${payload.reference || "Not provided"}`,
     `Attachment: ${payload.attachmentName || "Not attached"}`,
     `Deadline: ${payload.deadline || "Not selected"}`,
-    `Budget: ${payload.budget || "Not selected"}`,
+    `Budget: ${cleanSelect(payload.budget) || "Not selected"}`,
     `Comments: ${payload.comments || "None"}`,
   ].join("\n");
 
@@ -21,7 +24,10 @@ const buildMessage = (payload) =>
 const submitContact = async (req, res) => {
   try {
     if (req.body.website) {
-      return res.status(204).end();
+      return res.status(200).json({
+        success: true,
+        message: "Thank you! Your inquiry has been received.",
+      });
     }
 
     const firstName = (req.body.firstName || "").trim();

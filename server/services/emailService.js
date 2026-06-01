@@ -48,12 +48,6 @@ const sendContactNotifications = async (contact) => {
         text: [
           `Name: ${contact.name}`,
           `Email: ${contact.email}`,
-          `Phone: ${contact.phone || "Not provided"}`,
-          `Company: ${contact.company || "Not provided"}`,
-          `Company type: ${contact.companyType || "Not selected"}`,
-          `Support needed: ${(contact.support || []).join(", ") || "Not specified"}`,
-          `Deadline: ${contact.deadline || "Not selected"}`,
-          `Budget: ${contact.budget || "Not selected"}`,
           "",
           contact.message,
         ].join("\n"),
