@@ -1,35 +1,410 @@
+import { motion } from "framer-motion";
 import { Reveal } from "../components/common/Reveal";
-import { careers } from "../data/site";
+import { fadeUp, staggerContainer } from "../lib/motion";
+import "../styles/careers.css";
+
+const internRoles = [
+  {
+    title: "Web Development Intern",
+    department: "Engineering",
+    location: "Remote / India",
+    experience: "0-1 years",
+    type: "Intern",
+    description:
+      "Build and maintain responsive web interfaces using modern frameworks. Work on real client projects and learn industry-standard development workflows.",
+    tags: ["React", "JavaScript", "HTML/CSS"],
+    moreCount: 2,
+    icon: "🌐",
+  },
+  {
+    title: "Data Science Intern",
+    department: "AI & Analytics",
+    location: "Remote / India",
+    experience: "0-1 years",
+    type: "Intern",
+    description:
+      "Analyze datasets, build predictive models, and create data visualizations. Explore machine learning pipelines and work with real-world business data.",
+    tags: ["Python", "ML", "Data Analysis"],
+    moreCount: 2,
+    icon: "📊",
+  },
+  {
+    title: "UI/UX Design Intern",
+    department: "Design",
+    location: "Remote / India",
+    experience: "0-1 years",
+    type: "Intern",
+    description:
+      "Create intuitive and beautiful user experiences. Conduct user research and translate insights into clean, functional interface designs.",
+    tags: ["Figma", "Prototyping", "Design Systems"],
+    moreCount: 1,
+    icon: "🎨",
+  },
+  {
+    title: "App Development Intern",
+    department: "Engineering",
+    location: "Remote / India",
+    experience: "0-1 years",
+    type: "Intern",
+    description:
+      "Develop cross-platform mobile applications from the ground up. Learn industry-standard tools and contribute to production-ready codebases.",
+    tags: ["Flutter", "Dart", "Mobile UI"],
+    moreCount: 1,
+    icon: "📱",
+  },
+];
+
+const fulltimeRoles = [
+  {
+    title: "Flutter Developer",
+    department: "Engineering",
+    location: "Remote / India",
+    experience: "1-3 years",
+    type: "Full-time",
+    description:
+      "Build high-performance cross-platform mobile apps with Flutter. Collaborate with designers and backend engineers to deliver polished user experiences.",
+    tags: ["Flutter", "Dart", "Firebase"],
+    moreCount: 2,
+    icon: "⚡",
+  },
+  {
+    title: "App Developer",
+    department: "Engineering",
+    location: "Remote / India",
+    experience: "2-4 years",
+    type: "Full-time",
+    description:
+      "Design, develop, and deploy native and hybrid mobile applications. Drive technical architecture decisions for app projects across Android and iOS.",
+    tags: ["React Native", "Swift", "Kotlin"],
+    moreCount: 2,
+    icon: "📲",
+  },
+  {
+    title: "DevOps Engineer",
+    department: "Infrastructure",
+    location: "Remote / India",
+    experience: "1-3 years",
+    type: "Full-time",
+    description:
+      "Manage CI/CD pipelines, cloud infrastructure, and deployment workflows. Ensure scalable, reliable, and secure delivery across all engineering teams.",
+    tags: ["AWS", "Docker", "CI/CD"],
+    moreCount: 2,
+    icon: "🔧",
+  },
+];
+
+const benefits = [
+  {
+    icon: "💰",
+    title: "Competitive Compensation",
+    desc: "Industry-leading stipends and salaries with performance bonuses and growth incentives.",
+    bg: "#fff8f4",
+  },
+  {
+    icon: "🏠",
+    title: "Flexible Work Culture",
+    desc: "Hybrid & remote options with flexible working hours. Work from anywhere that inspires you.",
+    bg: "#f0fdf4",
+  },
+  {
+    icon: "🌍",
+    title: "Global Opportunities",
+    desc: "Work with international clients and collaborate with diverse teams across the globe.",
+    bg: "#eff6ff",
+  },
+  {
+    icon: "🚀",
+    title: "Fast Career Growth",
+    desc: "Clear promotion paths, mentorship programs, and opportunities to lead real projects early.",
+    bg: "#fdf4ff",
+  },
+  {
+    icon: "📚",
+    title: "Learning & Development",
+    desc: "Access to courses, conferences, and workshops. We invest in your continuous professional growth.",
+    bg: "#fefce8",
+  },
+  {
+    icon: "🎯",
+    title: "Impactful Work",
+    desc: "Work on cutting-edge products solving real business challenges. Your contributions matter from day one.",
+    bg: "#f0fdfa",
+  },
+];
+
+const totalRoles = internRoles.length + fulltimeRoles.length;
+
+function RoleCard({ role, index }) {
+  const isIntern = role.type === "Intern";
+  return (
+    <motion.article
+      className="role-card"
+      variants={fadeUp}
+      whileHover={{ y: -6 }}
+    >
+      <div className="role-card-header">
+        <div className={`role-icon ${isIntern ? "intern-icon" : "fulltime-icon"}`}>
+          {role.icon}
+        </div>
+        <span className={`role-type-badge ${isIntern ? "intern" : "fulltime"}`}>
+          {role.type}
+        </span>
+      </div>
+
+      <h3>{role.title}</h3>
+      <p className="role-department">{role.department}</p>
+
+      <div className="role-meta">
+        <span>
+          <span className="meta-icon">📍</span>
+          {role.location}
+        </span>
+        <span>
+          <span className="meta-icon">⏱️</span>
+          {role.experience}
+        </span>
+      </div>
+
+      <p className="role-desc">{role.description}</p>
+
+      <div className="role-tags">
+        {role.tags.map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
+        {role.moreCount > 0 && (
+          <span className="more-tag">+{role.moreCount}</span>
+        )}
+      </div>
+
+      <div className="role-card-footer">
+        <a className="apply-link" href="/contact">
+          Apply Now <span>→</span>
+        </a>
+        <span className="posted-date">Posted recently</span>
+      </div>
+    </motion.article>
+  );
+}
 
 export function CareersPage() {
   return (
-    <main className="bg-[#fff8f4]">
-      <section className="mx-auto max-w-5xl px-5 py-20 sm:px-6 lg:px-8">
-        <Reveal className="text-center">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-bitOrange">Careers</p>
-          <h1 className="mt-4 text-5xl font-black tracking-normal text-bitCharcoal sm:text-6xl">
-            Join a small team building useful digital products
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-600">
-            We are early-stage, so roles are lean, hands-on, and best suited for people who like
-            learning quickly.
-          </p>
-        </Reveal>
+    <main className="bg-white">
+      {/* ====== HERO ====== */}
+      <section className="careers-hero">
+        <div className="mx-auto max-w-5xl px-5 text-center sm:px-6 lg:px-8">
+          <Reveal className="flex flex-col items-center">
+            
 
-        <div className="mt-12 grid gap-5">
-          {careers.map((role) => (
-            <Reveal className="rounded-2xl bg-white p-6 shadow-sm" key={role}>
-              <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                <div>
-                  <h2 className="text-xl font-black text-bitCharcoal">{role}</h2>
-                  <p className="mt-2 text-sm text-slate-600">Internship / early-career friendly</p>
-                </div>
-                <a className="font-black text-bitOrange hover:text-bitCharcoal" href="/contact">
-                  Apply interest &rarr;
-                </a>
-              </div>
+            <h1>
+              Build Your Career at{" "}
+              <span className="highlight">BitBattles</span>
+            </h1>
+
+            <p className="hero-desc">
+              Join us in building the future of digital solutions. Work on
+              challenging projects, learn from industry experts, and grow your
+              career in a supportive environment.
+            </p>
+
+            <div className="hero-actions">
+              <a className="btn-primary" href="#positions">
+                Explore {totalRoles} Open Roles <span>→</span>
+              </a>
+              <a className="btn-secondary" href="/contact">
+                General Application
+              </a>
+            </div>
+          </Reveal>
+
+          {/* Stats */}
+          <motion.div
+            className="careers-stats"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {[
+              ["20+", "Team Members"],
+              ["5+", "Countries Served"],
+              ["50+", "Projects Delivered"],
+              ["4.9★", "Client Rating"],
+            ].map(([value, label]) => (
+              <motion.div className="stat-card" key={label} variants={fadeUp}>
+                <div className="stat-value">{value}</div>
+                <div className="stat-label">{label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ====== OPEN POSITIONS ====== */}
+      <section id="positions" className="careers-positions">
+        <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
+          <Reveal className="section-header">
+            <h2>Open Positions ({totalRoles} Roles)</h2>
+            <p>
+              Explore our current openings and find the perfect role to match
+              your skills and ambitions.
+            </p>
+          </Reveal>
+
+          {/* Intern Roles */}
+          <div className="positions-category">
+            <Reveal>
+              <span className="category-label intern">🎓 Internship Roles</span>
             </Reveal>
-          ))}
+            <motion.div
+              className="positions-grid"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              {internRoles.map((role, i) => (
+                <RoleCard role={role} index={i} key={role.title} />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Full-time Roles */}
+          <div className="positions-category" style={{ marginTop: "2.5rem" }}>
+            <Reveal>
+              <span className="category-label fulltime">
+                💼 Full-time Roles
+              </span>
+            </Reveal>
+            <motion.div
+              className="positions-grid"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              {fulltimeRoles.map((role, i) => (
+                <RoleCard role={role} index={i} key={role.title} />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* General Application CTA */}
+          <Reveal>
+            <div className="careers-general-cta" style={{ marginTop: "3rem" }}>
+              <h3>Don't see the perfect role?</h3>
+              <p>
+                We're always looking for talented people. Send us your resume and
+                we'll contact you when a matching position opens up.
+              </p>
+              <a className="btn-submit" href="/contact">
+                Submit General Application
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* WHY JOIN */}
+      <section className="careers-why-join">
+        <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
+          <Reveal className="section-header">
+            <h2>Why Join BitBattles?</h2>
+            <p>
+              We invest in our team's growth and well-being with comprehensive
+              benefits and a supportive culture.
+            </p>
+          </Reveal>
+
+          <motion.div
+            className="benefits-grid"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {benefits.map((b) => (
+              <motion.div
+                className="benefit-card"
+                key={b.title}
+                variants={fadeUp}
+              >
+                <div
+                  className="benefit-icon"
+                  style={{ background: b.bg }}
+                >
+                  {b.icon}
+                </div>
+                <div>
+                  <h4>{b.title}</h4>
+                  <p>{b.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* HR CONTACT  */}
+      <section className="careers-hr">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+          <Reveal className="section-header">
+            <h2>Get in Touch with HR</h2>
+            <p>
+              Have questions about our hiring process or want to discuss career
+              opportunities? Our HR team is here to help.
+            </p>
+          </Reveal>
+
+          <Reveal>
+            <div className="hr-cards-wrapper">
+              <div className="hr-cards-grid">
+                <div className="hr-card">
+                  <div className="hr-card-icon">✉️</div>
+                  <h4>Email Us</h4>
+                  <p>hr@bitbattles.in</p>
+                  <span className="hr-highlight">Click to copy</span>
+                  <a
+                    className="btn-send-email"
+                    href="mailto:hr@bitbattles.in"
+                  >
+                    Send Email
+                  </a>
+                </div>
+
+                <div className="hr-card">
+                  <div className="hr-card-icon">💬</div>
+                  <h4>Quick Response</h4>
+                  <p>
+                    We typically respond to all career inquiries within 24-48
+                    hours
+                  </p>
+                  <span className="hr-highlight">
+                    Mon – Fri, 9AM – 6PM IST
+                  </span>
+                </div>
+
+                <div className="hr-card">
+                  <div className="hr-card-icon">🤝</div>
+                  <h4>Application Support</h4>
+                  <p>
+                    Need help with your application? We're here to assist you
+                    through the process.
+                  </p>
+                  <span className="hr-highlight">
+                    Resume reviews & interview prep
+                  </span>
+                </div>
+              </div>
+
+              <div className="hr-email-footer">
+                <p>
+                  Prefer to apply via email? Send your resume and cover letter to{" "}
+                  <a href="mailto:hr@bitbattles.in">hr@bitbattles.in</a>{" "}
+                  with the position title in the subject line.
+                </p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
     </main>

@@ -75,7 +75,7 @@ function App() {
           {page}
         </motion.div>
       </AnimatePresence>
-      {pathname !== "/proposal" && <ProposalCta />}
+      {pathname !== "/proposal" && pathname !== "/careers" && <ProposalCta />}
       <SiteFooter />
     </div>
   );
