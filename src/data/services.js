@@ -4,79 +4,79 @@ export const services = [
     title: "AI Solutions",
     heroTitle: "AI Solutions for Modern Teams",
     heroDescription:
-      "Practical AI workflows, assistants, and automation systems designed around real business needs.",
+      "Custom AI systems that automate processes, support teams, and unlock new opportunities.",
     description:
-      "AI tools, assistants, and workflow automation that help teams move faster without adding unnecessary complexity.",
+      "Custom AI solutions to automate processes and unlock new opportunities.",
     icon: "brain",
     href: "/services/ai-solutions",
-    emoji: "AI",
+    emoji: "🧠",
     color: "#ff6a2a",
-  },
-  {
-    id: "saas-development",
-    title: "SaaS Development",
-    heroTitle: "SaaS Development Services",
-    heroDescription:
-      "Product architecture, dashboards, subscriptions, and scalable SaaS experiences for early-stage teams.",
-    description:
-      "Subscription platforms, admin dashboards, user workflows, and scalable SaaS product foundations.",
-    icon: "enterprise",
-    href: "/services/saas-development",
-    emoji: "S",
-    color: "#14b8a6",
   },
   {
     id: "web-development",
     title: "Web Development",
     heroTitle: "Web Development Services",
     heroDescription:
-      "High-performance websites and web apps built with clean UX, strong frontend systems, and room to scale.",
+      "Modern, scalable, high-performing websites and web applications built for growth.",
     description:
-      "Marketing websites, web applications, landing pages, dashboards, and frontend systems built for clarity.",
+      "Modern, scalable and high-performing websites and web applications.",
     icon: "design",
     href: "/services/web-development",
-    emoji: "W",
+    emoji: "🌐",
     color: "#0ea5e9",
   },
   {
-    id: "mobile-apps",
-    title: "Mobile Apps",
+    id: "mobile-app-development",
+    title: "Mobile App Development",
     heroTitle: "Mobile App Development Services",
     heroDescription:
-      "Mobile-first product experiences for startups, internal teams, commerce, and service platforms.",
+      "User-friendly mobile apps for iOS and Android that drive engagement.",
     description:
-      "Mobile application interfaces and product flows that are simple, responsive, and launch-ready.",
+      "User-friendly mobile apps for iOS and Android that drive engagement.",
     icon: "product",
-    href: "/services/mobile-apps",
-    emoji: "M",
+    href: "/services/mobile-app-development",
+    emoji: "📱",
     color: "#10b981",
   },
   {
-    id: "cyber-security",
-    title: "Cyber Security",
-    heroTitle: "Cyber Security Product Services",
+    id: "ui-ux-design",
+    title: "UI/UX Design",
+    heroTitle: "UI/UX Design Services",
     heroDescription:
-      "Security-aware portals, dashboards, workflows, and digital systems for safer business operations.",
+      "Beautiful, intuitive, and conversion-focused digital product experiences.",
     description:
-      "Security-focused interfaces, portals, monitoring workflows, and cyber-aware product experiences.",
-    icon: "shield",
-    href: "/services/cyber-security",
-    emoji: "CS",
-    color: "#ef4444",
+      "Beautiful, intuitive and conversion-focused design solutions.",
+    icon: "design",
+    href: "/services/ui-ux-design",
+    emoji: "🎨",
+    color: "#a855f7",
   },
   {
-    id: "automation",
-    title: "Automation",
-    heroTitle: "Automation Services",
+    id: "cloud-solutions",
+    title: "Cloud Solutions",
+    heroTitle: "Cloud Solutions",
     heroDescription:
-      "Lean automations for business workflows, operations, reporting, approvals, and AI-assisted execution.",
+      "Scalable cloud architecture, deployment, and DevOps services for reliable products.",
     description:
-      "Workflow automation, internal tools, data routing, and operational systems that reduce repetitive work.",
+      "Scalable cloud architecture, deployment and DevOps services.",
+    icon: "enterprise",
+    href: "/services/cloud-solutions",
+    emoji: "☁️",
+    color: "#38bdf8",
+  },
+  {
+    id: "digital-transformation",
+    title: "Digital Transformation",
+    heroTitle: "Digital Transformation Services",
+    heroDescription:
+      "Smart digital strategies and technologies that modernize business operations.",
+    description:
+      "Transform your business with smart digital strategies and technologies.",
     icon: "agent",
-    href: "/services/automation",
-    emoji: "A",
+    href: "/services/digital-transformation",
+    emoji: "🚀",
     color: "#f59e0b",
   },
 ];
 
-export const defaultHeroImage = "/images/service-hero.svg";
+export const defaultHeroImage = "/images/hero-cube.png";

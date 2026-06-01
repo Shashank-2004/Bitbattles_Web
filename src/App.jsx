@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { AppHeader } from "./components/layout/AppHeader";
-import { ProposalCta } from "./components/layout/ProposalCta";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { HomePage } from "./components/home/HomePage";
 import { AboutPage } from "./pages/AboutPage";
@@ -39,7 +38,7 @@ function App() {
   const page = activeService ? <ServicePage service={activeService} /> : routeMap[pathname] ?? <HomePage />;
 
   return (
-    <div className="min-h-screen overflow-hidden bg-white">
+    <div className="min-h-screen overflow-hidden bg-bitCharcoal">
       <AppHeader />
       <AnimatePresence mode="wait">
         <motion.div
@@ -52,7 +51,6 @@ function App() {
           {page}
         </motion.div>
       </AnimatePresence>
-      {pathname !== "/proposal" && <ProposalCta />}
       <SiteFooter />
     </div>
   );

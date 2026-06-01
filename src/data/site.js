@@ -37,19 +37,28 @@ export const sectors = [
 
 export const projects = [
   {
-    title: "AI Operations Workflow",
-    tag: "AI",
-    description: "A practical workflow concept for automating repetitive business operations.",
+    title: "AI Analytics Dashboard",
+    tag: "AI Dashboard",
+    description: "A practical workflow concept for AI-powered business insights.",
+    image: "/images/project-demo-ai.svg",
   },
   {
-    title: "Mobile Commerce App",
-    tag: "APP",
-    description: "A fast mobile product experience focused on clarity, retention, and conversion.",
+    title: "HealthCare+ Mobile App",
+    tag: "Mobile App",
+    description: "A mobile application concept for healthcare service experiences.",
+    image: "/images/project-demo-mobile.svg",
   },
   {
-    title: "Cyber Intake Portal",
-    tag: "SEC",
-    description: "A secure request and approval portal for internal business operations.",
+    title: "Fintech Web Platform",
+    tag: "Web Application",
+    description: "A web platform concept for modern financial product workflows.",
+    image: "/images/project-demo-web.svg",
+  },
+  {
+    title: "E-learning Platform",
+    tag: "Web Application",
+    description: "A learning product direction for courses, students, and content.",
+    image: "/images/project-demo-learning.svg",
   },
 ];
 

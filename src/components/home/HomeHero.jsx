@@ -1,116 +1,54 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import Spline from "@splinetool/react-spline";
-import { GlowBackground } from "../common/GlowBackground";
-import { Reveal } from "../common/Reveal";
-import { services } from "../../data/services";
-
-const splineSceneUrl =
-  import.meta.env.VITE_SPLINE_SCENE_URL ||
-  "https://prod.spline.design/zZlra7VUzTeOU62H/scene.splinecode";
-
-const floatingCards = [
-  { label: "AI Solutions", className: "left-4 top-8 sm:left-6", path: { x: [0, 16, -8, 0], y: [0, -18, 8, 0] } },
-  { label: "SaaS Development", className: "right-4 top-16 sm:right-8", path: { x: [0, -14, 10, 0], y: [0, 14, -10, 0] } },
-  { label: "Web Development", className: "left-8 top-1/2 sm:left-10", path: { x: [0, 12, -10, 0], y: [0, 18, -8, 0] } },
-  { label: "Mobile Apps", className: "right-3 top-[48%] sm:right-4", path: { x: [0, -18, 8, 0], y: [0, -12, 14, 0] } },
-  { label: "Cyber Security", className: "left-10 bottom-12 sm:left-16", path: { x: [0, 18, -12, 0], y: [0, -10, 16, 0] } },
-  { label: "Automation", className: "right-8 bottom-10 sm:right-14", path: { x: [0, -12, 16, 0], y: [0, 16, -12, 0] } },
-];
 
 export function HomeHero() {
-  const [parallax, setParallax] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    setParallax({ x, y });
-  };
-
   return (
-    <section className="relative overflow-hidden bg-bitCharcoal">
-      <GlowBackground />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px]" />
-
-      <div className="relative mx-auto grid min-h-[720px] max-w-7xl items-center gap-12 px-5 py-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <Reveal className="relative z-20">
-          <p className="inline-flex rounded-full border border-bitOrange/30 bg-white/10 px-5 py-2 text-xs font-black uppercase tracking-[0.14em] text-orange-200 backdrop-blur">
-            AI, SaaS, Software & Security
+    <section className="relative overflow-hidden bg-bitCharcoal px-5 py-20 sm:px-6 lg:px-8">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(9,75,168,0.28),transparent_30%),radial-gradient(circle_at_28%_40%,rgba(255,106,42,0.1),transparent_25%)]" />
+      <div className="relative mx-auto grid min-h-[560px] max-w-[1180px] items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p className="inline-flex rounded-md border border-bitOrange/40 bg-black/40 px-4 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-bitOrange">
+            AI & Digital Solutions
           </p>
-          <h1 className="mt-6 max-w-xl text-5xl font-black leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
-            We Build. You Scale. We Win.
+          <h1 className="mt-6 max-w-2xl text-5xl font-black leading-[1.04] tracking-normal text-white sm:text-6xl lg:text-7xl">
+            We Build. You Scale. <span className="text-bitOrange">We Win.</span>
           </h1>
-          <p className="mt-7 max-w-xl text-base font-medium leading-8 text-slate-300">
-            BitBattles builds SaaS products, websites, mobile apps, cybersecurity interfaces,
-            security systems, and automation workflows for modern teams.
+          <p className="mt-7 max-w-lg text-sm font-semibold leading-7 text-slate-500">
+            BitBattles builds intelligent digital products and AI-powered solutions that help
+            businesses automate, innovate and grow faster in a digital world.
           </p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <motion.a
-              className="service-card-focus inline-flex items-center justify-center rounded-md bg-bitOrange px-7 py-3.5 text-sm font-black text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-600"
-              href="/proposal"
-              whileHover={{ y: -3, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Request a Proposal
-            </motion.a>
-            <motion.a
-              className="service-card-focus inline-flex items-center justify-center rounded-md border border-white/15 bg-white/10 px-7 py-3.5 text-sm font-black text-white backdrop-blur transition hover:border-teal-300 hover:text-teal-100"
+              className="inline-flex items-center justify-center rounded-md bg-bitOrange px-6 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-500"
               href="/services"
-              whileHover={{ y: -3, scale: 1.02 }}
+              whileHover={{ y: -3 }}
               whileTap={{ scale: 0.98 }}
             >
-              Explore services
+              Explore Services →
+            </motion.a>
+            <motion.a
+              className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 text-sm font-black text-white transition hover:border-bitOrange hover:text-bitOrange"
+              href="/portfolio"
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Our Work →
             </motion.a>
           </div>
-        </Reveal>
+        </div>
 
-        <Reveal className="relative h-[460px] w-full md:h-[580px] lg:h-[640px]">
-          <div
-            className="relative z-10 h-full w-full overflow-visible"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={() => setParallax({ x: 0, y: 0 })}
-          >
-            <motion.div
-              className="absolute inset-0 h-full w-full"
-              animate={{ x: parallax.x * 18, y: parallax.y * 18 }}
-              transition={{ type: "spring", stiffness: 90, damping: 22 }}
-            >
-              <Spline
-                scene={splineSceneUrl}
-                style={{ display: "block", width: "100%", height: "100%" }}
-              />
-            </motion.div>
-
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(16,25,29,0.08)_62%,rgba(16,25,29,0.48)_100%)]" />
-
-            {floatingCards.map((card, index) => {
-              const service = services.find((item) => item.title === card.label);
-
-              return (
-                <motion.a
-                  className={`absolute ${card.className} z-20 rounded-2xl bg-white/12 px-4 py-3 text-xs font-black text-white shadow-2xl shadow-orange-500/15 ring-1 ring-white/18 backdrop-blur-xl transition hover:bg-bitOrange/20 sm:text-sm`}
-                  href={service?.href || "/services"}
-                  key={card.label}
-                  animate={{
-                    x: card.path.x.map((value) => value + parallax.x * (index % 2 ? -18 : 18)),
-                    y: card.path.y.map((value) => value + parallax.y * (index % 2 ? 18 : -18)),
-                  }}
-                  transition={{
-                    duration: 6 + index * 0.55,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  whileHover={{ scale: 1.06, y: -4 }}
-                >
-                  <span className="mr-2 inline-block h-2 w-2 rounded-full bg-bitOrange shadow-[0_0_18px_rgba(255,106,42,0.9)]" />
-                  {card.label}
-                </motion.a>
-              );
-            })}
-          </div>
-        </Reveal>
+        <motion.div
+          className="relative"
+          initial={{ opacity: 0, scale: 0.96, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <img
+            alt="BitBattles AI services cube"
+            className="relative z-10 ml-auto w-full max-w-[650px] object-contain drop-shadow-[0_0_70px_rgba(255,106,42,0.32)]"
+            src="/images/hero-cube.png"
+          />
+        </motion.div>
       </div>
     </section>
   );

@@ -1,10 +1,10 @@
-export function BrandLogo({ compact = false }) {
+export function BrandLogo({ compact = false, light = false }) {
   return (
-    <span className="inline-flex items-center gap-3" aria-label="BitBattles ESP">
-      <img className="h-9 w-9 object-contain" src="/bitbattles-logo.svg" alt="" />
+    <span className="inline-flex items-center gap-2.5" aria-label="BitBattles ESP">
+      <img className="h-6 w-6 object-contain" src="/images/bitbattles-logo.png" alt="" />
       {!compact && (
-        <span className="text-lg font-semibold tracking-normal text-bitCharcoal">
-          Bit Battles
+        <span className={`text-sm font-black tracking-normal ${light ? "text-slate-200" : "text-bitCharcoal"}`}>
+          BitBattles
         </span>
       )}
     </span>

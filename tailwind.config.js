@@ -9,7 +9,9 @@ export default {
         electric: "#3f5cff",
         aqua: "#10b8e8",
         bitOrange: "#ff6a2a",
-        bitCharcoal: "#243237",
+        bitCharcoal: "#050710",
+        bitPanel: "#08111f",
+        bitPanelSoft: "#101725",
         bitSteel: "#355d68",
       },
       boxShadow: {
