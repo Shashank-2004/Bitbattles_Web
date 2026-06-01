@@ -44,7 +44,7 @@ const mainOtherServices = [
   { emoji: "🌐", title: "Web Development", href: "/services/web-development", color: "#0ea5e9" },
   { emoji: "📱", title: "Mobile Apps", href: "/services/mobile-apps", color: "#10b981" },
   { emoji: "🎨", title: "UI/UX Design", href: "/services/ui-ux-design", color: "#a855f7" },
-  { emoji: "🛡️", title: "Cyber Security", href: "/services/cyber-security", color: "#ef4444" },
+
 ];
 
 /* ─── Shared Section Title ─────────────────────────────── */
@@ -110,7 +110,7 @@ function HeroSection() {
               Rigorous quality assurance and automated testing pipelines that catch bugs before your users do — so you ship with confidence.
             </p>
             <div className="qa-hero__cta-group" style={{ opacity: 0, display: "flex", gap: "14px", flexWrap: "wrap", marginTop: "40px" }}>
-              <a href="/proposal?service=qa-testing" className="svc-hero__cta-primary">Start QA Audit →</a>
+              <a href="/contact?service=qa-testing" className="svc-hero__cta-primary">Start QA Audit →</a>
               <a href="#qa-capabilities" className="svc-hero__cta-secondary">See Capabilities ↓</a>
             </div>
           </div>
@@ -299,7 +299,7 @@ function FloatingCta() {
       <div className="svc-float__card">
         <span className="svc-float__emoji">✅</span>
         <span className="svc-float__text">Join advance testing session →</span>
-        <a href="/proposal?service=qa-testing" className="svc-float__cta">Join Now</a>
+        <a href="/contact?service=qa-testing" className="svc-float__cta">Join Now</a>
         <button className="svc-float__close" onClick={() => { setDismissed(true); setVisible(false); }} aria-label="Close">✕</button>
       </div>
     </div>

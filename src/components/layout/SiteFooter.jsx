@@ -99,8 +99,8 @@ export function SiteFooter() {
               <li>{company.website}</li>
               <li>hello@bitbattles.in</li>
               <li>
-                <a className="font-black text-bitOrange hover:text-bitCharcoal" href="/proposal">
-                  Request a proposal
+                <a className="font-black text-bitOrange hover:text-bitCharcoal" href="/contact">
+                  Contact Us
                 </a>
               </li>
             </ul>

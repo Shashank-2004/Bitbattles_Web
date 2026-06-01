@@ -47,7 +47,7 @@ export function ServicesPage() {
                 </a>
                 <a
                   className="text-sm font-black text-bitCharcoal hover:text-bitOrange"
-                  href={`/proposal?service=${service.id}`}
+                  href={`/contact?service=${service.id}`}
                 >
                   Request service &rarr;
                 </a>

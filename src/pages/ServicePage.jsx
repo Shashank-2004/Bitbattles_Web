@@ -3,7 +3,7 @@ import { Reveal } from "../components/common/Reveal";
 import { defaultHeroImage } from "../data/services";
 
 export function ServicePage({ service }) {
-  const proposalHref = `/proposal?service=${service.id}`;
+  const proposalHref = `/contact?service=${service.id}`;
 
   return (
     <main className="bg-bitCharcoal">
@@ -85,7 +85,7 @@ export function ServicePage({ service }) {
               whileHover={{ y: -3, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Request a Proposal
+              Contact Us
             </motion.a>
           </Reveal>
         </div>

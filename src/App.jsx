@@ -7,7 +7,7 @@ import { AboutPage } from "./pages/AboutPage";
 import { CareersPage } from "./pages/CareersPage";
 import { ContactPage } from "./pages/ContactPage";
 import { PortfolioPage } from "./pages/PortfolioPage";
-import { ProposalPage } from "./pages/ProposalPage";
+
 import { services } from "./data/services";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
@@ -17,6 +17,9 @@ import { WebDevelopmentPage } from "./pages/WebDevelopmentPage";
 import { AppDevelopmentPage } from "./pages/AppDevelopmentPage";
 import { QaTestingPage } from "./pages/QaTestingPage";
 import { CyberSecurityPage } from "./pages/CyberSecurityPage";
+import { CloudImplementationPage } from "./pages/CloudImplementationPage";
+import { AutomationPage } from "./pages/AutomationPage";
+import { ArVrPage } from "./pages/ArVrPage";
 
 // Map service IDs to their dedicated page components
 const dedicatedServicePages = {
@@ -26,6 +29,9 @@ const dedicatedServicePages = {
   "mobile-apps": <AppDevelopmentPage />,
   "qa-testing": <QaTestingPage />,
   "cyber-security": <CyberSecurityPage />,
+  "cloud-implementation": <CloudImplementationPage />,
+  "automation": <AutomationPage />,
+  "ar-vr-development": <ArVrPage />,
 };
 
 function getActiveService() {
@@ -47,7 +53,7 @@ function App() {
     "/services": <ServicesPage />,
     "/about": <AboutPage />,
     "/portfolio": <PortfolioPage />,
-    "/proposal": <ProposalPage />,
+    "/proposal": <ContactPage />,
     "/careers": <CareersPage />,
     "/contact": <ContactPage />,
   };
@@ -75,7 +81,7 @@ function App() {
           {page}
         </motion.div>
       </AnimatePresence>
-      {pathname !== "/proposal" && pathname !== "/careers" && <ProposalCta />}
+      {pathname !== "/proposal" && pathname !== "/contact" && pathname !== "/careers" && <ProposalCta />}
       <SiteFooter />
     </div>
   );

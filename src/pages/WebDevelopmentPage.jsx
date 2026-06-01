@@ -118,7 +118,7 @@ function HeroSection() {
             <h1 className="web-hero__title" style={{ opacity: 0 }}>Websites That <span className="web-hero__title-accent">Perform & Convert</span></h1>
             <p className="web-hero__desc" style={{ opacity: 0 }}>High-performance websites and web applications built with clean architecture, modern tooling, and an obsession with speed, usability, and results.</p>
             <div className="web-hero__cta-group" style={{ opacity: 0 }}>
-              <a href="/proposal?service=web-development" className="web-hero__cta-primary">Start Your Web Project →</a>
+              <a href="/contact?service=web-development" className="web-hero__cta-primary">Start Your Web Project →</a>
               <a href="#web-process" className="web-hero__cta-secondary">See How We Work ↓</a>
             </div>
           </div>
@@ -284,7 +284,7 @@ function FloatingCta() {
       <div className="web-floating-tab__card">
         <span style={{ fontSize: "20px" }}>🌐</span>
         <span className="web-floating-tab__text">Ready to build your web product?</span>
-        <a href="/proposal?service=web-development" className="web-floating-tab__cta">Discuss Your Idea →</a>
+        <a href="/contact?service=web-development" className="web-floating-tab__cta">Discuss Your Idea →</a>
         <button className="web-floating-tab__close" onClick={() => { setDismissed(true); setVisible(false); }} aria-label="Close">✕</button>
       </div>
     </div>

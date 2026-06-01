@@ -114,7 +114,7 @@ export const services = [
     icon: "product",
     href: "/services/ar-vr-development",
     emoji: "🥽",
-    color: "#ec4899",
+    color: "#ff6a2a",
   },
 ];
 
