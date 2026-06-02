@@ -15,6 +15,7 @@ const VALID_BUDGETS = new Set([
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+<<<<<<< HEAD
 const cleanText = (value, fallback = "") =>
   String(value ?? fallback)
     .replace(/\s+/g, " ")
@@ -33,6 +34,10 @@ const cleanSupport = (support) => {
 
   return support.map((item) => cleanText(item)).filter(Boolean).slice(0, 12);
 };
+=======
+const cleanSelect = (val) =>
+  ["Please select", "Select a Budget Range"].includes(val) ? "" : val;
+>>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
 
 const buildMessage = (payload) =>
   [
@@ -44,7 +49,7 @@ const buildMessage = (payload) =>
     `Reference: ${payload.reference || "Not provided"}`,
     `Attachment: ${payload.attachmentName || "Not attached"}`,
     `Deadline: ${payload.deadline || "Not selected"}`,
-    `Budget: ${payload.budget || "Not selected"}`,
+    `Budget: ${cleanSelect(payload.budget) || "Not selected"}`,
     `Comments: ${payload.comments || "None"}`,
   ].join("\n");
 
@@ -52,7 +57,10 @@ const buildMessage = (payload) =>
 const submitContact = async (req, res) => {
   try {
     if (req.body.website) {
-      return res.status(204).end();
+      return res.status(200).json({
+        success: true,
+        message: "Thank you! Your inquiry has been received.",
+      });
     }
 
     const firstName = cleanText(req.body.firstName);

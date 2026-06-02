@@ -34,9 +34,41 @@ export const services = [
     description:
       "User-friendly mobile apps for iOS and Android that drive engagement.",
     icon: "product",
+<<<<<<< HEAD
     href: "/services/mobile-app-development",
     emoji: "📱",
     color: "#10b981",
+=======
+    href: "/services/mobile-apps",
+    emoji: "📱",
+    color: "#10b981",
+  },
+  {
+    id: "cyber-security",
+    title: "Cyber Security",
+    heroTitle: "Cyber Security Product Services",
+    heroDescription:
+      "Security-aware portals, dashboards, workflows, and digital systems for safer business operations.",
+    description:
+      "Security-focused interfaces, portals, monitoring workflows, and cyber-aware product experiences.",
+    icon: "shield",
+    href: "/services/cyber-security",
+    emoji: "🛡️",
+    color: "#ef4444",
+  },
+  {
+    id: "automation",
+    title: "Automation",
+    heroTitle: "Automation Services",
+    heroDescription:
+      "Lean automations for business workflows, operations, reporting, approvals, and AI-assisted execution.",
+    description:
+      "Workflow automation, internal tools, data routing, and operational systems that reduce repetitive work.",
+    icon: "agent",
+    href: "/services/automation",
+    emoji: "⚡",
+    color: "#f59e0b",
+>>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
   },
   {
     id: "ui-ux-design",
@@ -71,11 +103,19 @@ export const services = [
     heroDescription:
       "Smart digital strategies and technologies that modernize business operations.",
     description:
+<<<<<<< HEAD
       "Transform your business with smart digital strategies and technologies.",
     icon: "agent",
     href: "/services/digital-transformation",
     emoji: "🚀",
     color: "#f59e0b",
+=======
+      "AR/VR applications, 3D experiences, mixed reality interfaces, and spatial computing solutions.",
+    icon: "product",
+    href: "/services/ar-vr-development",
+    emoji: "🥽",
+    color: "#ec4899",
+>>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
   },
 ];
 

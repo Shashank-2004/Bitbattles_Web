@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
+=======
+import { useState, useEffect, useRef } from "react";
+>>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
 import { motion, AnimatePresence } from "framer-motion";
 import { BrandLogo } from "../brand/BrandLogo";
 import { services } from "../../data/services";

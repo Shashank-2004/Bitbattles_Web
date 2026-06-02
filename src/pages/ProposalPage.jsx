@@ -57,6 +57,7 @@ export function ProposalPage() {
   };
 
   return (
+<<<<<<< HEAD
     <main className="bg-bitCharcoal text-white">
       <section className="relative overflow-hidden px-5 py-20 sm:px-6 lg:px-8">
         <div className="absolute right-0 top-10 h-96 w-96 rounded-full bg-bitOrange/10 blur-3xl" />
@@ -79,6 +80,33 @@ export function ProposalPage() {
               <p className="text-[11px] font-black uppercase tracking-[0.14em] text-bitOrange">Service enquiry email</p>
               <a className="mt-2 block text-sm font-black text-white" href={`mailto:${company.inquiryEmail}`}>{company.inquiryEmail}</a>
             </div>
+=======
+    <main className="relative overflow-hidden bg-bitCharcoal text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_8%_30%,rgba(20,184,166,0.2),transparent_30%),radial-gradient(circle_at_96%_20%,rgba(255,106,42,0.22),transparent_28%),linear-gradient(135deg,#0f171b_0%,#15113f_58%,#4b12b6_100%)]" />
+
+      <section className="relative mx-auto grid min-h-[calc(100vh-64px)] max-w-7xl items-center gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+        <Reveal>
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-teal-200">
+            Proposal request
+          </p>
+          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal sm:text-6xl">
+            Got a product idea? Let&apos;s talk.
+          </h1>
+          <p className="mt-8 max-w-xl text-xl leading-8 text-slate-200">
+            We work as a full-service product partner across software, websites, apps,
+            cybersecurity, security systems, and AI automation.
+          </p>
+
+          <div className="mt-10 space-y-5">
+            {partnershipSteps.map((step) => (
+              <div className="flex items-center gap-4 text-lg font-black text-slate-200" key={step}>
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-teal-300/15 text-teal-200">
+                  ✓
+                </span>
+                {step}
+              </div>
+            ))}
+>>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
           </div>
 
           <form className="rounded-xl border border-bitOrange/25 bg-[#07101c] p-6 shadow-[0_0_44px_rgba(255,106,42,0.12)] md:p-8" onSubmit={handleSubmit}>

@@ -2,7 +2,19 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { company } from "../data/company";
 
+<<<<<<< HEAD
 const supportOptions = ["AI Solutions", "Web Development", "Mobile App Development", "UI/UX Design", "Cloud Solutions", "Digital Transformation"];
+=======
+const supportOptions = [
+  "AI Solutions",
+  "UI/UX Design",
+  "Web Development",
+  "Mobile Apps",
+  "Cyber Security",
+  "Automation",
+];
+
+>>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
 const companyTypes = ["Startup", "Growing Business", "Agency / Partner"];
 const deadlines = ["1 month - 2 months", "2 months - 4 months", "4 months - 6 months", "6 months - 1 year", "Other"];
 const budgets = ["Please select", "Under Rs. 50,000", "Rs. 50,000 - Rs. 2,00,000", "Rs. 2,00,000 - Rs. 5,00,000", "Rs. 5,00,000+", "Not sure yet"];
