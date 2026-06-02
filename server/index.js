@@ -1,22 +1,17 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
 const connectDB = require("./config/db");
 
-// Load environment variables
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, ".env") });
 
-// Connect to MongoDB
 connectDB();
 
 const app = express();
 
 // Middleware
-<<<<<<< HEAD
 const allowedOrigins = `${process.env.CLIENT_URL || ""},http://localhost:5173,http://localhost:5174,http://127.0.0.1:5173,http://127.0.0.1:5174`
-=======
-const allowedOrigins = `${process.env.CLIENT_URL || ""},http://localhost:5173,http://localhost:5174,http://127.0.0.1:5173`
->>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -35,8 +30,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/contact", require("./routes/contactRoutes"));
 app.use("/api/portfolio", require("./routes/portfolioRoutes"));
 app.use("/api/blog", require("./routes/blogRoutes"));

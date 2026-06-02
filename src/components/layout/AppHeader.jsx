@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { useEffect, useState } from "react";
-=======
-import { useState, useEffect, useRef } from "react";
->>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { BrandLogo } from "../brand/BrandLogo";
 import { services } from "../../data/services";
 
@@ -64,7 +60,7 @@ export function AppHeader() {
                               key={service.id}
                             >
                               <span className="grid h-9 w-9 place-items-center rounded-lg border border-bitOrange/60 bg-bitOrange/10 text-sm">
-                                {service.emoji}
+                                {service.shortCode}
                               </span>
                               <span>
                                 <span className="block text-xs font-black">{service.title}</span>
@@ -91,7 +87,7 @@ export function AppHeader() {
             className="hidden min-w-[112px] justify-center rounded-sm bg-bitOrange px-5 py-2.5 text-[11px] font-black text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-500 md:inline-flex"
             href="/proposal"
           >
-            Lets talk →
+            Lets talk -&gt;
           </a>
 
           <button
@@ -99,7 +95,7 @@ export function AppHeader() {
             onClick={() => setIsMobileOpen((value) => !value)}
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
           >
-            {isMobileOpen ? "X" : "☰"}
+            {isMobileOpen ? "X" : "Menu"}
           </button>
         </nav>
       </header>
@@ -128,7 +124,7 @@ export function AppHeader() {
                 href="/proposal"
                 onClick={() => setIsMobileOpen(false)}
               >
-                Lets talk →
+                Lets talk -&gt;
               </a>
             </nav>
           </motion.div>

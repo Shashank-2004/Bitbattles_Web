@@ -15,6 +15,7 @@ const budgetRanges = [
 const partnershipSteps = ["Strategy & Consulting", "Design & Prototyping", "Engineering", "Growth & Optimization"];
 const initialForm = { fullName: "", email: "", phone: "", budget: "Select a Budget Range", project: "", company: "", timeline: "", website: "" };
 const inputClass = "w-full rounded-lg border border-white/10 bg-[#07101c] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-bitOrange focus:bg-[#0b1321]";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export function ProposalPage() {
   const selectedServiceId = new URLSearchParams(window.location.search).get("service");
@@ -27,6 +28,7 @@ export function ProposalPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setStatus("loading");
+
     try {
       const payload = {
         firstName: formData.fullName.split(" ")[0] || formData.fullName,
@@ -43,12 +45,16 @@ export function ProposalPage() {
         reference: formData.website,
         source: "proposal-page",
       };
-      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/contact`, {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!response.ok) throw new Error("Unable to submit proposal request.");
+
+      if (!response.ok) {
+        throw new Error("Unable to submit proposal request.");
+      }
+
       setStatus("success");
       setFormData(initialForm);
     } catch (error) {
@@ -57,21 +63,20 @@ export function ProposalPage() {
   };
 
   return (
-<<<<<<< HEAD
     <main className="bg-bitCharcoal text-white">
       <section className="relative overflow-hidden px-5 py-20 sm:px-6 lg:px-8">
         <div className="absolute right-0 top-10 h-96 w-96 rounded-full bg-bitOrange/10 blur-3xl" />
         <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <p className="text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">Request Proposal</p>
-            <h1 className="mt-4 max-w-xl text-5xl font-black leading-tight sm:text-6xl">Got a product idea? Let&apos;s talk.</h1>
+            <h1 className="mt-4 max-w-xl text-5xl font-black leading-tight sm:text-6xl">Got a product idea? Let's talk.</h1>
             <p className="mt-6 max-w-xl text-sm font-semibold leading-7 text-slate-500">
               Share your project details and the BitBattles team will review the scope, budget, timeline, and next steps.
             </p>
             <div className="mt-10 space-y-4">
               {partnershipSteps.map((step) => (
                 <div className="flex items-center gap-4 text-base font-black" key={step}>
-                  <span className="grid h-8 w-8 place-items-center rounded-md bg-bitOrange text-white">✓</span>
+                  <span className="grid h-8 w-8 place-items-center rounded-md bg-bitOrange text-xs text-white">OK</span>
                   {step}
                 </div>
               ))}
@@ -80,33 +85,6 @@ export function ProposalPage() {
               <p className="text-[11px] font-black uppercase tracking-[0.14em] text-bitOrange">Service enquiry email</p>
               <a className="mt-2 block text-sm font-black text-white" href={`mailto:${company.inquiryEmail}`}>{company.inquiryEmail}</a>
             </div>
-=======
-    <main className="relative overflow-hidden bg-bitCharcoal text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_8%_30%,rgba(20,184,166,0.2),transparent_30%),radial-gradient(circle_at_96%_20%,rgba(255,106,42,0.22),transparent_28%),linear-gradient(135deg,#0f171b_0%,#15113f_58%,#4b12b6_100%)]" />
-
-      <section className="relative mx-auto grid min-h-[calc(100vh-64px)] max-w-7xl items-center gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <Reveal>
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-teal-200">
-            Proposal request
-          </p>
-          <h1 className="mt-4 text-5xl font-black leading-tight tracking-normal sm:text-6xl">
-            Got a product idea? Let&apos;s talk.
-          </h1>
-          <p className="mt-8 max-w-xl text-xl leading-8 text-slate-200">
-            We work as a full-service product partner across software, websites, apps,
-            cybersecurity, security systems, and AI automation.
-          </p>
-
-          <div className="mt-10 space-y-5">
-            {partnershipSteps.map((step) => (
-              <div className="flex items-center gap-4 text-lg font-black text-slate-200" key={step}>
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-teal-300/15 text-teal-200">
-                  ✓
-                </span>
-                {step}
-              </div>
-            ))}
->>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
           </div>
 
           <form className="rounded-xl border border-bitOrange/25 bg-[#07101c] p-6 shadow-[0_0_44px_rgba(255,106,42,0.12)] md:p-8" onSubmit={handleSubmit}>
@@ -117,7 +95,7 @@ export function ProposalPage() {
               </div>
             )}
             {status === "success" && <div className="mb-6 rounded-lg border border-green-300/30 bg-green-500/10 p-4 text-sm font-semibold text-green-200">Proposal request submitted successfully.</div>}
-            {status === "error" && <div className="mb-6 rounded-lg border border-red-300/30 bg-red-500/10 p-4 text-sm font-semibold text-red-200">Could not submit right now. Please check the backend server and try again.</div>}
+            {status === "error" && <div className="mb-6 rounded-lg border border-red-300/30 bg-red-500/10 p-4 text-sm font-semibold text-red-200">Could not submit right now. Please email us directly.</div>}
             <div className="grid gap-5 md:grid-cols-2">
               <input className={inputClass} name="fullName" onChange={handleChange} placeholder="Full Name*" required value={formData.fullName} />
               <input className={inputClass} name="email" onChange={handleChange} placeholder="Official E-mail*" required type="email" value={formData.email} />

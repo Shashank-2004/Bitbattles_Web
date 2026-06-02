@@ -1,4 +1,3 @@
-const Contact = require("../models/Contact");
 const { sendContactNotifications } = require("../services/emailService");
 
 const MAX_TEXT_LENGTH = 5000;
@@ -15,7 +14,6 @@ const VALID_BUDGETS = new Set([
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-<<<<<<< HEAD
 const cleanText = (value, fallback = "") =>
   String(value ?? fallback)
     .replace(/\s+/g, " ")
@@ -34,10 +32,9 @@ const cleanSupport = (support) => {
 
   return support.map((item) => cleanText(item)).filter(Boolean).slice(0, 12);
 };
-=======
-const cleanSelect = (val) =>
-  ["Please select", "Select a Budget Range"].includes(val) ? "" : val;
->>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
+
+const cleanSelect = (value) =>
+  ["Please select", "Select a Budget Range"].includes(value) ? "" : value;
 
 const buildMessage = (payload) =>
   [
@@ -53,7 +50,6 @@ const buildMessage = (payload) =>
     `Comments: ${payload.comments || "None"}`,
   ].join("\n");
 
-// POST /api/contact (public)
 const submitContact = async (req, res) => {
   try {
     if (req.body.website) {
@@ -85,7 +81,7 @@ const submitContact = async (req, res) => {
       return res.status(400).json({ message: "Please choose a valid budget range." });
     }
 
-    const contact = await Contact.create({
+    const contact = {
       firstName,
       lastName,
       name,
@@ -103,52 +99,26 @@ const submitContact = async (req, res) => {
       comments: cleanLongText(req.body.comments),
       message,
       source: cleanText(req.body.source, "website"),
-    });
+      submittedAt: new Date().toISOString(),
+    };
 
-    sendContactNotifications(contact).catch((error) => {
-      console.error("Contact email notification failed:", error);
-    });
+    const emailResults = await sendContactNotifications(contact);
+    const failedEmail = emailResults.some((result) => result.status === "rejected");
 
-    res.status(201).json({
+    if (failedEmail) {
+      return res.status(502).json({
+        message: "Could not send your inquiry right now. Please email the team directly.",
+      });
+    }
+
+    return res.status(202).json({
       success: true,
       message: "Thank you! Your inquiry has been received.",
-      data: contact,
     });
   } catch (error) {
     console.error("Contact submission failed:", error);
-    res.status(500).json({ message: "Could not submit your inquiry. Please try again." });
+    return res.status(500).json({ message: "Could not submit your inquiry. Please try again." });
   }
 };
 
-// GET /api/contact (admin only)
-const getContacts = async (req, res) => {
-  try {
-    const contacts = await Contact.find().sort({ createdAt: -1 });
-    res.json(contacts);
-  } catch (error) {
-    console.error("Contact list fetch failed:", error);
-    res.status(500).json({ message: "Could not fetch contact submissions." });
-  }
-};
-
-// PUT /api/contact/:id/read (admin only)
-const markAsRead = async (req, res) => {
-  try {
-    const contact = await Contact.findByIdAndUpdate(
-      req.params.id,
-      { read: true },
-      { new: true },
-    );
-
-    if (!contact) {
-      return res.status(404).json({ message: "Message not found" });
-    }
-
-    res.json(contact);
-  } catch (error) {
-    console.error("Contact read update failed:", error);
-    res.status(500).json({ message: "Could not update contact submission." });
-  }
-};
-
-module.exports = { submitContact, getContacts, markAsRead };
+module.exports = { submitContact };

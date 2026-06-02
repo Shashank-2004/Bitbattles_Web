@@ -11,7 +11,7 @@ const sections = [
   },
   {
     title: "Data Storage",
-    body: "Website enquiries may be stored in the BitBattles database and shared only with team members who need the information to respond or support the project discussion.",
+    body: "Website enquiries are sent to the configured support email and are not stored by the website database.",
   },
   {
     title: "Third-Party Services",

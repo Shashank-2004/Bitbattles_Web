@@ -1,20 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { company } from "../data/company";
+import { services } from "../data/services";
 
-<<<<<<< HEAD
-const supportOptions = ["AI Solutions", "Web Development", "Mobile App Development", "UI/UX Design", "Cloud Solutions", "Digital Transformation"];
-=======
-const supportOptions = [
-  "AI Solutions",
-  "UI/UX Design",
-  "Web Development",
-  "Mobile Apps",
-  "Cyber Security",
-  "Automation",
-];
-
->>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
+const supportOptions = services.map((service) => service.title);
 const companyTypes = ["Startup", "Growing Business", "Agency / Partner"];
 const deadlines = ["1 month - 2 months", "2 months - 4 months", "4 months - 6 months", "6 months - 1 year", "Other"];
 const budgets = ["Please select", "Under Rs. 50,000", "Rs. 50,000 - Rs. 2,00,000", "Rs. 2,00,000 - Rs. 5,00,000", "Rs. 5,00,000+", "Not sure yet"];
@@ -38,14 +27,20 @@ export function ContactPage() {
 
   const handleChange = (event) => {
     const { name, value, type, checked, files } = event.target;
+
     if (type === "checkbox") {
-      setFormData((current) => ({ ...current, support: checked ? [...current.support, value] : current.support.filter((item) => item !== value) }));
+      setFormData((current) => ({
+        ...current,
+        support: checked ? [...current.support, value] : current.support.filter((item) => item !== value),
+      }));
       return;
     }
+
     if (type === "file") {
       setFormData((current) => ({ ...current, attachmentName: files?.[0]?.name ?? "" }));
       return;
     }
+
     setFormData((current) => ({ ...current, [name]: value }));
   };
 
@@ -53,6 +48,7 @@ export function ContactPage() {
     event.preventDefault();
     setStatus("loading");
     setErrorMessage("");
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
@@ -60,12 +56,16 @@ export function ContactPage() {
         body: JSON.stringify({ ...formData, source: "website-contact-page" }),
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Something went wrong.");
+
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong.");
+      }
+
       setStatus("success");
       setFormData(initialFormData);
     } catch (error) {
       setStatus("error");
-      setErrorMessage(error.message || "Could not connect to the server. Is it running?");
+      setErrorMessage(error.message || "Could not send right now. Please email us directly.");
     }
   };
 
@@ -77,7 +77,7 @@ export function ContactPage() {
           <p className="text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">Contact</p>
           <h1 className="mt-4 text-5xl font-black tracking-normal sm:text-6xl">Let's Connect</h1>
           <p className="mt-6 max-w-2xl text-sm font-semibold leading-7 text-slate-500">
-            Share the idea, product, or workflow you want BitBattles to help build. This form stores the enquiry in MongoDB and can notify the team when SMTP is configured.
+            Share the idea, product, or workflow you want BitBattles to help build. The team receives your enquiry by email.
           </p>
         </div>
 

@@ -10,13 +10,8 @@ export const navItems = [
 
 export const sectors = [
   {
-<<<<<<< HEAD
     title: "SaaS Products",
     description: "Subscription platforms, internal tools, MVP dashboards, and product workflows.",
-=======
-    title: "Web Products",
-    description: "Web platforms, internal tools, MVP dashboards, and product workflows.",
->>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
   },
   {
     title: "Software Development",

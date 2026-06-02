@@ -1,18 +1,9 @@
 const express = require("express");
-const router = express.Router();
-const {
-  getBlogs,
-  getBlogBySlug,
-  createBlog,
-  updateBlog,
-  deleteBlog,
-} = require("../controllers/blogController");
-const { protect } = require("../middleware/authMiddleware");
+const { getBlogBySlug, getBlogs } = require("../controllers/blogController");
 
-router.get("/", getBlogs);                          // public
-router.get("/:slug", getBlogBySlug);                // public
-router.post("/", protect, createBlog);              // admin only
-router.put("/:id", protect, updateBlog);            // admin only
-router.delete("/:id", protect, deleteBlog);         // admin only
+const router = express.Router();
+
+router.get("/", getBlogs);
+router.get("/:slug", getBlogBySlug);
 
 module.exports = router;

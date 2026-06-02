@@ -19,7 +19,6 @@
   }
 
   body {
-<<<<<<< HEAD
     @apply min-h-screen bg-bitCharcoal text-white antialiased;
     font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     overflow-x: hidden;
@@ -32,19 +31,11 @@
   h5,
   h6 {
     font-family: "Sora", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    letter-spacing: -0.01em;
-=======
-    @apply min-h-screen bg-slate-50 text-slate-950 antialiased dark:bg-slate-950 dark:text-white;
-    font-family:
-      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", sans-serif;
-    overflow-x: hidden;
->>>>>>> bbdbdf675dbcfd53906d444e41caf982d54132d3
+    letter-spacing: 0;
   }
 }
 
 @layer components {
-  /* Shared section treatment keeps page-level spacing easy to tune later. */
   .service-section-shell {
     @apply mx-auto w-full max-w-7xl px-5 py-16 sm:px-6 lg:px-8 lg:py-24;
   }
