@@ -10,6 +10,7 @@ const VALID_BUDGETS = new Set([
   "Rs. 5,00,000+",
   "Not sure yet",
   "Need guidance",
+  "",
 ]);
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -26,6 +27,14 @@ const cleanLongText = (value, fallback = "") =>
     .slice(0, MAX_TEXT_LENGTH);
 
 const cleanSupport = (support) => {
+  if (typeof support === "string") {
+    return support
+      .split(",")
+      .map((item) => cleanText(item))
+      .filter(Boolean)
+      .slice(0, 12);
+  }
+
   if (!Array.isArray(support)) {
     return [];
   }
@@ -42,6 +51,10 @@ const buildMessage = (payload) =>
     `Company: ${payload.company || "Not provided"}`,
     `Company type: ${payload.companyType || "Not selected"}`,
     `Support needed: ${(payload.support || []).join(", ") || "Not specified"}`,
+    `Role: ${payload.role || "Not applicable"}`,
+    `Experience: ${payload.experience || "Not provided"}`,
+    `Portfolio: ${payload.portfolio || "Not provided"}`,
+    `LinkedIn: ${payload.linkedin || "Not provided"}`,
     `Summary: ${payload.summary || payload.message || "Not provided"}`,
     `Reference: ${payload.reference || "Not provided"}`,
     `Attachment: ${payload.attachmentName || "Not attached"}`,
@@ -93,13 +106,24 @@ const submitContact = async (req, res) => {
       support,
       summary,
       reference: cleanText(req.body.reference),
-      attachmentName: cleanText(req.body.attachmentName),
+      attachmentName: cleanText(req.body.attachmentName || req.file?.originalname),
+      role: cleanText(req.body.role),
+      experience: cleanText(req.body.experience),
+      portfolio: cleanText(req.body.portfolio),
+      linkedin: cleanText(req.body.linkedin),
       deadline: cleanText(req.body.deadline),
       budget,
       comments: cleanLongText(req.body.comments),
       message,
       source: cleanText(req.body.source, "website"),
       submittedAt: new Date().toISOString(),
+      attachment: req.file
+        ? {
+            filename: req.file.originalname,
+            content: req.file.buffer,
+            contentType: req.file.mimetype,
+          }
+        : null,
     };
 
     const emailResults = await sendContactNotifications(contact);

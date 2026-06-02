@@ -73,4 +73,6 @@ Base URL: `http://localhost:5000`
 
 ## Contact Form Payload
 
-`POST /api/contact` accepts contact and proposal payloads from the frontend. The endpoint validates required name/email/message fields, checks email format, validates budget options, trims text input, rate-limits public submissions, and uses a hidden `website` honeypot field for simple bot filtering.
+`POST /api/contact` accepts contact, proposal, and career application payloads from the frontend. The endpoint validates required name/email/message fields, checks email format, validates budget options, trims text input, rate-limits public submissions, and uses a hidden `website` honeypot field for simple bot filtering.
+
+Career applications can include one `resume` upload as `multipart/form-data`. Accepted file types are PDF, DOC, and DOCX up to 5 MB. Resumes are attached to the email notification and are not stored in the database.

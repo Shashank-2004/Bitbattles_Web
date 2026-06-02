@@ -19,7 +19,7 @@ const createTransporter = () => {
   });
 };
 
-const sendMail = async ({ to, subject, text, html, replyTo }) => {
+const sendMail = async ({ to, subject, text, html, replyTo, attachments }) => {
   const transporter = createTransporter();
 
   if (!transporter || !to) {
@@ -33,6 +33,7 @@ const sendMail = async ({ to, subject, text, html, replyTo }) => {
     subject,
     text,
     html,
+    attachments,
   });
 };
 
@@ -51,6 +52,15 @@ const sendContactNotifications = async (contact) => {
           "",
           contact.message,
         ].join("\n"),
+        attachments: contact.attachment
+          ? [
+              {
+                filename: contact.attachment.filename,
+                content: contact.attachment.content,
+                contentType: contact.attachment.contentType,
+              },
+            ]
+          : undefined,
       }),
     );
   }

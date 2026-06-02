@@ -14,7 +14,7 @@ const normalizeCareer = (career) => ({
     career.description ||
     "Work with the BitBattles team on practical digital products and production workflows.",
   tags: career.tags?.length ? career.tags : ["React", "Product", "Delivery"],
-  icon: career.icon || "💼",
+  icon: career.icon || "Job",
 });
 
 export function CareersPage() {
@@ -56,7 +56,7 @@ export function CareersPage() {
       <section className="mx-auto max-w-[1180px] px-5 pb-24 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center justify-between gap-4">
           <h2 className="text-2xl font-black">Open Positions ({loading ? "..." : roles.length})</h2>
-          <a className="rounded-md bg-bitOrange px-5 py-3 text-sm font-black text-white" href="/contact">
+          <a className="rounded-md bg-bitOrange px-5 py-3 text-sm font-black text-white" href="/careers/apply">
             General Application
           </a>
         </div>
@@ -69,7 +69,7 @@ export function CareersPage() {
               whileHover={{ y: -6 }}
             >
               <div className="flex items-start justify-between gap-4">
-                <span className="grid h-12 w-12 place-items-center rounded-xl border border-bitOrange bg-bitOrange/10 text-lg">
+                <span className="grid h-12 w-12 place-items-center rounded-xl border border-bitOrange bg-bitOrange/10 text-xs font-black">
                   {role.icon}
                 </span>
                 <span className="rounded-full border border-white/10 px-3 py-1 text-xs font-black text-slate-300">
@@ -90,8 +90,8 @@ export function CareersPage() {
                   </span>
                 ))}
               </div>
-              <a className="mt-7 inline-flex text-sm font-black text-blue-500 hover:text-bitOrange" href="/contact">
-                Apply Now →
+              <a className="mt-7 inline-flex text-sm font-black text-blue-500 hover:text-bitOrange" href={`/careers/apply?role=${encodeURIComponent(role.title)}`}>
+                Apply Now -&gt;
               </a>
             </motion.article>
           ))}

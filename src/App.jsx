@@ -3,6 +3,7 @@ import { AppHeader } from "./components/layout/AppHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { HomePage } from "./components/home/HomePage";
 import { AboutPage } from "./pages/AboutPage";
+import { CareerApplicationPage } from "./pages/CareerApplicationPage";
 import { CareersPage } from "./pages/CareersPage";
 import { ContactPage } from "./pages/ContactPage";
 import { PortfolioPage } from "./pages/PortfolioPage";
@@ -34,6 +35,7 @@ function App() {
     "/projects": <PortfolioPage />,
     "/proposal": <ProposalPage />,
     "/careers": <CareersPage />,
+    "/careers/apply": <CareerApplicationPage />,
     "/contact": <ContactPage />,
     "/privacy": <PrivacyPage />,
     "/terms": <TermsPage />,
