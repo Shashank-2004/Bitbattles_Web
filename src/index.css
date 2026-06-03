@@ -44,3 +44,110 @@
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950;
   }
 }
+
+/* ============================================================
+   Global Dark Theme Overrides for Service Pages
+   ============================================================ */
+
+/* 1. Base sections override - force deep dark backgrounds */
+.ai-section--light, .app-section--light, .ar-section--light, .auto-section--light, .svc-section--light, .ux-section--light, .qa-section--light, .web-section--light,
+.ai-section--soft, .app-section--soft, .ar-section--soft, .auto-section--soft, .svc-section--soft, .ux-section--soft, .qa-section--soft, .web-section--soft,
+.ai-section--gray, .app-section--gray, .ar-section--gray, .auto-section--gray, .svc-section--gray, .ux-section--gray, .qa-section--gray, .web-section--gray {
+  background-color: #050710 !important;
+  background-image: none !important;
+}
+
+.ai-section--dark, .app-section--dark, .ar-section--dark, .auto-section--dark, .svc-section--dark, .ux-section--dark, .qa-section--dark, .web-section--dark {
+  background-color: #101725 !important;
+  background-image: none !important;
+}
+
+/* 2. Title and heading elements override - force white text */
+.ai-section-title--dark, .app-section-title--dark, .ar-section-title--dark, .auto-section-title--dark, .svc-section-title--dark, .ux-section-title--dark, .qa-section-title--dark, .web-section-title--dark,
+.ai-solution-item__title, .app-solution-item__title, .ar-solution-item__title, .auto-solution-item__title, .svc-solution-item__title, .ux-solution-item__title, .qa-solution-item__title, .web-solution-item__title,
+.ai-feature-card__title, .app-feature-card__title, .ar-feature-card__title, .auto-feature-card__title, .svc-card__title--dark, .ux-feature-card__title, .qa-feature-card__title, .web-feature-card__title,
+.ai-feature-card__stat, .app-feature-card__stat, .ar-feature-card__stat, .auto-feature-card__stat, .ux-feature-card__stat, .qa-feature-card__stat, .web-feature-card__stat,
+.ai-approach__step-title, .app-approach-step-title, .ar-approach-step-title, .auto-approach-step-title, .svc-approach-step-title, .ux-approach-step-title, .qa-approach-step-title, .web-approach-step-title,
+.ai-other-card__title, .app-other-card__title, .ar-other-card__title, .auto-other-card__title, .svc-other-card__title, .ux-other-card__title, .qa-other-card__title, .web-other-card__title,
+.app-process-card__title, .app-build-card__title, .ar-solution-card__title, .ux-process-card__title, .web-process-card__title, .web-build-card__title, .cl-cap-card__title,
+.svc-faq-item__question, .app-faq-item__question, .web-faq-item__question, .qa-faq-item__question, .ar-faq-item__question, .auto-faq-item__question, .ux-faq-item__question {
+  color: #ffffff !important;
+}
+
+/* 3. Description and paragraph text override - force slate/gray text */
+.ai-solution-item__desc, .app-solution-item__desc, .ar-solution-item__desc, .auto-solution-item__desc, .svc-solution-item__desc, .ux-solution-item__desc, .qa-solution-item__desc, .web-solution-item__desc,
+.ai-solution-item__feature, .app-solution-item__feature, .ar-solution-item__feature, .auto-solution-item__feature, .svc-solution-item__feature, .ux-solution-item__feature, .qa-solution-item__feature, .web-solution-item__feature,
+.ai-feature-card__desc, .app-feature-card__desc, .ar-feature-card__desc, .auto-feature-card__desc, .svc-card__desc--dark, .ux-feature-card__desc, .qa-feature-card__desc, .web-feature-card__desc,
+.ai-approach__step-desc, .app-approach-step-desc, .ar-approach-step-desc, .auto-approach-step-desc, .svc-approach-step-desc, .ux-approach-step-desc, .qa-approach-step-desc, .web-approach-step-desc,
+.app-process-card__desc, .app-build-card__desc, .ar-solution-card__desc, .ux-process-card__desc, .web-process-card__desc, .web-build-card__desc, .cl-cap-card__desc, .cl-cap-card__feat,
+.svc-faq-item__answer, .app-faq-item__answer, .web-faq-item__answer, .qa-faq-item__answer, .ar-faq-item__answer, .auto-faq-item__answer, .ux-faq-item__answer {
+  color: #94a3b8 !important;
+}
+
+/* 4. Cards and interactive modules override - force dark panel style with brand orange border */
+.ai-feature-card, .app-feature-card, .ar-feature-card, .auto-feature-card, .svc-card--light, .ux-feature-card, .qa-feature-card, .web-feature-card,
+.ai-other-card, .app-other-card, .ar-other-card, .auto-other-card, .svc-other-card, .ux-other-card, .qa-other-card, .web-other-card,
+.app-process-card, .app-build-card, .ar-solution-card, .ux-process-card, .web-process-card, .web-build-card, .cl-cap-card, .cl-provider-badge,
+.svc-faq-item, .app-faq-item, .web-faq-item, .qa-faq-item, .ar-faq-item, .auto-faq-item, .ux-faq-item,
+.ai-solution-item__visual--orange, .ai-solution-item__visual--teal {
+  background-color: #08111f !important;
+  background-image: none !important;
+  border-color: rgba(255, 106, 42, 0.35) !important;
+  box-shadow: 0 0 34px rgba(255, 78, 18, 0.12) !important;
+  color: #ffffff !important;
+}
+
+/* Hover state for cards and interactive modules */
+.ai-feature-card:hover, .app-feature-card:hover, .ar-feature-card:hover, .auto-feature-card:hover, .svc-card--light:hover, .ux-feature-card:hover, .qa-feature-card:hover, .web-feature-card:hover,
+.ai-other-card:hover, .app-other-card:hover, .ar-other-card:hover, .auto-other-card:hover, .svc-other-card:hover, .ux-other-card:hover, .qa-other-card:hover, .web-other-card:hover,
+.app-process-card:hover, .app-build-card:hover, .ar-solution-card:hover, .ux-process-card:hover, .web-process-card:hover, .web-build-card:hover, .cl-cap-card:hover, .cl-provider-badge:hover {
+  border-color: #ff6a2a !important;
+  box-shadow: 0 0 44px rgba(255, 106, 42, 0.24) !important;
+  transform: translateY(-5px) !important;
+}
+
+/* 5. Additional styling fixes for visual content containers */
+.ai-solution-item__tag, .app-solution-item__tag, .ar-solution-item__tag, .auto-solution-item__tag, .svc-solution-item__tag, .ux-solution-item__tag, .qa-solution-item__tag, .web-solution-item__tag,
+.app-build-card__platform {
+  background-color: rgba(255, 106, 42, 0.15) !important;
+  color: #ff6a2a !important;
+}
+
+/* Force approach nodes and step circles to be unified dark */
+.ai-approach__step-node, .app-approach-step-node, .ar-approach-step-node, .auto-approach-step-node, .svc-approach-node, .ux-approach-step-node, .qa-approach-step-node, .web-approach-step-node {
+  background-color: #08111f !important;
+  border-color: rgba(255, 106, 42, 0.35) !important;
+  color: #ffffff !important;
+}
+
+/* 6. Hero background color tuning for all styles */
+.ai-hero, .app-hero, .ar-hero, .auto-hero, .svc-hero, .ux-hero, .qa-hero, .web-hero, .cl-hero {
+  background: radial-gradient(circle at 72% 16%, rgba(255, 106, 42, 0.22), transparent 30%),
+              radial-gradient(circle at 15% 80%, rgba(9, 75, 168, 0.15), transparent 30%),
+              linear-gradient(120deg, #050710 0%, #08111f 100%) !important;
+}
+
+/* Visual elements inside hero cards */
+.ai-hero__visual, .app-hero__visual, .ar-hero__visual, .auto-hero__visual, .ux-hero__visual, .qa-hero__visual, .web-hero__visual {
+  background: rgba(8, 17, 31, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.ai-hero__visual-card, .app-hero__visual-card, .ar-hero__visual-card, .auto-hero__visual-card, .ux-hero__visual-card, .qa-hero__visual-card, .web-hero__visual-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 7. Specific button fixes (like View All Services buttons) */
+.svc-container a[href="/services"], .ai-container a[href="/services"], .app-container a[href="/services"], .ar-container a[href="/services"], .auto-container a[href="/services"], .ux-container a[href="/services"], .qa-container a[href="/services"], .web-container a[href="/services"] {
+  background-color: #ff6a2a !important;
+  border-color: #ff6a2a !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease !important;
+}
+.svc-container a[href="/services"]:hover, .ai-container a[href="/services"]:hover, .app-container a[href="/services"]:hover, .ar-container a[href="/services"]:hover, .auto-container a[href="/services"]:hover, .ux-container a[href="/services"]:hover, .qa-container a[href="/services"]:hover, .web-container a[href="/services"]:hover {
+  background-color: #e85a1e !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(255, 106, 42, 0.35) !important;
+}
+

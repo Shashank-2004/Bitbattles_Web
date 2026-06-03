@@ -14,6 +14,32 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { TermsPage } from "./pages/TermsPage";
 import { services } from "./data/services";
 
+// Import dedicated service page components
+import { AiSolutionsPage } from "./pages/AiSolutionsPage";
+import { UiUxDesignPage } from "./pages/UiUxDesignPage";
+import { WebDevelopmentPage } from "./pages/WebDevelopmentPage";
+import { AppDevelopmentPage } from "./pages/AppDevelopmentPage";
+import { QaTestingPage } from "./pages/QaTestingPage";
+import { CyberSecurityPage } from "./pages/CyberSecurityPage";
+import { CloudImplementationPage } from "./pages/CloudImplementationPage";
+import { AutomationPage } from "./pages/AutomationPage";
+import { ArVrPage } from "./pages/ArVrPage";
+
+// Map service IDs to their dedicated page components
+const dedicatedServicePages = {
+  "ai-solutions": <AiSolutionsPage />,
+  "ui-ux-design": <UiUxDesignPage />,
+  "web-development": <WebDevelopmentPage />,
+  "mobile-apps": <AppDevelopmentPage />,
+  "mobile-app-development": <AppDevelopmentPage />,
+  "qa-testing": <QaTestingPage />,
+  "cyber-security": <CyberSecurityPage />,
+  "cloud-implementation": <CloudImplementationPage />,
+  "cloud-solutions": <CloudImplementationPage />,
+  "automation": <AutomationPage />,
+  "ar-vr-development": <ArVrPage />,
+};
+
 function getActiveService() {
   const [, section, serviceId] = window.location.pathname.split("/");
 
@@ -42,7 +68,13 @@ function App() {
     "/terms-and-conditions": <TermsPage />,
   };
 
-  const page = activeService ? <ServicePage service={activeService} /> : routeMap[pathname] ?? <HomePage />;
+  // Determine which page to render
+  let page;
+  if (activeService) {
+    page = dedicatedServicePages[activeService.id] ?? <ServicePage service={activeService} />;
+  } else {
+    page = routeMap[pathname] ?? <HomePage />;
+  }
 
   return (
     <div className="min-h-screen overflow-hidden bg-bitCharcoal">
