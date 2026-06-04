@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { company } from "../data/company";
 
@@ -22,6 +22,28 @@ export function CareerApplicationPage() {
   const [formData, setFormData] = useState(initialForm);
   const [status, setStatus] = useState("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isRoleActive, setIsRoleActive] = useState(true);
+  const [isCheckingRole, setIsCheckingRole] = useState(!!roleFromUrl);
+
+  useEffect(() => {
+    if (!roleFromUrl) return;
+
+    const checkRole = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/careers`);
+        if (response.ok) {
+          const activeCareers = await response.json();
+          const roleExists = activeCareers.some((c) => c.title === roleFromUrl && c.isActive !== false);
+          setIsRoleActive(roleExists);
+        }
+      } catch (error) {
+        console.error("Error checking role:", error);
+      } finally {
+        setIsCheckingRole(false);
+      }
+    };
+    checkRole();
+  }, []);
 
   const handleChange = (event) => {
     const { name, value, files } = event.target;
@@ -49,7 +71,6 @@ export function CareerApplicationPage() {
       payload.append("portfolio", formData.portfolio);
       payload.append("linkedin", formData.linkedin);
       payload.append("summary", formData.summary);
-      payload.append("message", formData.summary);
       payload.append("support", "Career Application");
       payload.append("subject", `Career application${formData.role ? `: ${formData.role}` : ""}`);
       payload.append("source", "career-application-page");
@@ -97,7 +118,17 @@ export function CareerApplicationPage() {
           </div>
         </div>
 
-        <form className="rounded-xl border border-bitOrange/25 bg-[#07101c] p-6 shadow-[0_0_44px_rgba(255,106,42,0.12)] md:p-8" onSubmit={handleSubmit}>
+        {isCheckingRole ? (
+          <div className="rounded-xl border border-bitOrange/25 bg-[#07101c] p-6 shadow-[0_0_44px_rgba(255,106,42,0.12)] md:p-8 text-center text-slate-400">
+            Checking role availability...
+          </div>
+        ) : !isRoleActive ? (
+          <div className="rounded-xl border border-bitOrange/25 bg-[#07101c] p-6 shadow-[0_0_44px_rgba(255,106,42,0.12)] md:p-8 text-center">
+            <h2 className="text-xl font-black text-white">Applications Closed</h2>
+            <p className="mt-2 text-slate-400">Applications for <span className="font-bold text-bitOrange">{roleFromUrl}</span> are currently closed. Please check back later.</p>
+          </div>
+        ) : (
+          <form className="rounded-xl border border-bitOrange/25 bg-[#07101c] p-6 shadow-[0_0_44px_rgba(255,106,42,0.12)] md:p-8" onSubmit={handleSubmit}>
           <input autoComplete="off" className="hidden" name="website" onChange={handleChange} tabIndex="-1" value={formData.website} />
           {status === "success" && <div className="mb-6 rounded-lg border border-green-300/30 bg-green-500/10 p-4 text-sm font-semibold text-green-200">Application submitted successfully.</div>}
           {status === "error" && <div className="mb-6 rounded-lg border border-red-300/30 bg-red-500/10 p-4 text-sm font-semibold text-red-200">{errorMessage}</div>}
@@ -131,6 +162,7 @@ export function CareerApplicationPage() {
             </motion.button>
           </div>
         </form>
+        )}
       </section>
     </main>
   );

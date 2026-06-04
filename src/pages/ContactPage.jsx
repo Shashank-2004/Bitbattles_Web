@@ -7,7 +7,7 @@ const supportOptions = services.map((service) => service.title);
 const companyTypes = ["Startup", "Growing Business", "Agency / Partner"];
 const deadlines = ["1 month - 2 months", "2 months - 4 months", "4 months - 6 months", "6 months - 1 year", "Other"];
 const budgets = ["Please select", "Under Rs. 50,000", "Rs. 50,000 - Rs. 2,00,000", "Rs. 2,00,000 - Rs. 5,00,000", "Rs. 5,00,000+", "Not sure yet"];
-const initialFormData = { firstName: "", lastName: "", email: "", phone: "", company: "", companyType: "", support: [], summary: "", reference: "", attachmentName: "", website: "", deadline: "", budget: "Please select", comments: "" };
+const initialFormData = { firstName: "", lastName: "", email: "", phone: "", company: "", companyType: "", support: [], summary: "", reference: "", attachmentName: "", attachment: null, website: "", deadline: "", budget: "Please select", comments: "" };
 const inputClass = "mt-2 w-full rounded-lg border border-white/10 bg-[#07101c] px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-bitOrange focus:bg-[#0b1321]";
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -37,7 +37,7 @@ export function ContactPage() {
     }
 
     if (type === "file") {
-      setFormData((current) => ({ ...current, attachmentName: files?.[0]?.name ?? "" }));
+      setFormData((current) => ({ ...current, attachmentName: files?.[0]?.name ?? "", attachment: files?.[0] ?? null }));
       return;
     }
 
@@ -50,10 +50,22 @@ export function ContactPage() {
     setErrorMessage("");
 
     try {
+      const payload = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === "support") {
+          value.forEach((item) => payload.append("support", item));
+        } else if (key === "attachment" && value) {
+          payload.append("resume", value);
+          payload.append("attachmentName", value.name);
+        } else if (value !== null && value !== "" && key !== "attachmentName" && key !== "attachment") {
+          payload.append(key, value);
+        }
+      });
+      payload.append("source", "website-contact-page");
+
       const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, source: "website-contact-page" }),
+        body: payload,
       });
       const data = await response.json();
 
