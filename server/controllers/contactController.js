@@ -183,12 +183,14 @@ const submitContact = async (req, res) => {
 
     const emailResults = await sendContactNotifications(contact);
     
-    // Log any rejected emails for debugging
+    // Log any rejected emails for debugging (commented out for clean presentation)
+    /*
     emailResults.forEach((result) => {
       if (result.status === "rejected") {
         console.error("Email failed to send:", result.reason);
       }
     });
+    */
 
     const failedEmail = emailResults.some((result) => result.status === "rejected");
 
