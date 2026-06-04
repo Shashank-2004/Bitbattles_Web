@@ -183,8 +183,12 @@ const submitContact = async (req, res) => {
 
     // Fire and forget the email notification so the user doesn't wait 30s 
     // for Render's SMTP block to timeout.
-    sendContactNotifications(contact).catch((err) => {
-      console.error("Email notification failed:", err);
+    sendContactNotifications(contact).then((results) => {
+      results.forEach((result) => {
+        if (result.status === "rejected") {
+          console.error("Brevo Email failed:", result.reason);
+        }
+      });
     });
 
 
