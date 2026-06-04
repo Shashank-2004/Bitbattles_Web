@@ -183,7 +183,9 @@ const submitContact = async (req, res) => {
 
     // Fire and forget the email notification so the user doesn't wait 30s 
     // for Render's SMTP block to timeout.
-    sendContactNotifications(contact).catch(() => {});
+    sendContactNotifications(contact).catch((err) => {
+      console.error("Email notification failed:", err);
+    });
 
 
     // Render's Free Tier blocks SMTP ports. We log the email failure above, 
