@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Solutions", href: "/#solutions" },
   { label: "About Us", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Blog", href: "/#blog" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export function AppHeader() {
