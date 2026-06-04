@@ -34,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/contact", require("./routes/contactRoutes"));
+app.use("/api/newsletter", require("./routes/newsletterRoutes"));
 app.use("/api/portfolio", require("./routes/portfolioRoutes"));
 app.use("/api/blog", require("./routes/blogRoutes"));
 app.use("/api/careers", require("./routes/careerRoutes"));
