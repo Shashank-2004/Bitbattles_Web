@@ -25,6 +25,10 @@ SMTP_PASS=
 MAIL_FROM=
 CONTACT_TO_EMAIL=sannidhyast15@gmail.com
 AUTO_REPLY_ENABLED=false
+
+MAILCHIMP_API_KEY=
+MAILCHIMP_AUDIENCE_ID=
+MAILCHIMP_SERVER_PREFIX=
 ```
 
 Start the backend:
@@ -65,6 +69,7 @@ Base URL: `http://localhost:5000`
 
 - `GET /api/health`
 - `POST /api/contact`
+- `POST /api/newsletter`
 - `GET /api/portfolio`
 - `GET /api/portfolio/featured`
 - `GET /api/blog`
@@ -76,3 +81,15 @@ Base URL: `http://localhost:5000`
 `POST /api/contact` accepts contact, proposal, and career application payloads from the frontend. The endpoint validates required name/email/message fields, checks email format, validates budget options, trims text input, rate-limits public submissions, and uses a hidden `website` honeypot field for simple bot filtering.
 
 Career applications can include one `resume` upload as `multipart/form-data`. Accepted file types are PDF, DOC, and DOCX up to 5 MB. Resumes are attached to the email notification and are not stored in the database.
+
+## Newsletter Configuration
+
+Newsletter subscriptions use Mailchimp and require these deployment environment variables:
+
+```env
+MAILCHIMP_API_KEY=<mailchimp-api-key>
+MAILCHIMP_AUDIENCE_ID=<mailchimp-audience-or-list-id>
+MAILCHIMP_SERVER_PREFIX=<mailchimp-datacenter-prefix>
+```
+
+The server prefix is the Mailchimp data center code such as `us21`. If it is not set, the backend tries to derive it from the API key suffix. Duplicate subscribers are checked against Mailchimp before creating a new subscription.
