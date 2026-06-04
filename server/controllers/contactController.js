@@ -181,18 +181,10 @@ const submitContact = async (req, res) => {
       await inquiry.save();
     }
 
-    const emailResults = await sendContactNotifications(contact);
-    
-    // Log any rejected emails for debugging (commented out for clean presentation)
-    /*
-    emailResults.forEach((result) => {
-      if (result.status === "rejected") {
-        console.error("Email failed to send:", result.reason);
-      }
-    });
-    */
+    // Fire and forget the email notification so the user doesn't wait 30s 
+    // for Render's SMTP block to timeout.
+    sendContactNotifications(contact).catch(() => {});
 
-    const failedEmail = emailResults.some((result) => result.status === "rejected");
 
     // Render's Free Tier blocks SMTP ports. We log the email failure above, 
     // but we bypass the 502 error so the user still sees a success message 
