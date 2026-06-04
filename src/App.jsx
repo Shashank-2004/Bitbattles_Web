@@ -12,7 +12,10 @@ import { ProposalPage } from "./pages/ProposalPage";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { TermsPage } from "./pages/TermsPage";
+import { BlogPage } from "./pages/BlogPage";
+import { BlogPostPage } from "./pages/BlogPostPage";
 import { services } from "./data/services";
+import { blogPosts } from "./data/blogPosts";
 
 // Import dedicated service page components
 import { AiSolutionsPage } from "./pages/AiSolutionsPage";
@@ -50,9 +53,20 @@ function getActiveService() {
   return services.find((service) => service.id === serviceId) ?? null;
 }
 
+function getActiveBlogPost() {
+  const [, section, postId] = window.location.pathname.split("/");
+
+  if (section !== "blog" || !postId) {
+    return null;
+  }
+
+  return blogPosts.find((post) => post.id.toString() === postId) ?? null;
+}
+
 function App() {
   const pathname = window.location.pathname;
   const activeService = getActiveService();
+  const activeBlogPost = getActiveBlogPost();
   const routeMap = {
     "/": <HomePage />,
     "/services": <ServicesPage />,
@@ -66,12 +80,15 @@ function App() {
     "/privacy": <PrivacyPage />,
     "/terms": <TermsPage />,
     "/terms-and-conditions": <TermsPage />,
+    "/blog": <BlogPage />,
   };
 
   // Determine which page to render
   let page;
   if (activeService) {
     page = dedicatedServicePages[activeService.id] ?? <ServicePage service={activeService} />;
+  } else if (activeBlogPost) {
+    page = <BlogPostPage post={activeBlogPost} />;
   } else {
     page = routeMap[pathname] ?? <HomePage />;
   }
