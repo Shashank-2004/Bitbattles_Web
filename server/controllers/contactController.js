@@ -192,11 +192,16 @@ const submitContact = async (req, res) => {
 
     const failedEmail = emailResults.some((result) => result.status === "rejected");
 
+    // Render's Free Tier blocks SMTP ports. We log the email failure above, 
+    // but we bypass the 502 error so the user still sees a success message 
+    // since the data was successfully saved to MongoDB.
+    /*
     if (failedEmail) {
       return res.status(502).json({
         message: "Could not send your inquiry right now. Please email the team directly.",
       });
     }
+    */
 
     return res.status(202).json({
       success: true,
