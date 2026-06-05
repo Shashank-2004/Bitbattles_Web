@@ -23,4 +23,25 @@ const getBlogBySlug = async (req, res) => {
   }
 };
 
-module.exports = { getBlogs, getBlogBySlug };
+const createBlog = async (req, res) => {
+  try {
+    const blog = await Blog.create(req.body);
+    res.status(201).json(blog);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const deleteBlog = async (req, res) => {
+  try {
+    const blog = await Blog.findByIdAndDelete(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+    res.json({ message: "Blog removed successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getBlogs, getBlogBySlug, createBlog, deleteBlog };

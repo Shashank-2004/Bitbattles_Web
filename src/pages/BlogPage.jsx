@@ -1,14 +1,47 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { blogPosts } from "../data/blogPosts";
 import { fadeUp, staggerContainer } from "../lib/motion";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 export function BlogPage() {
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState("All Tags");
 
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/blog`);
+        const data = await response.json();
+        
+        const formattedData = data.map(post => ({
+          ...post,
+          id: post.slug,
+          image: post.coverImage || "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+          excerpt: post.content ? post.content.replace(/<[^>]+>/g, '').substring(0, 150) + "..." : "",
+          readTime: `${Math.max(1, Math.ceil((post.content || "").split(' ').length / 200))} min read`,
+          date: new Date(post.createdAt).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          })
+        }));
+        
+        setBlogPosts(formattedData);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchBlogs();
+  }, []);
+
   // Get unique tags from all posts
-  const allTags = useMemo(() => ["All Tags", ...new Set(blogPosts.flatMap((post) => post.tags))], []);
+  const allTags = useMemo(() => ["All Tags", ...new Set(blogPosts.flatMap((post) => post.tags))], [blogPosts]);
 
   // Filter posts
   const filteredPosts = useMemo(() => {
@@ -20,7 +53,7 @@ export function BlogPage() {
       const matchesTag = selectedTag === "All Tags" || post.tags.includes(selectedTag);
       return matchesSearch && matchesTag;
     });
-  }, [searchTerm, selectedTag]);
+  }, [searchTerm, selectedTag, blogPosts]);
 
   const featuredPost = filteredPosts.find(post => post.featured);
   const standardPosts = filteredPosts.filter(post => post.id !== featuredPost?.id);
@@ -67,7 +100,7 @@ export function BlogPage() {
         </div>
 
         {/* Floating Glassmorphic Search & Filter */}
-        <div className="relative z-30 flex flex-col sm:flex-row gap-3 mb-16 p-2 rounded-2xl sm:rounded-full border border-white/10 bg-[#0c1322]/80 backdrop-blur-xl shadow-2xl max-w-3xl mx-auto">
+        <div className="sticky top-24 z-40 flex flex-col sm:flex-row gap-3 mb-16 p-2 rounded-2xl sm:rounded-full border border-white/10 bg-[#0c1322]/60 backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] max-w-3xl mx-auto transition-all duration-300">
           <div className="flex-1 relative flex items-center">
             <svg className="absolute left-4 w-5 h-5 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -77,7 +110,7 @@ export function BlogPage() {
               placeholder="Search articles..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-transparent pl-12 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-bitOrange/50 rounded-xl sm:rounded-full transition-all"
+              className="w-full bg-transparent pl-12 pr-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none rounded-xl sm:rounded-full transition-all"
             />
           </div>
           <div className="h-px sm:h-8 w-full sm:w-px bg-white/10 my-auto hidden sm:block" />
@@ -98,7 +131,16 @@ export function BlogPage() {
         </div>
 
         {/* Content Section */}
-        {filteredPosts.length === 0 ? (
+        {loading ? (
+          <div className="relative z-20 w-full animate-pulse">
+            <div className="w-full h-[500px] md:h-[600px] bg-white/5 rounded-3xl mb-16" />
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="rounded-3xl bg-white/5 border border-white/5 h-[450px]" />
+              ))}
+            </div>
+          </div>
+        ) : filteredPosts.length === 0 ? (
           <div className="py-32 text-center relative z-20">
             <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-white/5 mb-6">
               <svg className="w-10 h-10 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -120,74 +162,65 @@ export function BlogPage() {
             variants={staggerContainer}
             initial="hidden"
             animate="show"
-            className="grid gap-8 relative z-20"
+            className="relative z-20"
           >
-            {/* Featured Post (Full Width) */}
+            {/* Featured Post (Full Width Cinematic) */}
             {displayFeatured && (
               <motion.article 
                 key={`featured-${displayFeatured.id}`}
                 variants={fadeUp}
-                className="group relative flex flex-col lg:flex-row rounded-3xl border border-white/10 bg-[#09111c] overflow-hidden hover:border-bitOrange/30 hover:shadow-[0_0_50px_rgba(255,106,42,0.1)] transition-all duration-500"
+                className="group relative w-full rounded-3xl overflow-hidden hover:shadow-[0_0_80px_rgba(255,106,42,0.15)] transition-all duration-700 h-[500px] md:h-[600px] mb-16 border border-white/10 bg-[#09111c]"
               >
-                <div className="lg:w-1/2 relative overflow-hidden aspect-video lg:aspect-auto">
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#09111c] via-transparent to-transparent z-10 lg:hidden" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#09111c] via-transparent to-transparent z-10 hidden lg:block" />
+                <div className="absolute inset-0">
                   <img 
                     src={displayFeatured.image} 
                     alt={displayFeatured.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
-                  <div className="absolute top-6 left-6 z-20 flex gap-2 flex-wrap">
-                    {displayFeatured.tags.slice(0, 2).map(tag => (
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050710] via-[#050710]/80 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#050710]/90 via-[#050710]/40 to-transparent" />
+                </div>
+                
+                <div className="absolute inset-0 p-6 md:p-12 lg:p-16 flex flex-col justify-end z-20">
+                  <div className="flex gap-2 flex-wrap mb-6">
+                    {displayFeatured.tags.map(tag => (
                       <button 
                         key={tag} 
                         onClick={(e) => handleTagClick(tag, e)}
-                        className="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-bold border border-white/10 shadow-xl hover:bg-bitOrange transition-colors"
+                        className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-xl text-white text-xs font-bold tracking-wider uppercase border border-white/20 hover:bg-bitOrange hover:border-bitOrange transition-all"
                       >
                         {tag}
                       </button>
                     ))}
                   </div>
-                </div>
-                
-                <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center relative z-20">
-                  <div className="flex items-center gap-4 text-xs font-semibold text-slate-400 mb-6">
-                    <span className="flex items-center gap-1.5">
-                      <svg className="w-4 h-4 text-bitOrange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      {displayFeatured.date}
-                    </span>
-                    <span className="w-1 h-1 rounded-full bg-slate-600" />
-                    <span>{displayFeatured.readTime}</span>
-                  </div>
-                  
-                  <h2 className="text-3xl lg:text-4xl font-black leading-tight mb-5 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-400 transition-all duration-300">
+
+                  <h2 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 max-w-4xl text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all duration-500">
                     <a href={`/blog/${displayFeatured.id}`}>
                       <span className="absolute inset-0" />
                       {displayFeatured.title}
                     </a>
                   </h2>
                   
-                  <p className="text-slate-400 text-lg leading-relaxed mb-8 max-w-xl">
+                  <p className="text-slate-300 text-lg md:text-xl leading-relaxed mb-8 max-w-3xl line-clamp-2 md:line-clamp-3">
                     {displayFeatured.excerpt}
                   </p>
                   
-                  <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
+                  <div className="flex items-center gap-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-bitOrange to-purple-600 p-[2px]">
-                        <div className="w-full h-full rounded-full bg-[#09111c] flex items-center justify-center font-bold text-sm text-white">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-bitOrange to-purple-600 p-[2px] shadow-lg shadow-bitOrange/20">
+                        <div className="w-full h-full rounded-full bg-[#09111c] flex items-center justify-center font-bold text-lg text-white">
                           {displayFeatured.author.charAt(0)}
                         </div>
                       </div>
-                      <span className="text-sm font-semibold">{displayFeatured.author}</span>
+                      <div>
+                        <p className="text-sm font-bold text-white">{displayFeatured.author}</p>
+                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 mt-1">
+                          <span>{displayFeatured.date}</span>
+                          <span className="w-1 h-1 rounded-full bg-slate-600" />
+                          <span>{displayFeatured.readTime}</span>
+                        </div>
+                      </div>
                     </div>
-                    <a href={`/blog/${displayFeatured.id}`} className="text-bitOrange font-bold text-sm group-hover:translate-x-2 transition-transform duration-300 flex items-center gap-1 relative z-30">
-                      Read Article 
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </a>
                   </div>
                 </div>
               </motion.article>
@@ -195,26 +228,26 @@ export function BlogPage() {
 
             {/* Standard Posts Grid */}
             {displayStandard.length > 0 && (
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mt-8">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {displayStandard.map((post) => (
                   <motion.article 
                     key={`standard-${post.id}`}
                     variants={fadeUp}
-                    className="group flex flex-col rounded-2xl border border-white/10 bg-[#07101c] overflow-hidden hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-electric/10 transition-all duration-300 relative"
+                    className="group relative flex flex-col rounded-3xl bg-white/[0.02] border border-white/5 overflow-hidden hover:bg-white/[0.04] hover:-translate-y-2 hover:shadow-2xl hover:shadow-bitOrange/10 transition-all duration-500"
                   >
-                    <div className="relative aspect-[16/10] overflow-hidden">
+                    <div className="relative aspect-[4/3] overflow-hidden m-3 rounded-2xl">
                       <img 
                         src={post.image} 
                         alt={post.title} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#07101c] via-transparent to-transparent opacity-80" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
                       <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 z-20">
                         {post.tags.slice(0, 2).map(tag => (
                           <button 
                             key={tag} 
                             onClick={(e) => handleTagClick(tag, e)}
-                            className="px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider hover:bg-bitOrange transition-colors"
+                            className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider hover:bg-bitOrange transition-colors shadow-lg"
                           >
                             {tag}
                           </button>
@@ -223,29 +256,35 @@ export function BlogPage() {
                     </div>
                     
                     <div className="p-6 flex flex-col flex-1 relative z-10">
-                      <div className="flex items-center gap-3 text-xs text-slate-400 mb-4">
+                      <div className="flex items-center gap-3 text-xs text-bitOrange font-semibold mb-4">
                         <span>{post.date}</span>
-                        <span className="w-1 h-1 rounded-full bg-slate-600" />
+                        <span className="w-1 h-1 rounded-full bg-bitOrange/50" />
                         <span>{post.readTime}</span>
                       </div>
                       
-                      <h3 className="text-xl font-bold leading-snug mb-3 group-hover:text-blue-400 transition-colors">
+                      <h3 className="text-2xl font-bold leading-snug mb-3 text-white group-hover:text-blue-400 transition-colors">
                         <a href={`/blog/${post.id}`}>
                           <span className="absolute inset-0" />
                           {post.title}
                         </a>
                       </h3>
                       
-                      <p className="text-sm leading-relaxed text-slate-400 mb-6 flex-1 line-clamp-3">
+                      <p className="text-sm leading-relaxed text-slate-400 mb-8 flex-1 line-clamp-3">
                         {post.excerpt}
                       </p>
                       
-                      <div className="flex items-center justify-between mt-auto pt-5 border-t border-white/5 relative z-20">
-                        <span className="text-sm font-medium text-slate-300">{post.author}</span>
-                        <a href={`/blog/${post.id}`} className="flex items-center gap-1 text-slate-500 group-hover:text-bitOrange transition-colors text-sm font-bold relative z-30">
-                          Read <span className="hidden sm:inline">Article</span>
+                      <div className="flex items-center justify-between mt-auto">
+                        <div className="flex items-center gap-2">
+                           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 p-[1.5px]">
+                             <div className="w-full h-full rounded-full bg-[#050710] flex items-center justify-center font-bold text-xs text-white">
+                               {post.author.charAt(0)}
+                             </div>
+                           </div>
+                           <span className="text-sm font-medium text-slate-300">{post.author}</span>
+                        </div>
+                        <a href={`/blog/${post.id}`} className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 text-white group-hover:bg-bitOrange group-hover:text-white transition-all duration-300 relative z-30">
                           <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                           </svg>
                         </a>
                       </div>

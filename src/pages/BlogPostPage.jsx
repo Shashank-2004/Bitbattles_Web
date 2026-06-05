@@ -1,6 +1,55 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-export function BlogPostPage({ post }) {
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+export function BlogPostPage({ slug }) {
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/blog/${slug}`);
+        if (!response.ok) {
+          throw new Error("Post not found");
+        }
+        const data = await response.json();
+        
+        const formattedData = {
+          ...data,
+          id: data.slug,
+          image: data.coverImage || "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+          excerpt: data.content ? data.content.replace(/<[^>]+>/g, '').substring(0, 150) + "..." : "",
+          readTime: `${Math.max(1, Math.ceil((data.content || "").split(' ').length / 200))} min read`,
+          date: new Date(data.createdAt).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+          })
+        };
+        
+        setPost(formattedData);
+      } catch (error) {
+        console.error("Error fetching post:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (slug) {
+      fetchPost();
+    }
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen pt-32 pb-20 px-5 flex items-center justify-center text-white">
+        <div className="w-16 h-16 border-4 border-bitOrange border-t-transparent rounded-full animate-spin"></div>
+      </main>
+    );
+  }
+
   if (!post) {
     return (
       <main className="min-h-screen pt-32 pb-20 px-5 text-center text-white">
@@ -69,26 +118,7 @@ export function BlogPostPage({ post }) {
         )}
 
         <div className="prose prose-invert prose-lg max-w-none text-slate-300 leading-relaxed">
-          <p className="text-xl text-slate-200 font-medium mb-8">
-            {post.excerpt}
-          </p>
-          <p className="mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          </p>
-          <h2 className="text-2xl font-bold text-white mt-12 mb-6">The Current Landscape</h2>
-          <p className="mb-6">
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-          </p>
-          <blockquote className="border-l-4 border-bitOrange pl-6 py-2 my-8 text-xl italic text-slate-200 bg-white/5 rounded-r-lg">
-            "Innovation distinguishes between a leader and a follower. The web is evolving faster than ever before."
-          </blockquote>
-          <p className="mb-6">
-            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-          </p>
-          <h2 className="text-2xl font-bold text-white mt-12 mb-6">Looking Forward</h2>
-          <p className="mb-6">
-            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
       </div>
     </main>

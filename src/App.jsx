@@ -53,20 +53,20 @@ function getActiveService() {
   return services.find((service) => service.id === serviceId) ?? null;
 }
 
-function getActiveBlogPost() {
+function getActiveBlogPostSlug() {
   const [, section, postId] = window.location.pathname.split("/");
 
   if (section !== "blog" || !postId) {
     return null;
   }
 
-  return blogPosts.find((post) => post.id.toString() === postId) ?? null;
+  return postId;
 }
 
 function App() {
   const pathname = window.location.pathname;
   const activeService = getActiveService();
-  const activeBlogPost = getActiveBlogPost();
+  const activeBlogSlug = getActiveBlogPostSlug();
   const routeMap = {
     "/": <HomePage />,
     "/services": <ServicesPage />,
@@ -87,8 +87,8 @@ function App() {
   let page;
   if (activeService) {
     page = dedicatedServicePages[activeService.id] ?? <ServicePage service={activeService} />;
-  } else if (activeBlogPost) {
-    page = <BlogPostPage post={activeBlogPost} />;
+  } else if (activeBlogSlug) {
+    page = <BlogPostPage slug={activeBlogSlug} />;
   } else {
     page = routeMap[pathname] ?? <HomePage />;
   }
