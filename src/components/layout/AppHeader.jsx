@@ -9,6 +9,8 @@ const navLinks = [
   { label: "Solutions", href: "/#solutions" },
   { label: "About Us", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Certifications", href: "/certifications" },
+  { label: "Licenses", href: "/licenses" },
   { label: "Blog", href: "/blog" },
 ];
 
@@ -31,7 +33,7 @@ export function AppHeader() {
             <BrandLogo light />
           </a>
 
-          <div className="hidden flex-1 items-center justify-center gap-7 text-[11px] font-bold text-slate-200 lg:flex">
+          <div className="hidden flex-1 items-center justify-center gap-4 xl:gap-6 text-[11px] font-bold text-slate-200 lg:flex">
             {navLinks.map((item) =>
               item.label === "Services" ? (
                 <div
