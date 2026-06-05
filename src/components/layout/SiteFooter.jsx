@@ -34,6 +34,8 @@ const footerColumns = [
     links: [
       ["Case Studies", "/portfolio"],
       ["Services", "/services"],
+      ["Certifications", "/certifications"],
+      ["Licenses", "/licenses"],
       ["Terms and Conditions", "/terms"],
       ["Privacy Policy", "/privacy"],
     ],

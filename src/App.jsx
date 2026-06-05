@@ -14,6 +14,8 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { TermsPage } from "./pages/TermsPage";
 import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
+import { CertificationsPage } from "./pages/CertificationsPage";
+import { LicensesPage } from "./pages/LicensesPage";
 import { services } from "./data/services";
 import { blogPosts } from "./data/blogPosts";
 
@@ -81,6 +83,10 @@ function App() {
     "/terms": <TermsPage />,
     "/terms-and-conditions": <TermsPage />,
     "/blog": <BlogPage />,
+    "/certifications": <CertificationsPage />,
+    "/certificationns": <CertificationsPage />,
+    "/licenses": <LicensesPage />,
+    "/licsenses": <LicensesPage />,
   };
 
   // Determine which page to render
