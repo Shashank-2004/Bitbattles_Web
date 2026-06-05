@@ -5,6 +5,7 @@ import { HomePage } from "./components/home/HomePage";
 import { AboutPage } from "./pages/AboutPage";
 import { CareerApplicationPage } from "./pages/CareerApplicationPage";
 import { CareersPage } from "./pages/CareersPage";
+import { CertificationsPage } from "./pages/CertificationsPage";
 import { ContactPage } from "./pages/ContactPage";
 import { PortfolioPage } from "./pages/PortfolioPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
@@ -76,6 +77,8 @@ function App() {
     "/proposal": <ProposalPage />,
     "/careers": <CareersPage />,
     "/careers/apply": <CareerApplicationPage />,
+    "/certifications": <CertificationsPage />,
+    "/licenses": <CertificationsPage />,
     "/contact": <ContactPage />,
     "/privacy": <PrivacyPage />,
     "/terms": <TermsPage />,

@@ -26,12 +26,12 @@ export function AppHeader() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-white/8 bg-[#07101c]/95 backdrop-blur">
-        <nav className="mx-auto flex h-14 max-w-[1180px] items-center justify-between px-5 sm:px-6 lg:px-8">
-          <a className="flex min-w-[150px] items-center" href="/" aria-label="BitBattles home">
-            <BrandLogo light />
+        <nav className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-6 lg:px-8">
+          <a className="flex min-w-[170px] items-center" href="/" aria-label="BitBattles home">
+            <BrandLogo light size="lg" />
           </a>
 
-          <div className="hidden flex-1 items-center justify-center gap-7 text-[11px] font-bold text-slate-200 lg:flex">
+          <div className="hidden flex-1 items-center justify-center gap-7 text-[13px] font-bold text-slate-200 lg:flex">
             {navLinks.map((item) =>
               item.label === "Services" ? (
                 <div
@@ -84,7 +84,7 @@ export function AppHeader() {
           </div>
 
           <a
-            className="hidden min-w-[112px] justify-center rounded-sm bg-bitOrange px-5 py-2.5 text-[11px] font-black text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-500 md:inline-flex"
+            className="hidden min-w-[118px] justify-center rounded-sm bg-bitOrange px-5 py-2.5 text-xs font-black text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-500 md:inline-flex"
             href="/proposal"
           >
             Lets talk -&gt;
@@ -103,7 +103,7 @@ export function AppHeader() {
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
-            className="fixed inset-x-0 top-14 z-40 border-b border-white/10 bg-[#07101c] px-5 py-5 text-white shadow-2xl lg:hidden"
+            className="fixed inset-x-0 top-16 z-40 border-b border-white/10 bg-[#07101c] px-5 py-5 text-white shadow-2xl lg:hidden"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}

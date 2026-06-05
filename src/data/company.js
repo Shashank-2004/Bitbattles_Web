@@ -14,4 +14,5 @@ export const company = {
   linkedin: "https://in.linkedin.com/company/bitbattles",
   facebook: "#",
   instagram: "#",
+  telegram: "#",
 };

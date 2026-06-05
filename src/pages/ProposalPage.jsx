@@ -74,9 +74,11 @@ export function ProposalPage() {
               Share your project details and the BitBattles team will review the scope, budget, timeline, and next steps.
             </p>
             <div className="mt-10 space-y-4">
-              {partnershipSteps.map((step) => (
+              {partnershipSteps.map((step, index) => (
                 <div className="flex items-center gap-4 text-base font-black" key={step}>
-                  <span className="grid h-8 w-8 place-items-center rounded-md bg-bitOrange text-xs text-white">OK</span>
+                  <span className="grid h-8 w-8 place-items-center rounded-full border border-bitOrange/60 bg-bitOrange/10 text-[11px] text-bitOrange shadow-[0_0_18px_rgba(255,106,42,0.16)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                   {step}
                 </div>
               ))}
