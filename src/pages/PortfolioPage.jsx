@@ -536,15 +536,16 @@ export function PortfolioPage() {
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
-              <motion.article
+              <motion.a
                 layout
                 key={project.id}
+                href={`/portfolio/${project.id}`}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
                 whileHover={{ y: -8 }}
-                className="group overflow-hidden rounded-3xl border border-white/5 bg-[#0c121e]/80 flex flex-col justify-between h-[450px] transition-all duration-500 hover:border-white/10 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
+                className="group overflow-hidden rounded-3xl border border-white/5 bg-[#0c121e]/80 flex flex-col justify-between h-[450px] transition-all duration-500 hover:border-white/10 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] cursor-pointer"
               >
                 {/* Brand specific gradient background block with mockup */}
                 <div className={`relative pt-6 px-6 aspect-[4/3] bg-gradient-to-br ${project.bgClass} flex items-end justify-center overflow-hidden border-b border-white/5`}>
@@ -584,7 +585,7 @@ export function PortfolioPage() {
                     <span className="text-xs">&rarr;</span>
                   </div>
                 </div>
-              </motion.article>
+              </motion.a>
             ))}
           </AnimatePresence>
         </motion.div>

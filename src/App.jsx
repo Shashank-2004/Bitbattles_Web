@@ -17,6 +17,8 @@ import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { services } from "./data/services";
 import { blogPosts } from "./data/blogPosts";
+import { ProjectShowcasePage } from "./pages/ProjectShowcasePage";
+
 
 // Import dedicated service page components
 import { AiSolutionsPage } from "./pages/AiSolutionsPage";
@@ -64,10 +66,22 @@ function getActiveBlogPostSlug() {
   return postId;
 }
 
+function getActiveProject() {
+  const [, section, projectId] = window.location.pathname.split("/");
+
+  if ((section !== "portfolio" && section !== "projects") || !projectId) {
+    return null;
+  }
+
+  return projectId;
+}
+
+
 function App() {
   const pathname = window.location.pathname;
   const activeService = getActiveService();
   const activeBlogSlug = getActiveBlogPostSlug();
+  const activeProjectId = getActiveProject();
   const routeMap = {
     "/": <HomePage />,
     "/services": <ServicesPage />,
@@ -90,11 +104,14 @@ function App() {
   let page;
   if (activeService) {
     page = dedicatedServicePages[activeService.id] ?? <ServicePage service={activeService} />;
+  } else if (activeProjectId) {
+    page = <ProjectShowcasePage projectId={activeProjectId} />;
   } else if (activeBlogSlug) {
     page = <BlogPostPage slug={activeBlogSlug} />;
   } else {
     page = routeMap[pathname] ?? <HomePage />;
   }
+
 
   return (
     <div className="min-h-screen overflow-hidden bg-bitCharcoal">
