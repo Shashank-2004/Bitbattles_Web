@@ -29,6 +29,8 @@ AUTO_REPLY_ENABLED=false
 MAILCHIMP_API_KEY=
 MAILCHIMP_AUDIENCE_ID=
 MAILCHIMP_SERVER_PREFIX=
+
+ADMIN_API_KEY=
 ```
 
 Start the backend:
@@ -72,6 +74,10 @@ Base URL: `http://localhost:5000`
 - `POST /api/newsletter`
 - `GET /api/portfolio`
 - `GET /api/portfolio/featured`
+- `GET /api/portfolio/:id`
+- `POST /api/portfolio`
+- `PUT /api/portfolio/:id`
+- `DELETE /api/portfolio/:id`
 - `GET /api/blog`
 - `GET /api/blog/:slug`
 - `GET /api/careers`
@@ -93,3 +99,16 @@ MAILCHIMP_SERVER_PREFIX=<mailchimp-datacenter-prefix>
 ```
 
 The server prefix is the Mailchimp data center code such as `us21`. If it is not set, the backend tries to derive it from the API key suffix. Duplicate subscribers are checked against Mailchimp before creating a new subscription.
+
+## Portfolio Admin Configuration
+
+Portfolio projects are stored in MongoDB through the `Portfolio` model. The public portfolio page reads from `GET /api/portfolio`, homepage featured projects read from `GET /api/portfolio/featured`, and case-study pages read from `GET /api/portfolio/:id`.
+
+Admin project management is available at `/admin/projects` in the frontend. In production, set `ADMIN_API_KEY` on the backend and `VITE_ADMIN_API_KEY` on the frontend/admin environment. Create, update, and delete requests send this value through the `x-admin-key` header. In local development, writes are allowed when `ADMIN_API_KEY` is not set.
+
+To seed the current example portfolio projects into MongoDB:
+
+```bash
+cd server
+npm run seed:portfolio
+```

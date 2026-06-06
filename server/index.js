@@ -1,20 +1,36 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const dns = require("dns");
-dns.setDefaultResultOrder("ipv4first");
 const cors = require("cors");
 const path = require("path");
+
 const connectDB = require("./config/db");
 
-dotenv.config({ path: path.join(__dirname, ".env") });
+dns.setDefaultResultOrder("ipv4first");
 
+dotenv.config({
+  path: path.join(__dirname, ".env"),
+});
+
+// CONNECT DATABASE
 connectDB();
 
 const app = express();
+
 app.set("trust proxy", 1);
 
-// Middleware
-const allowedOrigins = `${process.env.CLIENT_URL || ""},http://localhost:5173,http://localhost:5174,http://127.0.0.1:5173,http://127.0.0.1:5174`
+
+
+// =========================
+// CORS CONFIG
+// =========================
+const allowedOrigins = `
+${process.env.CLIENT_URL || ""},
+http://localhost:5173,
+http://localhost:5174,
+http://127.0.0.1:5173,
+http://127.0.0.1:5174
+`
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -22,30 +38,118 @@ const allowedOrigins = `${process.env.CLIENT_URL || ""},http://localhost:5173,ht
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // ALLOW POSTMAN / MOBILE APPS / SSR
+      if (!origin) {
         return callback(null, true);
       }
 
-      return callback(new Error("Not allowed by CORS"));
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(
+        new Error("Not allowed by CORS")
+      );
     },
-  }),
+
+    credentials: true,
+  })
 );
+
+
+
+// =========================
+// MIDDLEWARES
+// =========================
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/contact", require("./routes/contactRoutes"));
-app.use("/api/newsletter", require("./routes/newsletterRoutes"));
-app.use("/api/portfolio", require("./routes/portfolioRoutes"));
-app.use("/api/blog", require("./routes/blogRoutes"));
-app.use("/api/careers", require("./routes/careerRoutes"));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
-// Health check route
+
+
+// =========================
+// API ROUTES
+// =========================
+app.use(
+  "/api/contact",
+  require("./routes/contactRoutes")
+);
+
+app.use(
+  "/api/newsletter",
+  require("./routes/newsletterRoutes")
+);
+
+app.use(
+  "/api/portfolio",
+  require("./routes/portfolioRoutes")
+);
+
+app.use(
+  "/api/blog",
+  require("./routes/blogRoutes")
+);
+
+app.use(
+  "/api/careers",
+  require("./routes/careerRoutes")
+);
+
+
+
+// =========================
+// HEALTH CHECK
+// =========================
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", message: "BitBattles API is running" });
+  res.status(200).json({
+    success: true,
+    status: "ok",
+    message: "BitBattles API is running",
+  });
 });
 
-// Start server
+
+
+// =========================
+// 404 ROUTE HANDLER
+// =========================
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
+
+
+
+// =========================
+// GLOBAL ERROR HANDLER
+// =========================
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+
+  res.status(500).json({
+    success: false,
+    message:
+      process.env.NODE_ENV === "production"
+        ? "Internal Server Error"
+        : err.message,
+  });
+});
+
+
+
+// =========================
+// START SERVER
+// =========================
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(
+    `🚀 Server running on port ${PORT}`
+  );
 });

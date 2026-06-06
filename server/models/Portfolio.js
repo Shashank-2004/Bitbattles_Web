@@ -1,40 +1,55 @@
 const mongoose = require("mongoose");
 
-const portfolioSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: [true, "Project title is required"],
-    trim: true,
+const portfolioSchema = new mongoose.Schema(
+  {
+    id: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+
+    title: {
+      type: String,
+      required: true,
+    },
+
+    category: String,
+
+    description: String,
+
+    tag: String,
+
+    color: String,
+
+    bgClass: String,
+
+    image: String,
+
+    subtitle: String,
+
+    challenge: String,
+
+    solution: String,
+
+    outcome: String,
+
+    techStack: [String],
+
+    metrics: [
+      {
+        label: String,
+        value: String,
+      },
+    ],
+
+    featured: {
+      type: Boolean,
+      default: false,
+    },
   },
-  category: {
-    type: String,
-    required: true,
-    enum: ["web", "mobile", "ai", "security", "saas"],
-  },
-  description: {
-    type: String,
-    required: [true, "Description is required"],
-  },
-  techStack: {
-    type: [String],
-    default: [],
-  },
-  image: {
-    type: String,
-    default: "",
-  },
-  liveUrl: {
-    type: String,
-    default: "",
-  },
-  featured: {
-    type: Boolean,
-    default: false,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 module.exports = mongoose.model("Portfolio", portfolioSchema);
