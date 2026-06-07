@@ -6,7 +6,7 @@ import { services } from "../../data/services";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Solutions", href: "/#solutions" },
+  { label: "Solutions", href: "/solutions" },
   { label: "About Us", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Certifications", href: "/certifications" },
