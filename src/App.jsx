@@ -11,6 +11,7 @@ import { PrivacyPage } from "./pages/PrivacyPage";
 import { ProposalPage } from "./pages/ProposalPage";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
+import { SolutionsPage } from "./pages/SolutionsPage";
 import { TermsPage } from "./pages/TermsPage";
 import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
@@ -72,6 +73,7 @@ function App() {
   const routeMap = {
     "/": <HomePage />,
     "/services": <ServicesPage />,
+    "/solutions": <SolutionsPage />,
     "/about": <AboutPage />,
     "/portfolio": <PortfolioPage />,
     "/projects": <PortfolioPage />,
