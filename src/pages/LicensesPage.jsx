@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { certifications, certCategories } from "../data/certifications";
+import { licenses, licenseCategories } from "../data/licenses";
 
-export function CertificationsPage() {
+export function LicensesPage() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedCert, setSelectedCert] = useState(null);
+  const [selectedLicense, setSelectedLicense] = useState(null);
 
-  const filteredCerts = activeCategory === "all"
-    ? certifications
-    : certifications.filter((cert) => cert.category === activeCategory);
+  const filteredLicenses = activeCategory === "all"
+    ? licenses
+    : licenses.filter((lic) => lic.category === activeCategory);
 
   const containerVariants = {
     hidden: {},
@@ -28,7 +28,7 @@ export function CertificationsPage() {
     <main className="relative min-h-screen overflow-hidden bg-bitCharcoal text-white font-sans">
       {/* Background Gradients & Animated Blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,106,42,0.12),transparent_30%),radial-gradient(circle_at_75%_60%,rgba(16,184,232,0.1),transparent_35%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(255,106,42,0.12),transparent_30%),radial-gradient(circle_at_25%_60%,rgba(16,184,232,0.1),transparent_35%)]" />
         
         {/* Pulsing Accent Divider Line */}
         <motion.div
@@ -39,14 +39,14 @@ export function CertificationsPage() {
 
         {/* Floating Glowing Blobs */}
         <motion.div
-          className="absolute top-[15%] right-[15%] w-[25vw] h-[25vw] rounded-full bg-bitOrange/10 blur-[80px]"
-          animate={{ x: [0, -30, 20, 0], y: [0, 20, -20, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[10%] w-[30vw] h-[30vw] rounded-full bg-bitOrange/10 blur-[100px]"
+          animate={{ x: [0, -25, 15, 0], y: [0, 15, -15, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-[20%] left-[10%] w-[30vw] h-[30vw] rounded-full bg-aqua/8 blur-[100px]"
-          animate={{ x: [0, 20, -10, 0], y: [0, -30, 10, 0] }}
-          transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[15%] right-[15%] w-[25vw] h-[25vw] rounded-full bg-aqua/8 blur-[80px]"
+          animate={{ x: [0, 15, -20, 0], y: [0, -20, 20, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -58,13 +58,13 @@ export function CertificationsPage() {
           transition={{ duration: 0.6 }}
         >
           <p className="inline-flex rounded-md border border-bitOrange/30 bg-black/40 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">
-            Quality & Trust
+            Legal & Compliance
           </p>
           <h1 className="mt-6 text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
-            Our <span className="text-bitOrange">Certifications</span>
+            Our <span className="text-bitOrange">Licenses</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-sm font-semibold leading-7 text-slate-400">
-            BitBattles is dedicated to maintaining the highest industry standards of quality management, cybersecurity, cloud scalability, and information safety.
+            BitBattles operates with full compliance, maintaining military, aviation, software IP, and dual-use authorizations for high-tech product delivery.
           </p>
         </motion.div>
       </section>
@@ -72,7 +72,7 @@ export function CertificationsPage() {
       {/* Filter Selection Tabs */}
       <section className="relative mx-auto max-w-[1180px] px-5 pb-8 sm:px-6 lg:px-8">
         <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-none justify-start sm:justify-center border-b border-white/5 sm:pb-8 flex-nowrap sm:flex-wrap">
-          {certCategories.map((category) => (
+          {licenseCategories.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
@@ -88,7 +88,7 @@ export function CertificationsPage() {
         </div>
       </section>
 
-      {/* Grid of Certifications */}
+      {/* Grid of Licenses */}
       <section className="relative mx-auto max-w-[1180px] px-5 pb-24 sm:px-6 lg:px-8">
         <motion.div
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
@@ -97,43 +97,42 @@ export function CertificationsPage() {
           animate="show"
           key={activeCategory}
         >
-          {filteredCerts.map((cert) => (
+          {filteredLicenses.map((lic) => (
             <motion.article
-              key={cert.id}
+              key={lic.id}
               variants={cardVariants}
-              onClick={() => setSelectedCert(cert)}
+              onClick={() => setSelectedLicense(lic)}
               className="group relative cursor-pointer overflow-hidden rounded-2xl border border-bitOrange/20 bg-[#07101c]/90 p-6 shadow-[0_0_30px_rgba(255,106,42,0.06)] hover:shadow-[0_0_45px_rgba(255,106,42,0.18)] border-t-bitOrange/30 hover:border-bitOrange transition-all duration-300 flex flex-col h-full"
               whileHover={{ y: -5 }}
             >
-              {/* Internal Accent Light Glow */}
-              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-bitOrange/5 blur-xl group-hover:bg-bitOrange/12 transition-all duration-300" />
-              
+              {/* Internal Accent Glow */}
+              <div className="absolute -left-8 -top-8 h-24 w-24 rounded-full bg-bitOrange/5 blur-xl group-hover:bg-bitOrange/12 transition-all duration-300" />
+
               <div className="flex items-center justify-between gap-4">
                 <span className="grid h-12 w-12 place-items-center rounded-xl border border-bitOrange bg-bitOrange/10 text-xl font-bold">
-                  {cert.category === "security" && "🛡️"}
-                  {cert.category === "quality" && "📈"}
-                  {cert.category === "cloud" && "☁️"}
-                  {cert.category === "defense" && "🎖️"}
+                  {lic.category === "military" && "🎖️"}
+                  {lic.category === "aviation" && "🛸"}
+                  {lic.category === "software" && "🔏"}
                 </span>
-                <span className="rounded-full border border-emerald-500/20 bg-emerald-500/5 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-400">
-                  {cert.status}
+                <span className="rounded-full border border-blue-500/20 bg-blue-500/5 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-blue-400">
+                  {lic.status}
                 </span>
               </div>
 
               <h2 className="mt-6 text-xl font-black text-white group-hover:text-bitOrange transition-colors duration-200">
-                {cert.title}
+                {lic.title}
               </h2>
               
               <p className="mt-1 text-xs text-slate-500 font-bold">
-                Issued by {cert.issuer}
+                Granted by {lic.authority}
               </p>
 
-              <p className="mt-4 text-xs font-semibold leading-relaxed text-slate-400 flex-grow">
-                {cert.description}
+              <p className="mt-4 text-xs font-semibold leading-relaxed text-slate-400 flex-grow line-clamp-3">
+                {lic.description}
               </p>
 
               <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-500 font-bold">
-                <span>No: {cert.certNumber}</span>
+                <span>ID: {lic.licenseNumber}</span>
                 <span className="text-blue-500 group-hover:text-bitOrange font-black transition-colors">
                   Details &rarr;
                 </span>
@@ -145,13 +144,13 @@ export function CertificationsPage() {
 
       {/* Detail Modal Overlay */}
       <AnimatePresence>
-        {selectedCert && (
+        {selectedLicense && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedCert(null)}
+            onClick={() => setSelectedLicense(null)}
           >
             <motion.div
               className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl border border-bitOrange/35 bg-bitPanelSoft p-6 sm:p-8 shadow-[0_0_50px_rgba(255,106,42,0.25)]"
@@ -161,10 +160,10 @@ export function CertificationsPage() {
               transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Icon Button */}
+              {/* Close Button */}
               <button
                 className="absolute top-4 right-4 z-10 p-2 rounded-full border border-white/10 bg-bitCharcoal text-slate-400 hover:text-white hover:border-bitOrange transition-all duration-200"
-                onClick={() => setSelectedCert(null)}
+                onClick={() => setSelectedLicense(null)}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -173,43 +172,38 @@ export function CertificationsPage() {
 
               <div className="mt-4">
                 <span className="inline-block rounded-full border border-bitOrange/30 bg-bitOrange/5 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-bitOrange">
-                  {selectedCert.category} Certification
+                  {selectedLicense.category} Authorization
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-black text-white mt-3">
-                  {selectedCert.title}
+                  {selectedLicense.title}
                 </h3>
                 <p className="text-xs text-slate-400 mt-1 font-semibold">
-                  Issuer: <span className="text-white font-bold">{selectedCert.issuer}</span>
+                  Authority: <span className="text-white font-bold">{selectedLicense.authority}</span>
                 </p>
 
                 <p className="mt-6 text-sm font-semibold leading-relaxed text-slate-300 bg-black/20 rounded-xl p-4 border border-white/5">
-                  {selectedCert.description}
+                  {selectedLicense.description}
                 </p>
 
-                {/* Audit details checklist */}
+                {/* Scope details */}
                 <div className="mt-6">
                   <h4 className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">
-                    Scope & Validations
+                    Scope of Authorization
                   </h4>
-                  <ul className="mt-3 space-y-2">
-                    {selectedCert.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-300 font-semibold leading-relaxed">
-                        <span className="text-bitOrange font-black mt-0.5">&bull;</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mt-3 text-xs text-slate-300 font-semibold leading-relaxed bg-[#07101c] rounded-xl p-4 border border-white/5">
+                    {selectedLicense.scope}
+                  </div>
                 </div>
 
                 {/* Meta Details */}
                 <div className="mt-8 pt-6 border-t border-white/5 grid grid-cols-2 gap-4 text-xs">
                   <div>
                     <span className="block text-[10px] font-black uppercase tracking-wider text-slate-500">License Number</span>
-                    <span className="font-bold text-white mt-1 block">{selectedCert.certNumber}</span>
+                    <span className="font-bold text-white mt-1 block">{selectedLicense.licenseNumber}</span>
                   </div>
                   <div>
                     <span className="block text-[10px] font-black uppercase tracking-wider text-slate-500">Validity Period</span>
-                    <span className="font-bold text-white mt-1 block">{selectedCert.issueDate} - {selectedCert.expiryDate}</span>
+                    <span className="font-bold text-white mt-1 block">{selectedLicense.validity}</span>
                   </div>
                 </div>
               </div>
