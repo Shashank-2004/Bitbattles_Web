@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const projectsData = [
@@ -398,14 +398,91 @@ const mockups = {
   auraai: <AuraAIMockup />
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const normalizeProject = (project, index = 0) => {
+  const fallback = projectsData[index % projectsData.length] ?? projectsData[0];
+
+  return {
+    ...fallback,
+    ...project,
+    id: project.id || project._id || fallback.id,
+    title: project.title || fallback.title,
+    category: project.category || fallback.category,
+    description: project.description || fallback.description,
+    color: project.color || fallback.color,
+    bgClass: project.bgClass || fallback.bgClass,
+    tag: project.tag || fallback.tag,
+    image: project.image || fallback.image || "",
+  };
+};
+
+function ProjectVisual({ project }) {
+  if (mockups[project.id]) {
+    return mockups[project.id];
+  }
+
+  if (project.image) {
+    return (
+      <img
+        alt=""
+        className="h-full w-full rounded-t-2xl object-cover shadow-2xl shadow-black/30"
+        src={project.image}
+      />
+    );
+  }
+
+  return (
+    <div className="flex h-full w-full flex-col justify-end rounded-t-2xl border border-white/10 bg-[#07101c] p-5 shadow-2xl shadow-black/30">
+      <div className="mb-auto h-10 w-10 rounded-xl border border-[#ff6a2a]/50 bg-[#ff6a2a]/10 shadow-[0_0_24px_rgba(255,106,42,0.2)]" />
+      <p className="text-xs font-black uppercase tracking-[0.16em] text-[#ff6a2a]">{project.category}</p>
+      <h4 className="mt-2 text-lg font-black text-white">{project.title}</h4>
+    </div>
+  );
+}
+
 export function PortfolioPage() {
   const [activeTab, setActiveTab] = useState("All");
+  const [projects, setProjects] = useState(projectsData);
+  const [loading, setLoading] = useState(true);
 
-  const categories = ["All", "AI", "Blockchain", "Design", "Development"];
+  const categories = useMemo(
+    () => ["All", ...Array.from(new Set(projects.map((project) => project.category).filter(Boolean)))],
+    [projects]
+  );
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function fetchProjects() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/portfolio`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Unable to fetch portfolio projects.");
+        }
+
+        if (mounted && Array.isArray(data) && data.length) {
+          setProjects(data.map(normalizeProject));
+        }
+      } catch (error) {
+        console.error("Portfolio fetch failed:", error);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+
+    fetchProjects();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const filteredProjects = activeTab === "All"
-    ? projectsData
-    : projectsData.filter(p => p.category === activeTab);
+    ? projects
+    : projects.filter(p => p.category === activeTab);
 
   return (
     <main className="relative min-h-screen bg-[#050816] text-white font-sans overflow-hidden">
@@ -496,7 +573,9 @@ export function PortfolioPage() {
             Our Work
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-sm font-semibold leading-relaxed text-slate-400">
-            We Build Turnkey Products for Media Agencies, Enterprises, R&D Labs and Startups
+            {loading
+              ? "Loading portfolio from BitBattles project database..."
+              : "We Build Turnkey Products for Media Agencies, Enterprises, R&D Labs and Startups"}
           </p>
         </div>
       </section>
@@ -554,7 +633,7 @@ export function PortfolioPage() {
                   
                   {/* Mockup wrapper with subtle rotation scale effect on card hover */}
                   <div className="w-full h-full transform translate-y-1 group-hover:translate-y-0 group-hover:scale-[1.02] transition-all duration-500 ease-out">
-                    {mockups[project.id]}
+                    <ProjectVisual project={project} />
                   </div>
                 </div>
 

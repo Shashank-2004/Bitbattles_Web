@@ -39,8 +39,8 @@ export function VantaBackground() {
 
           // MORE 3D / DEPTH
           blurFactor: 0.59,
-          speed: 1.9,
-          zoom: 1.0,
+          speed: 2.5,
+          zoom: 1.2,
         });
       } catch (error) {
         console.error("Vanta background failed to load:", error);
