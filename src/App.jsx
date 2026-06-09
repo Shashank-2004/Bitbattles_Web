@@ -18,7 +18,6 @@ import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { LicensesPage } from "./pages/LicensesPage";
 import { services } from "./data/services";
-import { blogPosts } from "./data/blogPosts";
 import { ProjectShowcasePage } from "./pages/ProjectShowcasePage";
 
 
