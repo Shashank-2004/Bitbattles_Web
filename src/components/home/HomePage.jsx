@@ -387,7 +387,7 @@ export function HomePage() {
       {/* STICKY IMPACT */}
       <section className="relative overflow-hidden px-5 py-16 sm:px-6 lg:px-8">
         <VantaBackground />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,16,0.72),rgba(5,7,16,0.9))]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,16,0.68),rgba(5,7,16,0.88))]" />
         <SectionDivider />
 
         <div className="pointer-events-none absolute left-0 top-24 h-72 w-72 rounded-full bg-blue-600/10 blur-[110px]" />
@@ -460,7 +460,7 @@ export function HomePage() {
         className="relative overflow-hidden px-5 pb-24 sm:px-6 lg:px-8"
       >
         <VantaBackground />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,16,0.86),rgba(5,7,16,0.92))]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,16,0.62),rgba(5,7,16,0.84))]" />
 
         <img
           alt=""
