@@ -12,9 +12,11 @@ import { PrivacyPage } from "./pages/PrivacyPage";
 import { ProposalPage } from "./pages/ProposalPage";
 import { ServicePage } from "./pages/ServicePage";
 import { ServicesPage } from "./pages/ServicesPage";
+import { SolutionsPage } from "./pages/SolutionsPage";
 import { TermsPage } from "./pages/TermsPage";
 import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
+import { LicensesPage } from "./pages/LicensesPage";
 import { services } from "./data/services";
 import { blogPosts } from "./data/blogPosts";
 import { ProjectShowcasePage } from "./pages/ProjectShowcasePage";
@@ -85,6 +87,7 @@ function App() {
   const routeMap = {
     "/": <HomePage />,
     "/services": <ServicesPage />,
+    "/solutions": <SolutionsPage />,
     "/about": <AboutPage />,
     "/portfolio": <PortfolioPage />,
     "/projects": <PortfolioPage />,
@@ -92,7 +95,7 @@ function App() {
     "/careers": <CareersPage />,
     "/careers/apply": <CareerApplicationPage />,
     "/certifications": <CertificationsPage />,
-    "/licenses": <CertificationsPage />,
+    "/licenses": <LicensesPage />,
     "/contact": <ContactPage />,
     "/privacy": <PrivacyPage />,
     "/terms": <TermsPage />,

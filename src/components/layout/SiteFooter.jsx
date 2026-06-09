@@ -28,7 +28,18 @@ const footerColumns = [
       ["Startups", "/services/ai-solutions"],
       ["Enterprises", "/services/cloud-implementation"],
       ["SaaS Products", "/services/web-development"],
-      ["Automation", "/services/automation"],
+      ["Automation", "/services/digital-transformation"],
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      ["Case Studies", "/portfolio"],
+      ["Services", "/services"],
+      ["Certifications", "/certifications"],
+      ["Licenses", "/licenses"],
+      ["Terms and Conditions", "/terms"],
+      ["Privacy Policy", "/privacy"],
     ],
   },
 ];

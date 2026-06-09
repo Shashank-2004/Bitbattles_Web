@@ -1,0 +1,815 @@
+/* ============================================================
+   Solutions Page — solutions.css
+   Matches the BitBattles design system (bitCharcoal / bitOrange)
+   ============================================================ */
+
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  --sol-orange: #ff6a2a;
+  --sol-orange-dim: rgba(255, 106, 42, 0.18);
+  --sol-orange-glow: rgba(255, 106, 42, 0.35);
+  --sol-bg-deep: #050710;
+  --sol-bg-panel: #08111f;
+  --sol-bg-mid: #101725;
+  --sol-border: rgba(255, 106, 42, 0.25);
+  --sol-text-muted: #94a3b8;
+  --sol-radius: 16px;
+}
+
+/* ── Layout helpers ─────────────────────────────────────────── */
+.sol-container {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px)  { .sol-container { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .sol-container { padding-inline: 2rem; } }
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.sol-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0 5rem;
+  background:
+    radial-gradient(circle at 70% 10%, rgba(255,106,42,0.20), transparent 35%),
+    radial-gradient(circle at 15% 85%, rgba(9,75,168,0.14), transparent 35%),
+    linear-gradient(130deg, #050710 0%, #08111f 100%);
+}
+.sol-hero__grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,106,42,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,106,42,0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 60% 30%, black 30%, transparent 70%);
+}
+.sol-hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+.sol-hero__orb--1 { width: 420px; height: 420px; top: -100px; right: -80px;  background: rgba(255,106,42,0.16); }
+.sol-hero__orb--2 { width: 300px; height: 300px; bottom: -60px; left: -60px;  background: rgba(9,75,168,0.12);  }
+.sol-hero__orb--3 { width: 220px; height: 220px; top: 40%;  right: 30%;  background: rgba(255,106,42,0.07); }
+
+.sol-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--sol-border);
+  border-radius: 999px;
+  background: rgba(255,106,42,0.08);
+  padding: 0.35rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sol-orange);
+  margin-bottom: 1.5rem;
+}
+.sol-hero__badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--sol-orange);
+  animation: solPulse 1.8s ease-in-out infinite;
+}
+@keyframes solPulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.7); }
+}
+
+.sol-hero__title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 1.25rem;
+}
+.sol-hero__title-accent {
+  background: linear-gradient(135deg, var(--sol-orange) 0%, #ffb347 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.sol-hero__desc {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--sol-text-muted);
+  max-width: 560px;
+  margin-bottom: 2.25rem;
+}
+.sol-hero__cta-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.sol-hero__cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 6px;
+  background: var(--sol-orange);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-decoration: none;
+  transition: background 0.22s, transform 0.22s, box-shadow 0.22s;
+  box-shadow: 0 8px 26px rgba(255,106,42,0.35);
+}
+.sol-hero__cta-primary:hover {
+  background: #e85a1e;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(255,106,42,0.45);
+}
+.sol-hero__cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--sol-border);
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.22s, color 0.22s, background 0.22s;
+}
+.sol-hero__cta-secondary:hover {
+  border-color: var(--sol-orange);
+  color: var(--sol-orange);
+  background: var(--sol-orange-dim);
+}
+
+.sol-hero__stats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.sol-hero__stat-num {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--sol-orange);
+  line-height: 1;
+}
+.sol-hero__stat-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--sol-text-muted);
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Hero visual panel */
+.sol-hero__visual {
+  border-radius: var(--sol-radius);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(8,17,31,0.7);
+  backdrop-filter: blur(14px);
+  padding: 1.75rem;
+}
+.sol-hero__visual-tag {
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--sol-orange);
+  margin-bottom: 1.25rem;
+}
+.sol-hero__visual-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.04);
+  margin-bottom: 0.6rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.sol-hero__visual-item:hover {
+  border-color: var(--sol-border);
+  background: rgba(255,106,42,0.07);
+}
+.sol-hero__visual-icon {
+  font-size: 1.25rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px solid rgba(255,106,42,0.4);
+  background: rgba(255,106,42,0.12);
+  flex-shrink: 0;
+}
+.sol-hero__visual-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+.sol-hero__visual-sublabel {
+  font-size: 0.7rem;
+  color: var(--sol-text-muted);
+  margin-top: 0.1rem;
+}
+.sol-hero__visual-chip {
+  margin-left: auto;
+  font-size: 0.6rem;
+  font-weight: 900;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255,106,42,0.15);
+  color: var(--sol-orange);
+}
+
+/* ── Generic Section Shell ──────────────────────────────────── */
+.sol-section {
+  padding: 5rem 0;
+}
+.sol-section--dark { background: var(--sol-bg-panel); }
+.sol-section--mid  { background: var(--sol-bg-mid);   }
+.sol-section--deep { background: var(--sol-bg-deep);  }
+
+/* ── Eyebrow + Section Title ────────────────────────────────── */
+.sol-eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--sol-orange);
+  margin-bottom: 0.75rem;
+}
+.sol-section-title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0;
+}
+.sol-section-desc {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: var(--sol-text-muted);
+  max-width: 600px;
+  margin: 1rem auto 0;
+}
+.sol-section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.sol-section-divider__line {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--sol-orange));
+  border-radius: 2px;
+}
+.sol-section-divider__line--right {
+  background: linear-gradient(90deg, var(--sol-orange), transparent);
+}
+.sol-section-divider__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sol-orange);
+  box-shadow: 0 0 10px var(--sol-orange-glow);
+}
+
+/* ── Solution Category Cards (Startups / Enterprise etc) ─────── */
+.sol-cards-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px)  { .sol-cards-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .sol-cards-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.sol-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--sol-radius);
+  border: 1px solid var(--sol-border);
+  background: var(--sol-bg-panel);
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+  box-shadow: 0 0 34px rgba(255,78,18,0.08);
+  text-decoration: none;
+  color: inherit;
+}
+.sol-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0%, rgba(255,106,42,0.10), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.sol-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--sol-orange);
+  box-shadow: 0 0 50px rgba(255,106,42,0.22);
+}
+.sol-card:hover::before { opacity: 1; }
+
+.sol-card__icon-wrap {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  border: 1px solid rgba(255,106,42,0.5);
+  background: rgba(255,106,42,0.12);
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+.sol-card__label {
+  font-size: 0.63rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--sol-orange);
+  margin-bottom: 0.5rem;
+}
+.sol-card__title {
+  font-family: "Sora", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.75rem;
+}
+.sol-card__desc {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--sol-text-muted);
+  flex: 1;
+}
+.sol-card__cta {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: var(--sol-orange);
+  transition: gap 0.2s;
+}
+.sol-card:hover .sol-card__cta { gap: 0.6rem; }
+
+.sol-card__tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+.sol-card__tag {
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255,106,42,0.12);
+  color: rgba(255,106,42,0.9);
+}
+
+/* ── Deep-Dive Alternating Sections ─────────────────────────── */
+.sol-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  margin-top: 4rem;
+}
+
+.sol-detail-item {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .sol-detail-item { grid-template-columns: 1fr 1fr; }
+  .sol-detail-item--reverse .sol-detail-item__content { order: 2; }
+  .sol-detail-item--reverse .sol-detail-item__visual  { order: 1; }
+}
+
+.sol-detail-item__num {
+  font-family: "Sora", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(255,106,42,0.12);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.sol-detail-item__tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255,106,42,0.15);
+  color: var(--sol-orange);
+  margin-bottom: 0.85rem;
+}
+.sol-detail-item__title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 1rem;
+}
+.sol-detail-item__desc {
+  font-size: 0.88rem;
+  line-height: 1.85;
+  color: var(--sol-text-muted);
+  margin-bottom: 1.5rem;
+}
+.sol-detail-item__features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.sol-detail-item__feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+.sol-detail-item__feature::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sol-orange);
+  flex-shrink: 0;
+}
+.sol-detail-item__cta {
+  margin-top: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: var(--sol-orange);
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+.sol-detail-item__cta:hover { gap: 0.75rem; }
+
+/* Visual panel in detail rows */
+.sol-detail-item__visual {
+  border-radius: var(--sol-radius);
+  border: 1px solid var(--sol-border);
+  background: var(--sol-bg-panel);
+  padding: 1.75rem;
+  box-shadow: 0 0 40px rgba(255,78,18,0.10);
+}
+.sol-detail-item__visual-header {
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--sol-orange);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sol-detail-item__visual-check {
+  width: 22px; height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(34,197,94,0.15);
+  color: #4ade80;
+  font-size: 0.7rem;
+}
+.sol-detail-item__visual-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.04);
+  margin-bottom: 0.6rem;
+}
+.sol-detail-item__visual-row-num {
+  width: 26px; height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: #fff;
+  flex-shrink: 0;
+}
+.sol-detail-item__visual-row-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+/* ── Why Choose BitBattles — Metrics Strip ───────────────────── */
+.sol-metrics-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 1024px) { .sol-metrics-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.sol-metric-card {
+  border-radius: var(--sol-radius);
+  border: 1px solid var(--sol-border);
+  background: var(--sol-bg-panel);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  transition: transform 0.26s, border-color 0.26s, box-shadow 0.26s;
+}
+.sol-metric-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sol-orange);
+  box-shadow: 0 0 44px rgba(255,106,42,0.2);
+}
+.sol-metric-card__icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.9rem;
+}
+.sol-metric-card__num {
+  font-family: "Sora", sans-serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--sol-orange);
+  line-height: 1;
+}
+.sol-metric-card__unit {
+  font-size: 1.1rem;
+}
+.sol-metric-card__label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 0.4rem;
+}
+.sol-metric-card__sub {
+  font-size: 0.75rem;
+  color: var(--sol-text-muted);
+  margin-top: 0.3rem;
+  line-height: 1.5;
+}
+
+/* ── Industries / Use-Cases Grid ────────────────────────────── */
+.sol-industries-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 640px)  { .sol-industries-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .sol-industries-grid { grid-template-columns: repeat(6, 1fr); } }
+
+.sol-industry-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--sol-border);
+  background: var(--sol-bg-panel);
+  text-align: center;
+  transition: border-color 0.22s, background 0.22s, transform 0.22s;
+  cursor: default;
+}
+.sol-industry-chip:hover {
+  border-color: var(--sol-orange);
+  background: rgba(255,106,42,0.07);
+  transform: translateY(-4px);
+}
+.sol-industry-chip__icon { font-size: 1.6rem; }
+.sol-industry-chip__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+/* ── Process / How It Works ──────────────────────────────────── */
+.sol-process-steps {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  margin-top: 3rem;
+  position: relative;
+}
+@media (min-width: 768px) { .sol-process-steps { grid-template-columns: repeat(4, 1fr); } }
+
+.sol-process-step {
+  text-align: center;
+  padding: 2rem 1.25rem;
+  border-radius: var(--sol-radius);
+  border: 1px solid var(--sol-border);
+  background: var(--sol-bg-panel);
+  position: relative;
+  transition: transform 0.26s, border-color 0.26s;
+}
+.sol-process-step:hover {
+  transform: translateY(-5px);
+  border-color: var(--sol-orange);
+}
+.sol-process-step__node {
+  width: 56px; height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--sol-border);
+  background: rgba(255,106,42,0.10);
+  margin: 0 auto 1rem;
+  font-size: 1.4rem;
+  position: relative;
+}
+.sol-process-step__num {
+  position: absolute;
+  top: -8px; right: -8px;
+  width: 20px; height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--sol-orange);
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #fff;
+}
+.sol-process-step__title {
+  font-family: "Sora", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.sol-process-step__desc {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--sol-text-muted);
+}
+
+/* ── Testimonial / Social Proof ──────────────────────────────── */
+.sol-testimonials-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) { .sol-testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.sol-testimonial-card {
+  border-radius: var(--sol-radius);
+  border: 1px solid var(--sol-border);
+  background: var(--sol-bg-panel);
+  padding: 1.75rem;
+  transition: transform 0.26s, border-color 0.26s, box-shadow 0.26s;
+}
+.sol-testimonial-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sol-orange);
+  box-shadow: 0 0 40px rgba(255,106,42,0.18);
+}
+.sol-testimonial-card__stars {
+  color: #fbbf24;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.85rem;
+}
+.sol-testimonial-card__quote {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: #cbd5e1;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+}
+.sol-testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.sol-testimonial-card__avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  border: 1px solid var(--sol-border);
+  background: rgba(255,106,42,0.12);
+  flex-shrink: 0;
+}
+.sol-testimonial-card__name {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #fff;
+}
+.sol-testimonial-card__role {
+  font-size: 0.72rem;
+  color: var(--sol-text-muted);
+}
+
+/* ── CTA Banner ──────────────────────────────────────────────── */
+.sol-cta-banner {
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 10% 50%, rgba(255,106,42,0.18), transparent 40%),
+    radial-gradient(circle at 90% 50%, rgba(9,75,168,0.12), transparent 40%),
+    var(--sol-bg-panel);
+  border: 1px solid var(--sol-border);
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.sol-cta-banner__title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 0.85rem;
+}
+.sol-cta-banner__desc {
+  font-size: 0.9rem;
+  color: var(--sol-text-muted);
+  max-width: 520px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+}
+.sol-cta-banner__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.sol-cta-banner__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.85rem 2.25rem;
+  border-radius: 6px;
+  background: var(--sol-orange);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(255,106,42,0.4);
+  transition: background 0.22s, transform 0.22s, box-shadow 0.22s;
+}
+.sol-cta-banner__btn-primary:hover {
+  background: #e85a1e;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(255,106,42,0.5);
+}
+.sol-cta-banner__btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.85rem 2rem;
+  border-radius: 6px;
+  border: 1px solid var(--sol-border);
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.22s, color 0.22s, background 0.22s;
+}
+.sol-cta-banner__btn-secondary:hover {
+  border-color: var(--sol-orange);
+  color: var(--sol-orange);
+  background: var(--sol-orange-dim);
+}
+
+/* ── Hero responsive layout ──────────────────────────────────── */
+@media (min-width: 768px) {
+  .sol-hero__layout {
+    grid-template-columns: 1.1fr 0.9fr !important;
+  }
+}
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes solFadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

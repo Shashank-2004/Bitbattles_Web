@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const projectCaseStudies = {
@@ -431,8 +432,95 @@ const mockups = {
   auraai: <AuraAIMockup />
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const normalizeCaseStudy = (project, fallback = {}) => ({
+  ...fallback,
+  ...project,
+  id: project.id || project._id || fallback.id,
+  title: project.title || fallback.title || "Untitled Project",
+  category: project.category || fallback.category || "Development",
+  tag: project.tag || fallback.tag || "Case Study",
+  subtitle: project.subtitle || fallback.subtitle || project.description || fallback.description || "Digital product case study",
+  color: project.color || fallback.color || "#ff6a2a",
+  bgClass: project.bgClass || fallback.bgClass || "from-[#111c2e] to-[#070c14]",
+  description: project.description || fallback.description || "A BitBattles project built for practical business outcomes.",
+  challenge: project.challenge || fallback.challenge || "The project required a focused product plan, clear user experience, and reliable technical delivery.",
+  solution: project.solution || fallback.solution || "BitBattles shaped the product flow, built the implementation foundation, and prepared the system for launch.",
+  outcome: project.outcome || fallback.outcome || "The engagement produced a cleaner digital product direction with a scalable delivery path.",
+  techStack: Array.isArray(project.techStack) && project.techStack.length ? project.techStack : fallback.techStack || ["React", "Node.js", "MongoDB"],
+  metrics: Array.isArray(project.metrics) && project.metrics.length
+    ? project.metrics
+    : fallback.metrics || [
+        { label: "Delivery", value: "Agile" },
+        { label: "Scope", value: "Custom" },
+        { label: "Support", value: "Included" },
+      ],
+});
+
+function ShowcaseVisual({ study }) {
+  if (mockups[study.id]) {
+    return mockups[study.id];
+  }
+
+  if (study.image) {
+    return <img alt="" className="h-full w-full rounded-2xl object-cover" src={study.image} />;
+  }
+
+  return (
+    <div className="flex h-full w-full flex-col justify-end rounded-2xl border border-white/10 bg-[#07101c] p-6">
+      <div className="mb-auto h-12 w-12 rounded-xl border border-[#ff6a2a]/50 bg-[#ff6a2a]/10 shadow-[0_0_24px_rgba(255,106,42,0.2)]" />
+      <p className="text-xs font-black uppercase tracking-[0.16em] text-[#ff6a2a]">{study.category}</p>
+      <h3 className="mt-3 text-2xl font-black text-white">{study.title}</h3>
+    </div>
+  );
+}
+
 export function ProjectShowcasePage({ projectId }) {
-  const study = projectCaseStudies[projectId];
+  const fallbackStudy = projectCaseStudies[projectId];
+  const [remoteStudy, setRemoteStudy] = useState(null);
+  const [loading, setLoading] = useState(!fallbackStudy);
+  const study = remoteStudy || fallbackStudy;
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function fetchProject() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/portfolio/${projectId}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Unable to fetch project.");
+        }
+
+        if (mounted) {
+          setRemoteStudy(normalizeCaseStudy(data, fallbackStudy));
+        }
+      } catch (error) {
+        if (!fallbackStudy) {
+          console.error("Project fetch failed:", error);
+        }
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+
+    fetchProject();
+
+    return () => {
+      mounted = false;
+    };
+  }, [fallbackStudy, projectId]);
+
+  if (loading) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#050816] p-8 text-white">
+        <h1 className="text-3xl font-black">Loading Project</h1>
+        <p className="mt-2 text-slate-400">Fetching project details from the database.</p>
+      </main>
+    );
+  }
 
   if (!study) {
     return (
@@ -539,7 +627,7 @@ export function ProjectShowcasePage({ projectId }) {
             />
             <div className={`relative aspect-[4/3] rounded-3xl border border-white/10 bg-gradient-to-br ${study.bgClass} p-8 flex items-end justify-center overflow-hidden shadow-2xl`}>
               <div className="w-full h-full transform translate-y-1">
-                {mockups[study.id]}
+                <ShowcaseVisual study={study} />
               </div>
             </div>
           </div>

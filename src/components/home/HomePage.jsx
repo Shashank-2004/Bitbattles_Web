@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { services } from "../../data/services";
 import { projects } from "../../data/site";
@@ -72,6 +73,19 @@ const testimonials = [
 ];
 
 const serviceProof = ["4.8 rating", "3+ builds", "Fast discovery"];
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const normalizeHomeProject = (project, index = 0) => {
+  const fallback = projects[index % projects.length] ?? projects[0];
+
+  return {
+    ...fallback,
+    ...project,
+    title: project.title || fallback.title,
+    tag: project.tag || project.category || fallback.tag,
+    image: project.image || fallback.image,
+  };
+};
 
 function SectionHeading({ eyebrow, title, text }) {
   return (
@@ -100,6 +114,35 @@ function SectionDivider() {
 }
 
 export function HomePage() {
+  const [featuredProjects, setFeaturedProjects] = useState(projects);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function fetchFeaturedProjects() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/portfolio/featured`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Unable to fetch featured projects.");
+        }
+
+        if (mounted && Array.isArray(data) && data.length) {
+          setFeaturedProjects(data.slice(0, 4).map(normalizeHomeProject));
+        }
+      } catch (error) {
+        console.error("Featured projects fetch failed:", error);
+      }
+    }
+
+    fetchFeaturedProjects();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <main className="overflow-hidden bg-bitCharcoal text-white">
       <HomeHero />
@@ -299,7 +342,7 @@ export function HomePage() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {projects.map((project) => (
+            {featuredProjects.map((project) => (
               <motion.article
                 className="overflow-hidden rounded-xl border border-white/10 bg-[#0b111c] shadow-xl shadow-black/20 transition hover:border-bitOrange/45"
                 key={project.title}
