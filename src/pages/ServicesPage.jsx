@@ -7,6 +7,11 @@ const serviceProjects = {
   "web-development": "Fintech Enterprise Web Platform",
   "mobile-apps": "HealthCare+ Mobile App Suite",
   "cyber-security": "Secure Authentication Intake Gateways",
+  "automation": "Slack & CRM Workflow Sync Orchestrator",
+  "ui-ux-design": "SaaS Dashboard Rebrand & Design System",
+  "qa-testing": "E-Commerce App Automated Testing Pipeline",
+  "cloud-implementation": "Multi-Region AWS Infrastructure Deployment",
+  "ar-vr-development": "3D Product Configurator WebVR Platform",
 };
 
 export function ServicesPage() {
@@ -15,8 +20,8 @@ export function ServicesPage() {
   const [isPulseTraveling, setIsPulseTraveling] = useState(false);
   const [pulseKey, setPulseKey] = useState(0);
 
-  // Filter only the 4 specified services
-  const displayServices = services.slice(0, 4);
+  // Show all 9 services
+  const displayServices = services;
   const activeService = displayServices[activeIndex] || displayServices[0];
   const displayedService = displayServices[displayedIndex] || displayServices[0];
 
@@ -24,8 +29,9 @@ export function ServicesPage() {
   const containerRef = useRef(null);
   const btnRefs = useRef([]);
   const cardRef = useRef(null);
+  const timerRef = useRef(null);
   const [coords, setCoords] = useState({
-    btnY: [0, 0, 0, 0],
+    btnY: Array(services.length).fill(0),
     cardY: 0,
     xStart: 0,
     xEnd: 0,
@@ -88,11 +94,18 @@ export function ServicesPage() {
       window.removeEventListener("resize", updateCoords);
       if (observer) observer.disconnect();
       clearTimeout(timer);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     };
   }, []);
 
   const handleServiceSelect = (index) => {
     if (index === activeIndex) return;
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
 
     // Trigger pulse and select state
     setActiveIndex(index);
@@ -100,12 +113,11 @@ export function ServicesPage() {
     setPulseKey((prev) => prev + 1);
 
     // Coordinate content reveal with pulse arrival
-    const timer = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setDisplayedIndex(index);
       setIsPulseTraveling(false);
+      timerRef.current = null;
     }, 450); // duration of pulse travel
-
-    return () => clearTimeout(timer);
   };
 
   const words = ["Services", "We", "Provide"];
@@ -183,7 +195,7 @@ export function ServicesPage() {
           </pattern>
           <rect width="100%" height="100%" fill="url(#grid)" />
           
-          {/* Constellation overlay */}
+          {/*Constellation overlay*/}
           <path d="M 150 200 L 300 150 L 450 300 M 300 150 L 250 350 L 450 300 M 800 600 L 950 450 L 1100 550 M 950 450 L 1050 300" 
                 fill="none" stroke="white" strokeWidth="1.5" />
           <circle cx="150" cy="200" r="3" fill="white" />
@@ -345,6 +357,7 @@ export function ServicesPage() {
                       : "border-white/5 bg-transparent hover:border-white/10 hover:bg-white/[0.01]"
                   }`}
                   onClick={() => handleServiceSelect(index)}
+                  onMouseEnter={() => handleServiceSelect(index)}
                 >
                   <div className="flex items-center gap-5">
                     <span

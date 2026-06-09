@@ -12,7 +12,7 @@ const teamMembers = [
     tags: ["Technical Expertise", "Strategic Leadership", "Innovative Thinking"],
     image: "/images/team-pranjal.png",
     linkedin: "https://linkedin.com/company/bitbattles",
-    email: "pranjal@bitbattles.in",
+    email: "1@bitbattles.in",
     skills: ["AI Systems Design", "Enterprise Architecture", "Strategic Planning", "Product Lifecycle Management", "Team Scaling"]
   },
   {
@@ -24,7 +24,7 @@ const teamMembers = [
     tags: ["Financial Planning & Analysis", "Budgeting & Resource Management", "Strategic Decision-Making"],
     image: "/images/team-divyansh.png",
     linkedin: "https://linkedin.com/company/bitbattles",
-    email: "divyansh@bitbattles.in",
+    email: "2@bitbattles.in",
     skills: ["Capital Allocation", "Financial Forecasting", "Risk Mitigation", "Operations Finance", "B2B Pricing Models"]
   },
   {
@@ -36,7 +36,7 @@ const teamMembers = [
     tags: ["Strategic Marketing", "Digital Branding", "Creative Campaigns"],
     image: "/images/team-ananya.png",
     linkedin: "https://linkedin.com/company/bitbattles",
-    email: "ananya@bitbattles.in",
+    email: "3@bitbattles.in",
     skills: ["Brand Strategy", "Content Marketing", "Data Analytics", "Public Relations", "Client Acquisition Funnels"]
   },
   {
@@ -48,7 +48,7 @@ const teamMembers = [
     tags: ["React.js", "Node.js", "Python"],
     image: "/images/team-ishant.png",
     linkedin: "https://linkedin.com/company/bitbattles",
-    email: "ishant@bitbattles.in",
+    email: "4@bitbattles.in",
     skills: ["React & Next.js", "Node.js & Express", "Python & PyTorch", "Cloud Infrastructure (AWS/GCP)", "Database Optimization"]
   }
 ];
