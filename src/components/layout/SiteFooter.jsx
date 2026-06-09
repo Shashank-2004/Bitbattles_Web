@@ -25,21 +25,10 @@ const footerColumns = [
   {
     title: "Solutions",
     links: [
-      ["Startups", "/services/ai-solutions"],
-      ["Enterprises", "/services/cloud-implementation"],
-      ["SaaS Products", "/services/web-development"],
-      ["Automation", "/services/digital-transformation"],
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      ["Case Studies", "/portfolio"],
-      ["Services", "/services"],
-      ["Certifications", "/certifications"],
-      ["Licenses", "/licenses"],
-      ["Terms and Conditions", "/terms"],
-      ["Privacy Policy", "/privacy"],
+      ["Startups", "/solutions/startups"],
+      ["Enterprises", "/solutions/enterprises"],
+      ["SaaS Products", "/solutions/saas"],
+      ["Automation", "/solutions/automation"],
     ],
   },
 ];
@@ -153,7 +142,7 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {footerColumns.map((column) => (
               <div key={column.title}>
                 <h3 className="text-sm font-black">{column.title}</h3>

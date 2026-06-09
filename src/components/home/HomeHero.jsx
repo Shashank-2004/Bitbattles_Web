@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { VantaBackground } from "./VantaBackground";
+import { TextGenerateEffect } from "../ui/text-generate-effect";
 
 export function HomeHero() {
   return (
@@ -21,30 +22,48 @@ export function HomeHero() {
           }}
         >
           <h1 className="max-w-2xl text-5xl font-black leading-[1.04] tracking-normal text-white sm:text-6xl lg:text-7xl">
-            We Build. You Scale.{" "}
-            <span className="text-bitOrange">We Win.</span>
+            {["We Build.", "You Scale."].map((line, index) => (
+              <motion.span
+                className="block"
+                initial={{ opacity: 0, y: 28, filter: "blur(12px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ delay: index * 0.12, duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+                key={line}
+              >
+                {line}
+              </motion.span>
+            ))}
+            <motion.span
+              className="block text-bitOrange drop-shadow-[0_0_24px_rgba(255,106,42,0.34)]"
+              initial={{ opacity: 0, y: 28, filter: "blur(12px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 0.24, duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+            >
+              We Win.
+            </motion.span>
           </h1>
 
-          <p className="mt-7 max-w-xl text-base font-semibold leading-8 text-slate-400">
-            BitBattles builds intelligent digital products and AI-powered
-            solutions that help businesses automate, innovate, and grow faster
-            in a digital world.
-          </p>
+          <TextGenerateEffect
+            className="mt-4 max-w-xl text-base font-semibold leading-8 text-slate-400"
+            duration={0.35}
+            filter
+            words="BitBattles builds intelligent digital products and AI-powered solutions that help businesses automate, innovate, and grow faster in a digital world."
+          />
 
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <motion.a
-              className="inline-flex items-center justify-center rounded-md bg-bitOrange px-6 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-500 hover:shadow-orange-500/40"
+              className="inline-flex items-center justify-center rounded-md bg-bitOrange px-6 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/25 transition duration-300 hover:bg-orange-500 hover:shadow-[0_0_34px_rgba(255,106,42,0.55)]"
               href="/services"
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -3, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               Explore Services -&gt;
             </motion.a>
 
             <motion.a
-              className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 text-sm font-black text-white transition hover:border-bitOrange hover:text-bitOrange"
+              className="inline-flex items-center justify-center rounded-md border border-white/25 bg-white/[0.03] px-6 py-3 text-sm font-black text-white backdrop-blur-sm transition duration-300 hover:border-bitOrange hover:text-bitOrange hover:shadow-[0_0_28px_rgba(255,106,42,0.22)]"
               href="/portfolio"
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -3, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               Our Work -&gt;
@@ -59,16 +78,37 @@ export function HomeHero() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          {/* ORANGE GLOW */}
-          <div className="absolute inset-6 rounded-full bg-bitOrange/20 blur-3xl" />
-
-          {/* BLUE GLOW */}
+          <motion.div
+            animate={{ opacity: [0.24, 0.42, 0.24], scale: [0.94, 1.04, 0.94] }}
+            className="absolute inset-4 rounded-full bg-bitOrange/25 blur-3xl"
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+          />
           <div className="absolute inset-x-10 bottom-10 h-24 rounded-full bg-blue-500/20 blur-3xl" />
 
-          <img
+          {[0, 1, 2].map((ring) => (
+            <div
+              className="absolute left-1/2 top-1/2 z-[2] hidden -translate-x-1/2 -translate-y-1/2 lg:block"
+              key={ring}
+              style={{ transformStyle: "preserve-3d", transform: "translate(-50%, -50%) rotateX(66deg)" }}
+            >
+              <motion.div
+                animate={{ rotate: ring % 2 ? -360 : 360 }}
+                className="rounded-full border border-bitOrange/25 bg-[conic-gradient(from_90deg,transparent,rgba(255,106,42,0.5),transparent_34%)] opacity-70 blur-[0.2px]"
+                style={{
+                  height: `${360 + ring * 72}px`,
+                  width: `${560 + ring * 100}px`,
+                }}
+                transition={{ duration: 28 + ring * 8, repeat: Infinity, ease: "linear" }}
+              />
+            </div>
+          ))}
+
+          <motion.img
+            animate={{ y: [0, -14, 0], rotate: [0, 0.8, 0] }}
             alt="BitBattles AI services cube"
-            className="relative z-10 ml-auto w-full max-w-[820px] object-contain drop-shadow-[0_0_120px_rgba(255,106,42,0.45)]"
+            className="relative z-10 ml-auto w-full max-w-[820px] object-contain drop-shadow-[0_0_120px_rgba(255,106,42,0.52)]"
             src="/images/hero-cube.png"
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
       </div>

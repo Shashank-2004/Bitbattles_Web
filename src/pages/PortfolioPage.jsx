@@ -67,7 +67,7 @@ const EnixtaMockup = () => (
       <div className="w-1.5 h-1.5 rounded-full bg-green-500/80" />
       <div className="w-24 h-3 bg-white/5 rounded-full mx-auto" />
     </div>
-    
+
     <div className="flex items-center justify-between px-3 py-1.5 bg-[#040a14]/65">
       <div className="flex items-center gap-1">
         <svg className="w-2.5 h-2.5 text-[#ff6a2a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -82,10 +82,10 @@ const EnixtaMockup = () => (
       </div>
       <div className="px-2 py-0.5 rounded-sm bg-[#ff6a2a] text-[4.5px] font-black scale-90 text-white">Get Started</div>
     </div>
-    
+
     <div className="flex-1 flex flex-col justify-center items-center text-center p-4 relative bg-gradient-to-b from-[#091b35] to-[#030914] overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none" />
-      
+
       <div className="relative z-10 max-w-[150px] mt-1">
         <h4 className="font-extrabold text-[8.5px] leading-tight text-white">
           Tap into your customer's voice for <span className="text-[#ff6a2a]">Actionable Insights</span>
@@ -113,18 +113,18 @@ const KarmeqMockup = () => (
       <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
       <div className="w-24 h-3 bg-slate-200 rounded-full mx-auto" />
     </div>
-    
+
     <div className="bg-[#ecfdf5] border-b border-emerald-100 px-3 py-1.5 flex items-center justify-between text-[5.5px] text-emerald-800 font-bold scale-95 origin-left">
       <span>🎉 Congratulations! Your monthly investment reward of $250 has succeeded.</span>
     </div>
-    
+
     <div className="flex-1 grid grid-cols-5 p-3 gap-2 bg-white">
       <div className="col-span-3 border border-slate-100 rounded-lg p-2 flex flex-col justify-between">
         <div className="flex items-center justify-between">
           <span className="font-extrabold text-[5.5px] text-slate-400">PORTFOLIO VALUE</span>
           <span className="font-black text-[7px] text-slate-900">$12,509.77</span>
         </div>
-        
+
         <div className="h-14 mt-1 flex items-end">
           <svg className="w-full h-full text-emerald-500" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M0 45 C15 42, 30 25, 45 35 C60 45, 75 15, 100 5" strokeLinecap="round" strokeLinejoin="round" />
@@ -132,10 +132,10 @@ const KarmeqMockup = () => (
           </svg>
         </div>
       </div>
-      
+
       <div className="col-span-2 border border-slate-100 rounded-lg p-2 flex flex-col gap-1.5 bg-slate-50/50">
         <span className="font-black text-[6px] text-slate-400 uppercase">Onboarding Checklist</span>
-        
+
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-1 scale-95 origin-left">
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 text-white flex items-center justify-center font-black text-[5px]">✓</div>
@@ -150,7 +150,7 @@ const KarmeqMockup = () => (
             <span className="text-[5.5px] font-bold text-slate-400">First deposit</span>
           </div>
         </div>
-        
+
         <button className="mt-auto w-full py-1 rounded bg-emerald-500 text-white text-[5px] font-black uppercase tracking-wider scale-95">
           Complete Setup
         </button>
@@ -217,7 +217,7 @@ const ABInBevMockup = () => (
 
         <div className="col-span-1 bg-[#1c1006] border border-amber-500/10 rounded p-1.5 flex flex-col justify-between items-center text-center">
           <span className="font-extrabold text-[5px] text-amber-500/80 uppercase">Allocation</span>
-          
+
           <svg className="w-9 h-9 my-1 text-amber-500" viewBox="0 0 32 32">
             <circle r="16" cx="16" cy="16" fill="transparent" stroke="#ffb703" strokeWidth="6" strokeDasharray="60 100" />
             <circle r="16" cx="16" cy="16" fill="transparent" stroke="#10b981" strokeWidth="6" strokeDasharray="40 100" strokeDashoffset="-60" />
@@ -304,7 +304,7 @@ const NovaCloudMockup = () => (
         <circle cx="50" cy="40" r="1.2" fill="#22c55e" />
         <circle cx="20" cy="50" r="1.2" fill="#22c55e" />
       </svg>
-      
+
       <div className="w-[85px] bg-slate-950/90 border border-slate-800 rounded p-1.5 relative z-10 self-start shadow-xl">
         <div className="text-[4px] text-slate-400 font-bold uppercase mb-1">SYSTEM INSTANCES</div>
         <div className="flex flex-col gap-0.5">
@@ -443,8 +443,9 @@ function ProjectVisual({ project }) {
 
 export function PortfolioPage() {
   const [activeTab, setActiveTab] = useState("All");
-  const [projects, setProjects] = useState(projectsData);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState("");
 
   const categories = useMemo(
     () => ["All", ...Array.from(new Set(projects.map((project) => project.category).filter(Boolean)))],
@@ -465,9 +466,17 @@ export function PortfolioPage() {
 
         if (mounted && Array.isArray(data) && data.length) {
           setProjects(data.map(normalizeProject));
+          setFetchError("");
+        } else if (mounted) {
+          setProjects([]);
+          setFetchError("");
         }
       } catch (error) {
         console.error("Portfolio fetch failed:", error);
+        if (mounted) {
+          setProjects([]);
+          setFetchError("Portfolio projects could not be loaded from the database.");
+        }
       } finally {
         if (mounted) setLoading(false);
       }
@@ -486,7 +495,7 @@ export function PortfolioPage() {
 
   return (
     <main className="relative min-h-screen bg-[#050816] text-white font-sans overflow-hidden">
-      
+
       {/* Background Mesh Glows */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
         <motion.div
@@ -609,65 +618,88 @@ export function PortfolioPage() {
 
       {/* Project Mockups Grid */}
       <section className="relative z-10 mx-auto max-w-[1180px] px-5 pb-32 sm:px-6 lg:px-8">
-        <motion.div 
-          layout
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.a
-                layout
-                key={project.id}
-                href={`/portfolio/${project.id}`}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                whileHover={{ y: -8 }}
-                className="group overflow-hidden rounded-3xl border border-white/5 bg-[#0c121e]/80 flex flex-col justify-between h-[450px] transition-all duration-500 hover:border-white/10 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] cursor-pointer"
-              >
-                {/* Brand specific gradient background block with mockup */}
-                <div className={`relative pt-6 px-6 aspect-[4/3] bg-gradient-to-br ${project.bgClass} flex items-end justify-center overflow-hidden border-b border-white/5`}>
-                  {/* Subtle inner grid glow overlay */}
-                  <div className="absolute inset-0 bg-radial-gradient opacity-[0.02] pointer-events-none" />
-                  
-                  {/* Mockup wrapper with subtle rotation scale effect on card hover */}
-                  <div className="w-full h-full transform translate-y-1 group-hover:translate-y-0 group-hover:scale-[1.02] transition-all duration-500 ease-out">
-                    <ProjectVisual project={project} />
-                  </div>
+        {loading && (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <article className="h-[450px] animate-pulse rounded-3xl bg-[#0c121e]/80" key={index}>
+                <div className="h-64 rounded-t-3xl bg-white/[0.05]" />
+                <div className="space-y-4 p-6">
+                  <div className="h-3 w-24 rounded bg-white/[0.08]" />
+                  <div className="h-5 w-40 rounded bg-white/[0.08]" />
+                  <div className="h-3 w-full rounded bg-white/[0.05]" />
+                  <div className="h-3 w-2/3 rounded bg-white/[0.05]" />
                 </div>
-
-                {/* Card Description Footer */}
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">
-                        {project.tag}
-                      </span>
-                      <span className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-white/5 text-slate-400 border border-white/5">
-                        {project.category}
-                      </span>
-                    </div>
-                    
-                    <h3 className="mt-3 text-lg font-black text-white leading-tight">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  {/* Tiny View Link */}
-                  <div className="mt-4 flex items-center text-[#ff6a2a] text-[10px] font-black uppercase tracking-widest gap-1 group-hover:translate-x-0.5 transition-transform duration-300">
-                    <span>View Case Study</span>
-                    <span className="text-xs">&rarr;</span>
-                  </div>
-                </div>
-              </motion.a>
+              </article>
             ))}
-          </AnimatePresence>
-        </motion.div>
+          </div>
+        )}
+
+        {!loading && filteredProjects.length === 0 && (
+          <div className="mx-auto max-w-xl rounded-3xl bg-white/[0.04] px-8 py-10 text-center shadow-[0_0_50px_rgba(255,106,42,0.10)]">
+            <h2 className="text-xl font-black text-white">
+              {fetchError || "No portfolio projects found in the database."}
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-slate-400">
+              Add project documents in MongoDB through the portfolio collection or the portfolio API, then refresh this page.
+            </p>
+          </div>
+        )}
+
+        {!loading && filteredProjects.length > 0 && (
+          <motion.div
+            layout
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project) => (
+                <motion.a
+                  layout
+                  key={project.id}
+                  href={`/portfolio/${project.id}`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  whileHover={{ y: -8 }}
+                  className="group overflow-hidden rounded-3xl border border-white/5 bg-[#0c121e]/80 flex flex-col justify-between h-[450px] transition-all duration-500 hover:border-white/10 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] cursor-pointer"
+                >
+                  <div className={`relative pt-6 px-6 aspect-[4/3] bg-gradient-to-br ${project.bgClass} flex items-end justify-center overflow-hidden border-b border-white/5`}>
+                    <div className="absolute inset-0 bg-radial-gradient opacity-[0.02] pointer-events-none" />
+                    <div className="w-full h-full transform translate-y-1 group-hover:translate-y-0 group-hover:scale-[1.02] transition-all duration-500 ease-out">
+                      <ProjectVisual project={project} />
+                    </div>
+                  </div>
+
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">
+                          {project.tag}
+                        </span>
+                        <span className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded bg-white/5 text-slate-400 border border-white/5">
+                          {project.category}
+                        </span>
+                      </div>
+
+                      <h3 className="mt-3 text-lg font-black text-white leading-tight">
+                        {project.title}
+                      </h3>
+
+                      <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 flex items-center text-[#ff6a2a] text-[10px] font-black uppercase tracking-widest gap-1 group-hover:translate-x-0.5 transition-transform duration-300">
+                      <span>View Case Study</span>
+                      <span className="text-xs">&rarr;</span>
+                    </div>
+                  </div>
+                </motion.a>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
       </section>
     </main>
   );

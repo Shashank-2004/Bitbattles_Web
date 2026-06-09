@@ -1,216 +1,220 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { certifications, certCategories } from "../data/certifications";
+import { certifications } from "../data/certifications";
+import { licenses } from "../data/licenses";
+
+const complianceData = [
+  ...certifications.map((item) => ({
+    ...item,
+    type: "Certification",
+    authority: item.issuer,
+    number: item.certNumber,
+    validity: `${item.issueDate} - ${item.expiryDate}`,
+  })),
+
+  ...licenses.map((item) => ({
+    ...item,
+    type: "License",
+    authority: item.authority,
+    number: item.licenseNumber,
+    validity: item.validity,
+  })),
+];
 
 export function CertificationsPage() {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedCert, setSelectedCert] = useState(null);
-
-  const filteredCerts = activeCategory === "all"
-    ? certifications
-    : certifications.filter((cert) => cert.category === activeCategory);
-
-  const containerVariants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-  };
+  const [selectedItem, setSelectedItem] = useState(null);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-bitCharcoal text-white font-sans">
-      {/* Background Gradients & Animated Blobs */}
+
+      {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,106,42,0.12),transparent_30%),radial-gradient(circle_at_75%_60%,rgba(16,184,232,0.1),transparent_35%)]" />
-        
-        {/* Pulsing Accent Divider Line */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,106,42,0.10),transparent_30%),radial-gradient(circle_at_75%_60%,rgba(16,184,232,0.08),transparent_35%)]" />
+
         <motion.div
           className="absolute left-1/2 top-20 h-px w-[80%] -translate-x-1/2 bg-gradient-to-r from-transparent via-bitOrange/40 to-transparent"
           animate={{ opacity: [0.2, 0.5, 0.2] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
-
-        {/* Floating Glowing Blobs */}
-        <motion.div
-          className="absolute top-[15%] right-[15%] w-[25vw] h-[25vw] rounded-full bg-bitOrange/10 blur-[80px]"
-          animate={{ x: [0, -30, 20, 0], y: [0, 20, -20, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-[20%] left-[10%] w-[30vw] h-[30vw] rounded-full bg-aqua/8 blur-[100px]"
-          animate={{ x: [0, 20, -10, 0], y: [0, -30, 10, 0] }}
-          transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
-        />
       </div>
 
-      {/* Hero Section */}
-      <section className="relative mx-auto max-w-[1180px] px-5 pt-24 pb-12 text-center sm:px-6 lg:px-8">
+      {/* Hero */}
+      <section className="relative mx-auto max-w-[1180px] px-5 pt-24 pb-16 text-center sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="inline-flex rounded-md border border-bitOrange/30 bg-black/40 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">
-            Quality & Trust
-          </p>
+
           <h1 className="mt-6 text-4xl font-black leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
-            Our <span className="text-bitOrange">Certifications</span>
+            Certifications <span className="text-bitOrange">&</span> Licenses
           </h1>
+
           <p className="mx-auto mt-6 max-w-2xl text-sm font-semibold leading-7 text-slate-400">
-            BitBattles is dedicated to maintaining the highest industry standards of quality management, cybersecurity, cloud scalability, and information safety.
+            Industry certifications, operational licenses, and compliance standards
+            maintained by BitBattles for secure and scalable digital solutions.
           </p>
         </motion.div>
       </section>
 
-      {/* Filter Selection Tabs */}
-      <section className="relative mx-auto max-w-[1180px] px-5 pb-8 sm:px-6 lg:px-8">
-        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-none justify-start sm:justify-center border-b border-white/5 sm:pb-8 flex-nowrap sm:flex-wrap">
-          {certCategories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`flex-shrink-0 rounded-full px-5 py-2 text-xs font-bold transition-all duration-300 border ${
-                activeCategory === category.id
-                  ? "bg-bitOrange border-bitOrange text-white shadow-lg shadow-orange-500/20"
-                  : "bg-white/5 border-white/10 text-slate-400 hover:border-bitOrange/35 hover:text-white"
-              }`}
+      {/* Compliance List */}
+      <section className="relative mx-auto max-w-[1180px] px-5 pb-24 sm:px-6 lg:px-8">
+        <div className="space-y-5">
+          {complianceData.map((item, index) => (
+            <motion.article
+              key={item.id}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.04, duration: 0.45 }}
+              onClick={() => setSelectedItem(item)}
+              className="group cursor-pointer rounded-2xl border border-white/10 bg-[#07101c]/90 p-6 transition-all duration-300 hover:border-bitOrange/40 hover:bg-[#0a1424]"
             >
-              {category.label}
-            </button>
+              <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
+                <div className="max-w-3xl">
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-full border border-bitOrange/30 bg-bitOrange/5 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-bitOrange">
+                      {item.type}
+                    </span>
+
+                    <span className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                      {item.status}
+                    </span>
+                  </div>
+
+                  <h2 className="mt-4 text-2xl font-black text-white transition-colors group-hover:text-bitOrange">
+                    {item.title}
+                  </h2>
+
+                  <p className="mt-2 text-sm font-semibold text-slate-500">
+                    {item.authority}
+                  </p>
+
+                  <p className="mt-4 text-sm leading-7 text-slate-400">
+                    {item.description}
+                  </p>
+                </div>
+
+                <div className="min-w-[220px] border-t border-white/5 pt-4 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+                  <div className="space-y-4 text-sm">
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
+                        Registration ID
+                      </p>
+                      <p className="mt-1 font-bold text-white">
+                        {item.number}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
+                        Validity
+                      </p>
+                      <p className="mt-1 font-bold text-white">
+                        {item.validity}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
       </section>
 
-      {/* Grid of Certifications */}
-      <section className="relative mx-auto max-w-[1180px] px-5 pb-24 sm:px-6 lg:px-8">
-        <motion.div
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          key={activeCategory}
-        >
-          {filteredCerts.map((cert) => (
-            <motion.article
-              key={cert.id}
-              variants={cardVariants}
-              onClick={() => setSelectedCert(cert)}
-              className="group relative cursor-pointer overflow-hidden rounded-2xl border border-bitOrange/20 bg-[#07101c]/90 p-6 shadow-[0_0_30px_rgba(255,106,42,0.06)] hover:shadow-[0_0_45px_rgba(255,106,42,0.18)] border-t-bitOrange/30 hover:border-bitOrange transition-all duration-300 flex flex-col h-full"
-              whileHover={{ y: -5 }}
-            >
-              {/* Internal Accent Light Glow */}
-              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-bitOrange/5 blur-xl group-hover:bg-bitOrange/12 transition-all duration-300" />
-              
-              <div className="flex items-center justify-between gap-4">
-                <span className="grid h-12 w-12 place-items-center rounded-xl border border-bitOrange bg-bitOrange/10 text-xl font-bold">
-                  {cert.category === "security" && "🛡️"}
-                  {cert.category === "quality" && "📈"}
-                  {cert.category === "cloud" && "☁️"}
-                  {cert.category === "defense" && "🎖️"}
-                </span>
-                <span className="rounded-full border border-emerald-500/20 bg-emerald-500/5 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-400">
-                  {cert.status}
-                </span>
-              </div>
-
-              <h2 className="mt-6 text-xl font-black text-white group-hover:text-bitOrange transition-colors duration-200">
-                {cert.title}
-              </h2>
-              
-              <p className="mt-1 text-xs text-slate-500 font-bold">
-                Issued by {cert.issuer}
-              </p>
-
-              <p className="mt-4 text-xs font-semibold leading-relaxed text-slate-400 flex-grow">
-                {cert.description}
-              </p>
-
-              <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-500 font-bold">
-                <span>No: {cert.certNumber}</span>
-                <span className="text-blue-500 group-hover:text-bitOrange font-black transition-colors">
-                  Details &rarr;
-                </span>
-              </div>
-            </motion.article>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* Detail Modal Overlay */}
+      {/* Modal */}
       <AnimatePresence>
-        {selectedCert && (
+        {selectedItem && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedCert(null)}
+            onClick={() => setSelectedItem(null)}
           >
             <motion.div
-              className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl border border-bitOrange/35 bg-bitPanelSoft p-6 sm:p-8 shadow-[0_0_50px_rgba(255,106,42,0.25)]"
-              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              className="relative w-full max-w-2xl rounded-2xl border border-bitOrange/30 bg-bitPanelSoft p-6 shadow-[0_0_50px_rgba(255,106,42,0.18)] sm:p-8"
+              initial={{ scale: 0.96, opacity: 0, y: 10 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              exit={{ scale: 0.96, opacity: 0, y: 10 }}
               transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Icon Button */}
               <button
-                className="absolute top-4 right-4 z-10 p-2 rounded-full border border-white/10 bg-bitCharcoal text-slate-400 hover:text-white hover:border-bitOrange transition-all duration-200"
-                onClick={() => setSelectedCert(null)}
+                className="absolute right-4 top-4 rounded-full border border-white/10 bg-bitCharcoal p-2 text-slate-400 transition hover:border-bitOrange hover:text-white"
+                onClick={() => setSelectedItem(null)}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                ✕
               </button>
 
-              <div className="mt-4">
-                <span className="inline-block rounded-full border border-bitOrange/30 bg-bitOrange/5 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-bitOrange">
-                  {selectedCert.category} Certification
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-white mt-3">
-                  {selectedCert.title}
-                </h3>
-                <p className="text-xs text-slate-400 mt-1 font-semibold">
-                  Issuer: <span className="text-white font-bold">{selectedCert.issuer}</span>
-                </p>
+              <span className="inline-flex rounded-full border border-bitOrange/30 bg-bitOrange/5 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-bitOrange">
+                {selectedItem.type}
+              </span>
 
-                <p className="mt-6 text-sm font-semibold leading-relaxed text-slate-300 bg-black/20 rounded-xl p-4 border border-white/5">
-                  {selectedCert.description}
-                </p>
+              <h3 className="mt-4 text-3xl font-black text-white">
+                {selectedItem.title}
+              </h3>
 
-                {/* Audit details checklist */}
-                <div className="mt-6">
-                  <h4 className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">
-                    Scope & Validations
+              <p className="mt-2 text-sm font-semibold text-slate-400">
+                {selectedItem.authority}
+              </p>
+
+              <p className="mt-6 text-sm leading-7 text-slate-300">
+                {selectedItem.description}
+              </p>
+
+              {"details" in selectedItem && selectedItem.details && (
+                <div className="mt-8">
+                  <h4 className="text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                    Scope & Details
                   </h4>
-                  <ul className="mt-3 space-y-2">
-                    {selectedCert.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-300 font-semibold leading-relaxed">
-                        <span className="text-bitOrange font-black mt-0.5">&bull;</span>
+
+                  <ul className="mt-4 space-y-3">
+                    {selectedItem.details.map((detail, idx) => (
+                      <li
+                        key={idx}
+                        className="flex gap-3 text-sm leading-7 text-slate-300"
+                      >
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-bitOrange" />
                         <span>{detail}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
+              )}
 
-                {/* Meta Details */}
-                <div className="mt-8 pt-6 border-t border-white/5 grid grid-cols-2 gap-4 text-xs">
-                  <div>
-                    <span className="block text-[10px] font-black uppercase tracking-wider text-slate-500">License Number</span>
-                    <span className="font-bold text-white mt-1 block">{selectedCert.certNumber}</span>
+              {"scope" in selectedItem && selectedItem.scope && (
+                <div className="mt-8">
+                  <h4 className="text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                    Scope of Authorization
+                  </h4>
+
+                  <div className="mt-4 rounded-xl border border-white/5 bg-black/20 p-4 text-sm leading-7 text-slate-300">
+                    {selectedItem.scope}
                   </div>
-                  <div>
-                    <span className="block text-[10px] font-black uppercase tracking-wider text-slate-500">Validity Period</span>
-                    <span className="font-bold text-white mt-1 block">{selectedCert.issueDate} - {selectedCert.expiryDate}</span>
-                  </div>
+                </div>
+              )}
+
+              <div className="mt-8 grid gap-4 border-t border-white/5 pt-6 sm:grid-cols-2">
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
+                    Registration ID
+                  </p>
+
+                  <p className="mt-1 text-sm font-bold text-white">
+                    {selectedItem.number}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
+                    Validity
+                  </p>
+
+                  <p className="mt-1 text-sm font-bold text-white">
+                    {selectedItem.validity}
+                  </p>
                 </div>
               </div>
             </motion.div>

@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Premium Solution Subpages - Global Styles
+   ========================================================================== */
+
+/* 
+  Theme variables should be defined in the page component style objects or 
+  inline CSS vars to allow each page to have its own accent colors.
+  Default fallbacks are provided here.
+*/
+:root {
+  --sol-accent-primary: #ff6a2a;
+  --sol-accent-secondary: #ff4e12;
+  --sol-bg-dark: #050710;
+  --sol-bg-panel: #08111f;
+  --sol-border-glow: rgba(255, 106, 42, 0.35);
+}
+
+/* --- Container & Utilities --- */
+.sol-sub-container {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+}
+
+.sol-sub-section {
+  @apply py-20 lg:py-32 relative;
+  background-color: var(--sol-bg-dark);
+}
+
+.sol-sub-section--panel {
+  background-color: var(--sol-bg-panel);
+}
+
+/* --- Typography --- */
+.sol-sub-eyebrow {
+  @apply inline-block mb-4 text-xs font-black tracking-widest uppercase;
+  color: var(--sol-accent-primary);
+}
+
+.sol-sub-title {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white mb-6;
+}
+
+.sol-sub-desc {
+  @apply text-lg md:text-xl text-slate-400 leading-relaxed max-w-3xl;
+}
+
+/* --- Hero Section --- */
+.sol-sub-hero {
+  @apply relative min-h-[90vh] flex items-center pt-32 pb-20 overflow-hidden;
+  background-color: var(--sol-bg-dark);
+}
+
+.sol-sub-hero__bg {
+  @apply absolute inset-0 pointer-events-none opacity-40;
+  background-image: 
+    radial-gradient(circle at 80% 20%, var(--sol-accent-primary), transparent 40%),
+    radial-gradient(circle at 20% 80%, var(--sol-accent-secondary), transparent 50%);
+  filter: blur(100px);
+}
+
+.sol-sub-hero__grid {
+  @apply absolute inset-0 pointer-events-none opacity-20;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+.sol-sub-hero__content {
+  @apply relative z-10;
+}
+
+/* --- Glassmorphism Panels --- */
+.sol-sub-glass-panel {
+  @apply rounded-3xl border border-white/10 backdrop-blur-md overflow-hidden relative;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Feature Cards --- */
+.sol-sub-feature-card {
+  @apply p-8 rounded-3xl border border-white/5 transition-all duration-300 h-full relative overflow-hidden;
+  background-color: var(--sol-bg-panel);
+}
+
+.sol-sub-feature-card:hover {
+  border-color: var(--sol-border-glow);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 0 20px var(--sol-border-glow);
+  transform: translateY(-5px);
+}
+
+.sol-sub-feature-card__icon {
+  @apply w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-white/10;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+}
+
+/* --- Buttons --- */
+.sol-sub-btn-primary {
+  @apply inline-flex items-center justify-center px-8 py-4 text-sm font-bold text-white rounded-full transition-all duration-300 hover:-translate-y-1;
+  background-color: var(--sol-accent-primary);
+  box-shadow: 0 0 20px var(--sol-border-glow);
+}
+
+.sol-sub-btn-primary:hover {
+  background-color: var(--sol-accent-secondary);
+  box-shadow: 0 0 30px var(--sol-border-glow);
+}
+
+.sol-sub-btn-secondary {
+  @apply inline-flex items-center justify-center px-8 py-4 text-sm font-bold text-white rounded-full border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:border-white/40;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+/* --- Process Timeline --- */
+.sol-sub-process {
+  @apply relative pl-8 md:pl-0;
+}
+
+.sol-sub-process__line {
+  @apply absolute top-0 bottom-0 left-[15px] md:left-1/2 w-0.5 md:-translate-x-1/2;
+  background: linear-gradient(to bottom, var(--sol-accent-primary), transparent);
+  opacity: 0.3;
+}
+
+.sol-sub-process-step {
+  @apply relative mb-12 md:mb-24 flex flex-col md:flex-row md:items-center md:justify-between;
+}
+
+.sol-sub-process-step:nth-child(even) {
+  @apply md:flex-row-reverse;
+}
+
+.sol-sub-process-node {
+  @apply absolute left-[-24px] md:left-1/2 md:-translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-10 h-10 rounded-full border-4 flex items-center justify-center font-bold text-sm z-10;
+  background-color: var(--sol-bg-panel);
+  border-color: var(--sol-accent-primary);
+  color: white;
+}
+
+.sol-sub-process-content {
+  @apply md:w-[45%] bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all;
+}
+
+/* --- Metrics / Stats --- */
+.sol-sub-stat-card {
+  @apply text-center p-8 rounded-3xl border border-white/5;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.05), transparent);
+}
+
+.sol-sub-stat-num {
+  @apply text-5xl font-black mb-2;
+  color: var(--sol-accent-primary);
+}
+
+/* --- Testimonial Card --- */
+.sol-sub-testimonial {
+  @apply p-8 rounded-3xl border border-white/5 relative;
+  background: linear-gradient(180deg, var(--sol-bg-panel) 0%, rgba(255,255,255,0.02) 100%);
+}
+
+.sol-sub-testimonial::before {
+  content: '"';
+  @apply absolute top-4 right-8 text-6xl opacity-10 font-serif;
+  color: var(--sol-accent-primary);
+}
+
+/* --- GSAP Utilities --- */
+.gsap-reveal {
+  opacity: 0;
+  visibility: hidden;
+}

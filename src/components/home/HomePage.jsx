@@ -1,32 +1,109 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { services } from "../../data/services";
 import { projects } from "../../data/site";
 import { fadeUp, staggerContainer } from "../../lib/motion";
 import { HomeHero } from "./HomeHero";
+import { AnimatedTestimonials } from "../ui/animated-testimonials";
+import { CometCard } from "../ui/comet-card";
+import { ContainerScroll } from "../ui/container-scroll-animation";
+import { FollowerPointerCard } from "../ui/following-pointer";
+import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
+import { StickyScroll } from "../ui/sticky-scroll-reveal";
+import { HoverBorderGradient } from "../ui/hover-border-gradient";
+import { VantaBackground } from "./VantaBackground";
 
-const whyChooseUs = [
-  [
-    "Expert Team",
-    "Skilled professionals with deep product thinking and technical execution.",
-    "Team",
-  ],
-  [
-    "Innovation First",
-    "Practical AI, automation, and modern stacks for future-ready products.",
-    "AI",
-  ],
-  [
-    "On-Time Delivery",
-    "Agile planning, clear milestones, and transparent communication.",
-    "Ops",
-  ],
-  [
-    "Quality Focused",
-    "Secure, scalable, and maintainable delivery from day one.",
-    "QA",
-  ],
+const placeholderImage = "/images/placeholders/image-placeholder.svg";
+const placeholderLogo = "/images/placeholders/logo-placeholder.svg";
+
+const whyChooseItems = [
+  {
+    quote:
+      "Skilled engineers focused on scalable architecture, modern technologies and product execution.",
+    name: "Experienced Development Team",
+    designation: "Scalable Systems • Product Thinking • Modern Stack",
+    src: "/images/experienced_teams.png",
+  },
+  {
+    quote:
+      "Modern AI systems and automation workflows designed for operational efficiency and scalable operations.",
+    name: "AI & Automation Solutions",
+    designation: "Workflow Automation • AI Integration • Process Optimization",
+    src: "/images/ai_automation.png",
+  },
+  {
+    quote:
+      "Structured workflows and scalable infrastructure focused on long-term product growth and reliability.",
+    name: "Reliable Product Delivery",
+    designation: "Agile Workflow • Transparent Process • Long-Term Support",
+    src: "/images/about-hero.png",
+  },
+  {
+    quote:
+      "Secure, maintainable and high-performance digital systems built for scalability and long-term success.",
+    name: "Quality & Scalability",
+    designation: "Secure Systems • Performance Focused • Maintainable Code",
+    src: "/images/quality_and_scalability.png",
+  },
 ];
+
+const stickyHighlights = [
+  {
+    title: "Discovery that feels practical",
+    description:
+      "We clarify goals, constraints, users, integrations, and delivery risks before writing production code.",
+    content: (
+      <img
+        alt=""
+        className="h-full w-full object-cover"
+        src={"/images/experienced_teams.png"}
+      />
+    ),
+  },
+  {
+    title: "Design systems before screens",
+    description:
+      "Interfaces are planned around repeatable components, clean hierarchy, and a brand system that can scale.",
+    content: (
+      <img
+        alt=""
+        className="h-full w-full object-cover"
+        src={"/images/quality_and_scalability.png"}
+      />
+    ),
+  },
+  {
+    title: "Engineering with room to grow",
+    description:
+      "Frontend, backend, API, database, and deployment decisions stay readable and maintainable for the next team.",
+    content: (
+      <img
+        alt=""
+        className="h-full w-full object-cover"
+        src={"/images/ai_automation.png"}
+      />
+    ),
+  },
+];
+
+const featureMarquee = [
+  { name: "AI WORKFLOWS" },
+  { name: "AUTOMATION" },
+  { name: "SaaS SYSTEMS" },
+  { name: "CLOUD DELIVERY" },
+  { name: "SECURE APPS" },
+  { name: "PRODUCT DESIGN" },
+];
+
+const stackMarquee = [
+  { logo: "/images/physics.png" },
+  { logo: "/images/docker.jpg" },
+  { logo: "/images/nodejs.png" },
+  { logo: "/images/mongoDB.png" },
+  { logo: "/images/js.png" },
+  { logo: "/images/FastAPI.png" },
+];
+
 
 const processSteps = [
   [
@@ -52,24 +129,27 @@ const processSteps = [
 ];
 
 const testimonials = [
-  [
-    "Rohit Sharma",
-    "CTO, FinEdge",
-    "BitBattles delivered an AI solution that improved our workflow and productivity significantly.",
-    "R",
-  ],
-  [
-    "Anjali Verma",
-    "Product Manager, HealthCare+",
-    "Their team was professional, responsive and delivered the project on time with excellent quality.",
-    "A",
-  ],
-  [
-    "Arjun Mehta",
-    "Founder, EduChamp",
-    "They understood our vision and turned it into a clean, usable digital product.",
-    "A",
-  ],
+  {
+    name: "Rohit Sharma",
+    title: "CTO, FinEdge",
+    quote:
+      "BitBattles delivered an AI solution that improved our workflow and productivity significantly.",
+    logo: placeholderImage,
+  },
+  {
+    name: "Anjali Verma",
+    title: "Product Manager, HealthCare+",
+    quote:
+      "Their team was professional, responsive and delivered the project on time with excellent quality.",
+    logo: placeholderImage,
+  },
+  {
+    name: "Arjun Mehta",
+    title: "Founder, EduChamp",
+    quote:
+      "They understood our vision and turned it into a clean, usable digital product.",
+    logo: placeholderImage,
+  },
 ];
 
 const serviceProof = ["4.8 rating", "3+ builds", "Fast discovery"];
@@ -90,13 +170,25 @@ const normalizeHomeProject = (project, index = 0) => {
 function SectionHeading({ eyebrow, title, text }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
-      <p className="text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">
+      <motion.p
+        className="text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange"
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.45 }}
+      >
         {eyebrow}
-      </p>
+      </motion.p>
 
-      <h2 className="mt-2 text-3xl font-black tracking-normal text-white sm:text-4xl">
+      <motion.h2
+        className="mt-2 text-3xl font-black tracking-normal text-white sm:text-4xl"
+        initial={{ opacity: 0, y: 18, filter: "blur(10px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.65, ease: "easeOut" }}
+      >
         {title}
-      </h2>
+      </motion.h2>
 
       {text && (
         <p className="mx-auto mt-5 max-w-md text-sm leading-7 text-slate-500">
@@ -113,8 +205,28 @@ function SectionDivider() {
   );
 }
 
+function LogoMarquee({ title, items, direction = "left" }) {
+  return (
+    <div className="mx-auto mt-8 max-w-[1180px]" aria-label={title}>
+      <InfiniteMovingCards
+        className="max-w-full"
+        direction={direction}
+        items={items}
+        speed="slow"
+        variant="logo"
+        title={title}
+      />
+    </div>
+  );
+}
+
+
 export function HomePage() {
-  const [featuredProjects, setFeaturedProjects] = useState(projects);
+  const [featuredProjects, setFeaturedProjects] = useState([]);
+  const [featuredProjectsLoading, setFeaturedProjectsLoading] = useState(true);
+  const { scrollYProgress } = useScroll();
+  const parallaxTop = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const parallaxBottom = useTransform(scrollYProgress, [0, 1], [0, 140]);
 
   useEffect(() => {
     let mounted = true;
@@ -130,9 +242,14 @@ export function HomePage() {
 
         if (mounted && Array.isArray(data) && data.length) {
           setFeaturedProjects(data.slice(0, 4).map(normalizeHomeProject));
+        } else if (mounted) {
+          setFeaturedProjects([]);
         }
       } catch (error) {
         console.error("Featured projects fetch failed:", error);
+        if (mounted) setFeaturedProjects([]);
+      } finally {
+        if (mounted) setFeaturedProjectsLoading(false);
       }
     }
 
@@ -164,110 +281,130 @@ export function HomePage() {
           />
 
           <motion.div
-            className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-12"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
             variants={staggerContainer}
           >
             {services.slice(0, 6).map((service, index) => (
-              <motion.article
-                className="group relative flex min-h-[300px] flex-col overflow-hidden rounded-2xl border border-bitOrange/25 bg-[linear-gradient(145deg,rgba(7,16,28,0.98),rgba(11,19,33,0.92))] p-6 shadow-[0_0_34px_rgba(255,78,18,0.10)] transition hover:-translate-y-2 hover:border-bitOrange/80 hover:shadow-[0_0_54px_rgba(255,106,42,0.22)]"
-                key={service.id}
-                variants={fadeUp}
-              >
-                <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-bitOrange/10 blur-2xl transition group-hover:bg-bitOrange/20" />
+              <motion.div key={service.id} variants={fadeUp}>
+                <FollowerPointerCard title={service.title}>
+                  <CometCard rotateDepth={9} translateDepth={10}>
+                    <article className="group relative flex min-h-[420px] flex-col overflow-hidden rounded-[2rem] bg-[linear-gradient(145deg,rgba(7,16,28,0.92),rgba(11,19,33,0.82))] p-8 shadow-[0_24px_70px_rgba(0,0,0,0.38),0_0_38px_rgba(255,78,18,0.12)] transition">
+                      <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-bitOrange/12 blur-3xl transition group-hover:bg-bitOrange/22" />
+                      <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-bitOrange/70 to-transparent" />
 
-                <div className="flex items-center justify-between gap-4">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl border border-bitOrange/70 bg-bitOrange/10 text-sm font-black text-bitOrange">
-                    {service.shortCode}
-                  </div>
+                      <motion.img
+                        alt=""
+                        className="h-32 w-full rounded-[1.5rem] object-cover opacity-85 shadow-[0_0_28px_rgba(255,106,42,0.10)]"
+                        src={placeholderImage}
+                        whileHover={{ scale: 1.04 }}
+                        transition={{ duration: 0.45 }}
+                      />
 
-                  <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-black text-slate-400">
-                    {serviceProof[index % serviceProof.length]}
-                  </span>
-                </div>
+                      <div className="mt-7 flex items-center justify-between gap-4">
+                        <span className="rounded-full bg-white/[0.04] px-3 py-1 text-[11px] font-black text-slate-400">
+                          {serviceProof[index % serviceProof.length]}
+                        </span>
+                        <span className="text-xs font-black text-bitOrange">
+                          {service.shortCode}
+                        </span>
+                      </div>
 
-                <h3 className="mt-7 text-base font-black leading-snug text-white">
-                  {service.title}
-                </h3>
+                      <h3 className="mt-6 text-xl font-black leading-snug text-white">
+                        {service.title}
+                      </h3>
 
-                <p className="mt-5 text-sm leading-7 text-slate-400">
-                  {service.description}
-                </p>
+                      <p className="mt-5 text-sm font-semibold leading-7 text-slate-400">
+                        {service.description}
+                      </p>
 
-                <div className="mt-6 flex items-center gap-1 text-bitOrange">
-                  {Array.from({ length: 5 }).map((_, starIndex) => (
-                    <span key={starIndex} className="text-xs">
-                      ★
-                    </span>
-                  ))}
-
-                  <span className="ml-2 text-xs font-semibold text-slate-500">
-                    scope-ready
-                  </span>
-                </div>
-
-                <a
-                  className="mt-auto pt-6 text-sm font-black text-blue-500 transition hover:text-bitOrange"
-                  href={service.href}
-                >
-                  Learn more -&gt;
-                </a>
-              </motion.article>
+                      <a
+                        className="mt-auto pt-8 text-sm font-black text-blue-500 transition hover:text-bitOrange"
+                        href={service.href}
+                      >
+                        Learn more -&gt;
+                      </a>
+                    </article>
+                  </CometCard>
+                </FollowerPointerCard>
+              </motion.div>
             ))}
           </motion.div>
 
           <div className="mt-10 text-center">
-            <a
-              className="inline-flex rounded-md border border-bitOrange/40 px-5 py-3 text-sm font-black text-white transition hover:border-bitOrange hover:bg-bitOrange/10"
+            <HoverBorderGradient
+              as="a"
+              className="bg-[#050710] px-6 py-3 text-sm font-black text-white"
+              containerClassName="mx-auto"
               href="/services"
             >
               Explore all services -&gt;
-            </a>
+            </HoverBorderGradient>
           </div>
+        </div>
+
+        <div className="mt-16 space-y-7">
+          <LogoMarquee
+            direction="left"
+            items={featureMarquee}
+            title="Product features"
+          />
+          <LogoMarquee
+            direction="right"
+            items={stackMarquee}
+            title="Technology stack"
+          />
         </div>
       </section>
 
       {/* WHY CHOOSE US */}
       <section
         id="solutions"
-        className="relative bg-[#101722] px-5 py-16 sm:px-6 lg:px-8"
+        className="relative overflow-hidden bg-[#101722] px-5 py-24 sm:px-6 lg:px-8"
       >
         <SectionDivider />
+
+        <div className="pointer-events-none absolute left-[-10%] top-20 h-[320px] w-[320px] rounded-full bg-bitOrange/10 blur-[120px]" />
+        <div className="pointer-events-none absolute bottom-0 right-[-5%] h-[260px] w-[260px] rounded-full bg-orange-500/10 blur-[100px]" />
 
         <div className="mx-auto max-w-[1180px]">
           <SectionHeading
             eyebrow="Why choose us"
-            title="Why Choose Us"
+            title="Built for Modern Businesses"
+            text="Scalable systems, modern technologies and execution-focused product development."
           />
 
-          <motion.div
-            className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {whyChooseUs.map(([title, text, icon]) => (
-              <motion.article
-                className="rounded-2xl border border-bitOrange/35 bg-[linear-gradient(145deg,#111827,#0b1321)] p-6 shadow-[0_0_30px_rgba(255,106,42,0.08)] transition hover:border-bitOrange/70"
-                key={title}
-                variants={fadeUp}
-                whileHover={{ y: -7, scale: 1.015 }}
-              >
-                <div className="grid h-12 w-12 place-items-center rounded-xl border border-white/10 bg-slate-700/70 text-xs font-black text-bitOrange">
-                  {icon}
-                </div>
+          <div className="mt-16">
+            <AnimatedTestimonials
+              testimonials={whyChooseItems}
+            />
+          </div>
+        </div>
+      </section>
 
-                <h3 className="mt-5 text-sm font-black">{title}</h3>
+      {/* STICKY IMPACT */}
+      <section className="relative overflow-hidden px-5 py-16 sm:px-6 lg:px-8">
+        <VantaBackground />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,16,0.72),rgba(5,7,16,0.9))]" />
+        <SectionDivider />
 
-                <p className="mt-3 text-xs leading-6 text-slate-400">
-                  {text}
-                </p>
-              </motion.article>
-            ))}
-          </motion.div>
+        <div className="pointer-events-none absolute left-0 top-24 h-72 w-72 rounded-full bg-blue-600/10 blur-[110px]" />
+
+        <div className="relative z-10 mx-auto max-w-[1180px]">
+          <SectionHeading
+            eyebrow="How we think"
+            title="Abstract Ideas Into Buildable Systems"
+            text="A fluid product workflow that connects strategy, design and engineering without making the process feel heavy."
+          />
+
+          <div className="mt-12">
+            <StickyScroll
+              content={stickyHighlights}
+              contentClassName="shadow-[0_0_60px_rgba(255,106,42,0.14)]"
+            />
+          </div>
         </div>
       </section>
 
@@ -320,8 +457,10 @@ export function HomePage() {
       {/* PORTFOLIO */}
       <section
         id="portfolio"
-        className="relative px-5 pb-24 sm:px-6 lg:px-8"
+        className="relative overflow-hidden px-5 pb-24 sm:px-6 lg:px-8"
       >
+        <VantaBackground />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,16,0.86),rgba(5,7,16,0.92))]" />
 
         <img
           alt=""
@@ -329,50 +468,82 @@ export function HomePage() {
           src="/images/orange-wave.png"
         />
 
-        <div className="mx-auto max-w-[1180px]">
-          <SectionHeading
-            eyebrow="Our work"
-            title="Featured Projects"
-          />
-
-          <motion.div
-            className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={staggerContainer}
+        <div className="relative z-10 mx-auto max-w-[1180px]">
+          <ContainerScroll
+            titleComponent={
+              <SectionHeading
+                eyebrow="Our work"
+                title="Featured Projects"
+                text="A rotating product showcase area ready for your final project images."
+              />
+            }
           >
-            {featuredProjects.map((project) => (
-              <motion.article
-                className="overflow-hidden rounded-xl border border-white/10 bg-[#0b111c] shadow-xl shadow-black/20 transition hover:border-bitOrange/45"
-                key={project.title}
-                variants={fadeUp}
-                whileHover={{ y: -6, scale: 1.01 }}
-              >
-                <img
-                  className="h-40 w-full object-cover"
-                  src={project.image}
-                  alt=""
-                />
+            <motion.div
+              className="grid h-full gap-5 p-5 md:grid-cols-2 lg:grid-cols-4"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              {featuredProjectsLoading &&
+                Array.from({ length: 4 }).map((_, index) => (
+                  <article
+                    className="overflow-hidden rounded-[1.25rem] bg-[#0b111c]/80 shadow-[0_18px_60px_rgba(0,0,0,0.32)]"
+                    key={`featured-skeleton-${index}`}
+                  >
+                    <div className="h-56 w-full animate-pulse bg-white/[0.05]" />
+                    <div className="p-5">
+                      <div className="h-4 w-28 animate-pulse rounded bg-white/[0.08]" />
+                      <div className="mt-3 h-3 w-20 animate-pulse rounded bg-white/[0.05]" />
+                    </div>
+                  </article>
+                ))}
 
-                <div className="p-5">
-                  <h3 className="text-sm font-black">{project.title}</h3>
+              {!featuredProjectsLoading && featuredProjects.map((project) => (
+                <motion.article
+                  className="group overflow-hidden rounded-[1.25rem] bg-[#0b111c] shadow-[0_18px_60px_rgba(0,0,0,0.32)] transition"
+                  key={project.title}
+                  variants={fadeUp}
+                  whileHover={{ y: -6, scale: 1.01 }}
+                >
+                  <img
+                    className="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+                    src={project.image || placeholderImage}
+                    alt=""
+                  />
 
-                  <p className="mt-2 text-xs text-slate-500">
-                    {project.tag}
+                  <div className="p-5">
+                    <h3 className="text-sm font-black">{project.title}</h3>
+
+                    <p className="mt-2 text-xs text-slate-500">
+                      {project.tag}
+                    </p>
+                  </div>
+                </motion.article>
+              ))}
+
+              {!featuredProjectsLoading && featuredProjects.length === 0 && (
+                <div className="col-span-full mx-auto max-w-xl rounded-2xl bg-white/[0.04] px-6 py-8 text-center shadow-[0_0_35px_rgba(255,106,42,0.08)]">
+                  <p className="text-sm font-bold text-slate-300">
+                    No featured projects are available from the database yet.
+                  </p>
+                  <p className="mt-3 text-xs leading-6 text-slate-500">
+                    Add portfolio documents in MongoDB and set featured to true to show them here.
                   </p>
                 </div>
-              </motion.article>
-            ))}
-          </motion.div>
+              )}
+            </motion.div>
+          </ContainerScroll>
 
-          <div className="mt-10 text-center">
-            <a
-              className="text-sm font-semibold text-blue-500 hover:text-bitOrange"
+          <div className="-mt-16 text-center md:-mt-24">
+            <motion.a
+              className="relative z-20 inline-flex rounded-full bg-white/[0.04] px-6 py-3 text-sm font-black text-white shadow-[0_0_24px_rgba(255,106,42,0.10)] transition hover:bg-bitOrange hover:text-white"
               href="/portfolio"
+              whileHover={{ y: -3, scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
             >
               View All Projects -&gt;
-            </a>
+            </motion.a>
           </div>
         </div>
       </section>
@@ -384,57 +555,20 @@ export function HomePage() {
       >
         <SectionDivider />
 
-        <div className="mx-auto max-w-[1180px]">
+        <div className="mx-auto max-w-[1500px]">
           <SectionHeading
             eyebrow="Testimonials"
             title="What Our Clients Say"
           />
 
-          <motion.div
-            className="mt-12 grid gap-6 md:grid-cols-3"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {testimonials.map(([name, role, quote, initial]) => (
-              <motion.figure
-                className="rounded-2xl border border-slate-600/60 bg-[linear-gradient(145deg,#08111f,#07101c)] p-7 shadow-[0_0_34px_rgba(255,106,42,0.06)] transition hover:border-bitOrange/50"
-                key={name}
-                variants={fadeUp}
-                whileHover={{ y: -6 }}
-              >
-                <blockquote className="text-sm leading-7 text-slate-300">
-                  <span className="mb-5 block text-3xl font-black text-bitOrange">
-                    “
-                  </span>
-
-                  {quote}
-                </blockquote>
-
-                <figcaption className="mt-8 flex items-center gap-4">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-blue-600 text-sm font-black">
-                    {initial}
-                  </span>
-
-                  <span>
-                    <span className="block text-sm font-black">
-                      {name}
-                    </span>
-
-                    <span className="block text-xs text-slate-500">
-                      {role}
-                    </span>
-                  </span>
-                </figcaption>
-              </motion.figure>
-            ))}
-          </motion.div>
-
-          <div className="mt-8 flex justify-center gap-2">
-            <span className="h-1.5 w-6 rounded-full bg-bitOrange" />
-            <span className="h-1.5 w-2 rounded-full bg-white" />
-            <span className="h-1.5 w-2 rounded-full bg-white/50" />
+          <div className="mt-12">
+            <InfiniteMovingCards
+              className="max-w-full"
+              direction="left"
+              items={testimonials}
+              pauseOnHover={false}
+              speed="slow"
+            />
           </div>
         </div>
       </section>
@@ -461,12 +595,13 @@ export function HomePage() {
             </p>
           </div>
 
-          <a
-            className="relative inline-flex rounded-md bg-bitOrange px-7 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/25 transition hover:-translate-y-1 hover:bg-orange-500"
+          <HoverBorderGradient
+            as="a"
+            className="bg-bitOrange px-7 py-3 text-sm font-black text-white"
             href="/contact"
           >
             Get in touch -&gt;
-          </a>
+          </HoverBorderGradient>
         </div>
       </section>
     </main>

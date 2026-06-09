@@ -32,6 +32,10 @@ import { CyberSecurityPage } from "./pages/CyberSecurityPage";
 import { CloudImplementationPage } from "./pages/CloudImplementationPage";
 import { AutomationPage } from "./pages/AutomationPage";
 import { ArVrPage } from "./pages/ArVrPage";
+import { StartupSolutionPage } from "./pages/StartupSolutionPage";
+import { EnterpriseSolutionPage } from "./pages/EnterpriseSolutionPage";
+import { SaasSolutionPage } from "./pages/SaasSolutionPage";
+import { AutomationSolutionPage } from "./pages/AutomationSolutionPage";
 
 // Map service IDs to their dedicated page components
 const dedicatedServicePages = {
@@ -46,6 +50,13 @@ const dedicatedServicePages = {
   "cloud-solutions": <CloudImplementationPage />,
   "automation": <AutomationPage />,
   "ar-vr-development": <ArVrPage />,
+};
+
+const dedicatedSolutionPages = {
+  startups: <StartupSolutionPage />,
+  enterprises: <EnterpriseSolutionPage />,
+  saas: <SaasSolutionPage />,
+  automation: <AutomationSolutionPage />,
 };
 
 function getActiveService() {
@@ -78,12 +89,23 @@ function getActiveProject() {
   return projectId;
 }
 
+function getActiveSolutionId() {
+  const [, section, solutionId] = window.location.pathname.split("/");
+
+  if (section !== "solutions" || !solutionId) {
+    return null;
+  }
+
+  return solutionId;
+}
+
 
 function App() {
   const pathname = window.location.pathname;
   const activeService = getActiveService();
   const activeBlogSlug = getActiveBlogPostSlug();
   const activeProjectId = getActiveProject();
+  const activeSolutionId = getActiveSolutionId();
   const routeMap = {
     "/": <HomePage />,
     "/services": <ServicesPage />,
@@ -111,6 +133,8 @@ function App() {
     page = <ProjectShowcasePage projectId={activeProjectId} />;
   } else if (activeBlogSlug) {
     page = <BlogPostPage slug={activeBlogSlug} />;
+  } else if (activeSolutionId && dedicatedSolutionPages[activeSolutionId]) {
+    page = dedicatedSolutionPages[activeSolutionId];
   } else {
     page = routeMap[pathname] ?? <HomePage />;
   }
