@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { careers as fallbackCareers } from "../data/site";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const normalizeCareer = (career) => ({
+  id: career._id || career.id || career.title,
   title: career.title,
   department: career.department || "Engineering",
   location: career.location || "Remote / India",
@@ -18,21 +18,28 @@ const normalizeCareer = (career) => ({
 });
 
 export function CareersPage() {
-  const [roles, setRoles] = useState(fallbackCareers.map((title) => normalizeCareer({ title })));
+  const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchCareers = async () => {
       try {
         const response = await fetch(`${API_BASE_URL}/api/careers`);
-        if (response.ok) {
-          const data = await response.json();
-          if (Array.isArray(data) && data.length) {
-            setRoles(data.map(normalizeCareer));
-          }
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Unable to fetch careers.");
+        }
+
+        if (Array.isArray(data)) {
+          setRoles(data.map(normalizeCareer));
+          setError("");
         }
       } catch (error) {
         console.error("Error fetching careers:", error);
+        setRoles([]);
+        setError("Career openings could not be loaded from the database.");
       } finally {
         setLoading(false);
       }
@@ -61,11 +68,31 @@ export function CareersPage() {
           </a>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {roles.map((role) => (
+        {loading && (
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <article
+                className="min-h-[320px] animate-pulse rounded-xl border border-bitOrange/20 bg-[#07101c]"
+                key={index}
+              />
+            ))}
+          </div>
+        )}
+
+        {!loading && roles.length === 0 && (
+          <div className="rounded-xl border border-bitOrange/25 bg-[#07101c] p-8 text-center shadow-[0_0_34px_rgba(255,78,18,0.10)]">
+            <h3 className="text-xl font-black">
+              {error || "No open positions are available right now."}
+            </h3>
+          </div>
+        )}
+
+        {!loading && roles.length > 0 && (
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {roles.map((role) => (
             <motion.article
               className="rounded-xl border border-bitOrange/35 bg-[#07101c] p-6 shadow-[0_0_34px_rgba(255,78,18,0.12)]"
-              key={`${role.title}-${role.type}`}
+              key={role.id}
               whileHover={{ y: -6 }}
             >
               <div className="flex items-start justify-between gap-4">
@@ -94,8 +121,9 @@ export function CareersPage() {
                 Apply Now -&gt;
               </a>
             </motion.article>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

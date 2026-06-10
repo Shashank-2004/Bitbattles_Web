@@ -474,7 +474,6 @@ export function HomePage() {
               <SectionHeading
                 eyebrow="Our work"
                 title="Featured Projects"
-                text="A rotating product showcase area ready for your final project images."
               />
             }
           >
@@ -525,10 +524,10 @@ export function HomePage() {
               {!featuredProjectsLoading && featuredProjects.length === 0 && (
                 <div className="col-span-full mx-auto max-w-xl rounded-2xl bg-white/[0.04] px-6 py-8 text-center shadow-[0_0_35px_rgba(255,106,42,0.08)]">
                   <p className="text-sm font-bold text-slate-300">
-                    No featured projects are available from the database yet.
+                    No featured projects available yet.
                   </p>
                   <p className="mt-3 text-xs leading-6 text-slate-500">
-                    Add portfolio documents in MongoDB and set featured to true to show them here.
+                    coming soon.
                   </p>
                 </div>
               )}
