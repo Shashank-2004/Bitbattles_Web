@@ -50,26 +50,54 @@ export function AppHeader() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.18 }}
-                        className="absolute left-1/2 top-full w-[680px] -translate-x-1/2 rounded-xl border border-orange-500/25 bg-[#09111f] p-4 shadow-2xl shadow-orange-950/40"
+                        className="absolute left-1/2 top-full w-[680px] -translate-x-1/2 rounded-xl border border-white/10 bg-[#08111f]/95 backdrop-blur-md p-3.5 shadow-2xl shadow-black/60 transition-all duration-300"
                       >
                         <div className="grid grid-cols-2 gap-2">
                           {services.map((service) => (
                             <a
-                              className="group flex items-center gap-3 rounded-lg p-3 text-slate-300 transition hover:bg-white/5 hover:text-white"
+                              className="group relative flex flex-col items-start rounded-lg p-3.5 pl-5 text-slate-300 transition-all duration-300 hover:bg-white/[0.03] hover:text-white border border-transparent hover:border-white/[0.04]"
                               href={service.href}
                               key={service.id}
                             >
-                              <span className="grid h-9 w-9 place-items-center rounded-lg border border-bitOrange/60 bg-bitOrange/10 text-sm">
-                                {service.shortCode}
+                              <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-0 rounded-r bg-bitOrange transition-all duration-300 group-hover:h-3/5" />
+                              <span className="flex items-center gap-1.5 text-xs font-black text-bitOrange transition-colors duration-200">
+                                {service.title}
+                                <svg
+                                  className="h-3 w-3 text-bitOrange opacity-0 -translate-x-1.5 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  strokeWidth="3.5"
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                </svg>
                               </span>
-                              <span>
-                                <span className="block text-xs font-black">{service.title}</span>
-                                <span className="mt-1 block text-[10px] leading-4 text-slate-500 group-hover:text-slate-300">
-                                  {service.description}
-                                </span>
+                              <span className="mt-1 block text-[10.5px] leading-relaxed text-slate-500 group-hover:text-slate-300 transition-colors duration-300">
+                                {service.description}
                               </span>
                             </a>
                           ))}
+                          <a
+                            className="group relative flex flex-col items-start rounded-lg p-3.5 pl-5 bg-bitOrange/5 border border-bitOrange/20 hover:border-bitOrange/40 hover:bg-bitOrange/10 transition-all duration-300"
+                            href="/services"
+                          >
+                            <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-0 rounded-r bg-bitOrange transition-all duration-300 group-hover:h-3/5" />
+                            <span className="flex items-center gap-1.5 text-xs font-black text-bitOrange transition-colors duration-200">
+                              View All Services
+                              <svg
+                                className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="3.5"
+                              >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                              </svg>
+                            </span>
+                            <span className="mt-1 block text-[10.5px] leading-relaxed text-slate-400 group-hover:text-slate-200 transition-colors duration-300">
+                              Explore all our agency capabilities and options to solve your needs.
+                            </span>
+                          </a>
                         </div>
                       </motion.div>
                     )}

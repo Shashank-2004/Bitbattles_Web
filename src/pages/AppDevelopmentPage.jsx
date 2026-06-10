@@ -89,8 +89,8 @@ function HeroSection() {
               <a href="#app-industries" className="app-hero__cta-secondary">See Industries ↓</a>
             </div>
             <div style={{ marginTop: "40px", marginBottom:"25px", display: "flex", gap: "32px", flexWrap: "wrap" }}>
-              {[{ num: "40+", label: "Apps Shipped" }, { num: "4.8★", label: "Avg App Rating" }, { num: "2M+", label: "Combined Users" }].map((s) => (
-                <div key={s.label}><div style={{ fontSize: "1.75rem", fontWeight: 900, color: "#EFBF04" }}>{s.num}</div><div style={{ fontSize: "11px", fontWeight: 600, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em" }}>{s.label}</div></div>
+              {[{ num: "40+", label: "Apps Shipped" }, { num: "4.8", label: "Avg App Rating" }, { num: "2M+", label: "Combined Users" }].map((s) => (
+                <div key={s.label}><div style={{ fontSize: "1.75rem", fontWeight: 900, color: "#ff6a2a" }}>{s.num}</div><div style={{ fontSize: "11px", fontWeight: 600, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em" }}>{s.label}</div></div>
               ))}
             </div>
           </div>
