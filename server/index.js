@@ -99,6 +99,10 @@ app.use(
   require("./routes/careerRoutes")
 );
 
+app.use(
+  "/api/services",
+  require("./routes/serviceRoutes")
+);
 
 
 // =========================

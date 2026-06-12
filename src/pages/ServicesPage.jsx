@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { services } from "../data/services";
+
 
 const serviceProjects = {
   "ai-solutions": "Omni-Channel Support AI Agent & Dashboard",
@@ -15,15 +15,34 @@ const serviceProjects = {
 };
 
 export function ServicesPage() {
+  const [services, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [displayedIndex, setDisplayedIndex] = useState(0);
   const [isPulseTraveling, setIsPulseTraveling] = useState(false);
   const [pulseKey, setPulseKey] = useState(0);
 
-  // Show all 9 services
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/services`);
+        const data = await response.json();
+        if (data.success) {
+          setServices(data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch services:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchServices();
+  }, []);
+
+  // Show fetched services
   const displayServices = services;
-  const activeService = displayServices[activeIndex] || displayServices[0];
-  const displayedService = displayServices[displayedIndex] || displayServices[0];
+  const activeService = displayServices[activeIndex] || (displayServices.length > 0 ? displayServices[0] : null);
+  const displayedService = displayServices[displayedIndex] || (displayServices.length > 0 ? displayServices[0] : null);
 
   // Coordinates state for SVG lines
   const containerRef = useRef(null);
@@ -237,6 +256,15 @@ export function ServicesPage() {
       </section>
 
       {/* Interactive Showcase Section */}
+      {isLoading ? (
+        <div className="flex justify-center items-center py-32 z-10 relative">
+          <div className="h-12 w-12 border-4 border-bitOrange border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      ) : displayServices.length === 0 ? (
+        <div className="flex justify-center items-center py-32 z-10 relative text-white">
+          <p>No services currently available.</p>
+        </div>
+      ) : (
       <section 
         ref={containerRef}
         className="relative mx-auto max-w-[1180px] px-5 pb-32 sm:px-6 lg:px-8 z-10"
@@ -521,6 +549,7 @@ export function ServicesPage() {
 
         </div>
       </section>
+      )}
     </main>
   );
 }
