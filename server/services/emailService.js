@@ -112,19 +112,31 @@ const sendContactNotifications = async (contact) => {
     );
   }
 
-  if (process.env.AUTO_REPLY_ENABLED === "true") {
+  if (String(process.env.AUTO_REPLY_ENABLED).trim().toLowerCase() === "true") {
+    const textContent = [
+      `Hi ${contact.firstName || contact.name},`,
+      "",
+      "Thanks for reaching out to BitBattles. We received your inquiry and will review it soon.",
+      "",
+      "Regards,",
+      "BitBattles ESP",
+    ].join("\n");
+
+    const htmlContent = `
+      <div style="font-family: sans-serif; color: #333;">
+        <p>Hi ${contact.firstName || contact.name},</p>
+        <p>Thanks for reaching out to BitBattles. We received your inquiry and will review it soon.</p>
+        <br/>
+        <p>Regards,<br/><strong>BitBattles ESP</strong></p>
+      </div>
+    `;
+
     notifications.push(
       sendMail({
         to: contact.email,
         subject: "Thanks for contacting BitBattles",
-        text: [
-          `Hi ${contact.firstName || contact.name},`,
-          "",
-          "Thanks for reaching out to BitBattles. We received your inquiry and will review it soon.",
-          "",
-          "Regards,",
-          "BitBattles ESP",
-        ].join("\n"),
+        text: textContent,
+        html: htmlContent,
       }),
     );
   }
