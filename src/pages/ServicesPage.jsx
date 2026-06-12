@@ -78,6 +78,7 @@ export function ServicesPage() {
   useEffect(() => {
     updateCoords();
     window.addEventListener("resize", updateCoords);
+    window.addEventListener("scroll", updateCoords);
 
     let observer;
     if (containerRef.current) {
@@ -92,6 +93,7 @@ export function ServicesPage() {
 
     return () => {
       window.removeEventListener("resize", updateCoords);
+      window.removeEventListener("scroll", updateCoords);
       if (observer) observer.disconnect();
       clearTimeout(timer);
       if (timerRef.current) {
