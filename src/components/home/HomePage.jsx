@@ -7,7 +7,6 @@ import { HomeHero } from "./HomeHero";
 import { AnimatedTestimonials } from "../ui/animated-testimonials";
 import { CometCard } from "../ui/comet-card";
 import { ContainerScroll } from "../ui/container-scroll-animation";
-import { FollowerPointerCard } from "../ui/following-pointer";
 import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
 import { StickyScroll } from "../ui/sticky-scroll-reveal";
 import { HoverBorderGradient } from "../ui/hover-border-gradient";
@@ -289,9 +288,8 @@ export function HomePage() {
           >
             {services.slice(0, 6).map((service, index) => (
               <motion.div key={service.id} variants={fadeUp}>
-                <FollowerPointerCard title={service.title}>
-                  <CometCard rotateDepth={9} translateDepth={10}>
-                    <article className="group relative flex min-h-[420px] flex-col overflow-hidden rounded-[2rem] bg-[linear-gradient(145deg,rgba(7,16,28,0.92),rgba(11,19,33,0.82))] p-8 shadow-[0_24px_70px_rgba(0,0,0,0.38),0_0_38px_rgba(255,78,18,0.12)] transition">
+                <CometCard rotateDepth={9} translateDepth={10}>
+                  <article className="group relative flex min-h-[420px] flex-col overflow-hidden rounded-[2rem] bg-[linear-gradient(145deg,rgba(7,16,28,0.92),rgba(11,19,33,0.82))] p-8 shadow-[0_24px_70px_rgba(0,0,0,0.38),0_0_38px_rgba(255,78,18,0.12)] transition">
                       <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full bg-bitOrange/12 blur-3xl transition group-hover:bg-bitOrange/22" />
                       <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-bitOrange/70 to-transparent" />
 
@@ -328,7 +326,6 @@ export function HomePage() {
                       </a>
                     </article>
                   </CometCard>
-                </FollowerPointerCard>
               </motion.div>
             ))}
           </motion.div>

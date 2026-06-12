@@ -5,11 +5,11 @@ import { TypeAnimation } from "react-type-animation";
 
 export function HomeHero() {
   return (
-    <section className="relative overflow-hidden bg-bitCharcoal px-5 py-20 sm:px-6 lg:px-8 lg:py-24">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-bitCharcoal px-5 pt-28 pb-12 sm:px-6 lg:px-8">
       <VantaBackground />
 
       {/* OVERLAY */}
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_72%_22%,rgba(9,75,168,0.34),transparent_31%),radial-gradient(circle_at_20%_32%,rgba(255,106,42,0.18),transparent_27%),linear-gradient(180deg,rgba(5,7,16,0.2),rgba(5,7,16,0.82)_76%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_72%_22%,rgba(9,75,168,0.34),transparent_31%),linear-gradient(180deg,rgba(5,7,16,0.2),rgba(5,7,16,0.82)_76%)]" />
 
       <div className="relative z-10 mx-auto grid min-h-[610px] max-w-[1280px] items-center gap-10 lg:grid-cols-[0.85fr_1.15fr]">
         

@@ -165,32 +165,32 @@ export function AboutPage() {
       </div>
       
       {/* Hero Section */}
-      <section className="relative mx-auto max-w-[1180px] px-5 py-24 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <section className="relative mx-auto max-w-[1400px] px-5 min-h-screen flex items-center pt-16 pb-12 sm:px-6 lg:px-12">
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="inline-flex rounded-md border border-bitOrange/40 bg-black/40 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">
+            <p className="inline-flex rounded-md border border-bitOrange/40 bg-black/40 px-3.5 py-2 text-xs font-black uppercase tracking-[0.2em] text-bitOrange">
               Who We Are
             </p>
-            <h1 className="mt-6 text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Pioneering the Next Era of <span className="text-bitOrange">Digital Innovation</span>.
+            <h1 className="mt-6 text-5xl font-black leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl">
+              Pioneering the Next Era of <br className="hidden lg:block" /><span className="text-bitOrange">Digital Innovation</span>.
             </h1>
-            <p className="mt-6 text-sm font-medium leading-7 text-slate-400 max-w-xl">
+            <p className="mt-8 text-base font-medium leading-8 text-slate-400 max-w-xl">
               BitBattles is a forward-thinking technology partner specializing in custom AI systems, enterprise applications, web solutions, and software architectures. We help modern businesses scale, automate, and dominate their digital spaces with elite product execution.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap gap-5">
               <a
                 href="/portfolio"
-                className="inline-flex items-center justify-center rounded-md bg-bitOrange px-6 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-500 hover:scale-[1.02]"
+                className="inline-flex items-center justify-center rounded-md bg-bitOrange px-8 py-4 text-base font-black text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-500 hover:scale-[1.02]"
               >
                 View Our Portfolio &rarr;
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-md border border-white/20 px-6 py-3 text-sm font-black text-white transition hover:border-bitOrange hover:text-bitOrange hover:scale-[1.02]"
+                className="inline-flex items-center justify-center rounded-md border border-white/20 px-8 py-4 text-base font-black text-white transition hover:border-bitOrange hover:text-bitOrange hover:scale-[1.02]"
               >
                 Get in Touch &rarr;
               </a>
@@ -202,10 +202,10 @@ export function AboutPage() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <div className="relative overflow-hidden rounded-2xl border border-bitOrange/30 bg-bitPanel p-3 shadow-[0_0_50px_rgba(255,106,42,0.12)]">
+            <div className="relative overflow-hidden rounded-2xl border border-bitOrange/30 bg-bitPanel p-4 shadow-[0_0_60px_rgba(255,106,42,0.15)]">
               <img
                 alt="BitBattles AI and Software Solutions"
-                className="w-full rounded-xl object-cover aspect-[4/3] relative z-10"
+                className="w-full rounded-xl object-cover aspect-[4/3] relative z-10 hover:scale-105 transition-transform duration-700"
                 src="/images/about-hero.png"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none rounded-xl" />

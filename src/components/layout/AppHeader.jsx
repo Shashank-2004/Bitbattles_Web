@@ -25,7 +25,7 @@ export function AppHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-white/8 bg-[#07101c]/95 backdrop-blur">
+      <header className="fixed inset-x-0 top-0 w-full z-50 border-b border-white/8 bg-[#07101c]/95 backdrop-blur">
         <nav className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-6 lg:px-8">
           <a className="flex min-w-[170px] items-center" href="/" aria-label="BitBattles home">
             <BrandLogo light size="lg" />

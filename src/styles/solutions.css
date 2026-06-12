@@ -62,7 +62,7 @@
   border-radius: 999px;
   background: rgba(255,106,42,0.08);
   padding: 0.35rem 1rem;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   font-weight: 900;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -95,7 +95,7 @@
   background-clip: text;
 }
 .sol-hero__desc {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   line-height: 1.85;
   color: var(--sol-text-muted);
   max-width: 560px;
@@ -114,7 +114,7 @@
   border-radius: 6px;
   background: var(--sol-orange);
   color: #fff;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   font-weight: 900;
   text-decoration: none;
   transition: background 0.22s, transform 0.22s, box-shadow 0.22s;
@@ -133,7 +133,7 @@
   border-radius: 6px;
   border: 1px solid var(--sol-border);
   color: #e2e8f0;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
   transition: border-color 0.22s, color 0.22s, background 0.22s;
@@ -155,14 +155,14 @@
 .sol-hero__stat-num {
   display: block;
   font-family: "Sora", sans-serif;
-  font-size: 1.7rem;
+  font-size: 2.2rem;
   font-weight: 900;
   color: var(--sol-orange);
   line-height: 1;
 }
 .sol-hero__stat-label {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--sol-text-muted);
   margin-top: 0.3rem;
@@ -179,7 +179,7 @@
   padding: 1.75rem;
 }
 .sol-hero__visual-tag {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -213,18 +213,18 @@
   flex-shrink: 0;
 }
 .sol-hero__visual-label {
-  font-size: 0.8rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #e2e8f0;
 }
 .sol-hero__visual-sublabel {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: var(--sol-text-muted);
   margin-top: 0.1rem;
 }
 .sol-hero__visual-chip {
   margin-left: auto;
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   font-weight: 900;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
@@ -243,7 +243,7 @@
 /* ── Eyebrow + Section Title ────────────────────────────────── */
 .sol-eyebrow {
   display: block;
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -259,7 +259,7 @@
   margin: 0;
 }
 .sol-section-desc {
-  font-size: 0.9rem;
+  font-size: 1.15rem;
   line-height: 1.85;
   color: var(--sol-text-muted);
   max-width: 600px;
@@ -341,7 +341,7 @@
   flex-shrink: 0;
 }
 .sol-card__label {
-  font-size: 0.63rem;
+  font-size: 0.8rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -350,13 +350,13 @@
 }
 .sol-card__title {
   font-family: "Sora", sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: #fff;
   margin: 0 0 0.75rem;
 }
 .sol-card__desc {
-  font-size: 0.82rem;
+  font-size: 1rem;
   line-height: 1.7;
   color: var(--sol-text-muted);
   flex: 1;
@@ -366,7 +366,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 900;
   color: var(--sol-orange);
   transition: gap 0.2s;
@@ -380,7 +380,7 @@
   margin-top: 1rem;
 }
 .sol-card__tag {
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 800;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
@@ -751,7 +751,7 @@
   margin-bottom: 0.85rem;
 }
 .sol-cta-banner__desc {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: var(--sol-text-muted);
   max-width: 520px;
   margin: 0 auto 2rem;
@@ -771,7 +771,7 @@
   border-radius: 6px;
   background: var(--sol-orange);
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 900;
   text-decoration: none;
   box-shadow: 0 8px 28px rgba(255,106,42,0.4);
@@ -790,7 +790,7 @@
   border-radius: 6px;
   border: 1px solid var(--sol-border);
   color: #e2e8f0;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
   transition: border-color 0.22s, color 0.22s, background 0.22s;
@@ -814,265 +814,267 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Compact pass: keep the same Solutions layout, but reduce the overall page footprint. */
-.sol-container {
-  max-width: 1080px;
-}
+/* Compact pass: keep the same Solutions layout, but reduce the overall page footprint on smaller screens. */
+@media (max-width: 1024px) {
+  .sol-container {
+    max-width: 1080px;
+  }
 
-.sol-hero {
-  padding: 4.25rem 0 3.75rem;
-}
+  .sol-hero {
+    padding: 4.25rem 0 3.75rem;
+  }
 
-.sol-hero__title {
-  font-size: clamp(2rem, 4.8vw, 3.35rem);
-  margin-bottom: 1rem;
-}
+  .sol-hero__title {
+    font-size: clamp(2rem, 4.8vw, 3.35rem);
+    margin-bottom: 1rem;
+  }
 
-.sol-hero__desc {
-  max-width: 500px;
-  margin-bottom: 1.6rem;
-  font-size: 0.86rem;
-  line-height: 1.7;
-}
+  .sol-hero__desc {
+    max-width: 500px;
+    margin-bottom: 1.6rem;
+    font-size: 0.86rem;
+    line-height: 1.7;
+  }
 
-.sol-hero__badge {
-  margin-bottom: 1rem;
-  padding: 0.28rem 0.8rem;
-  font-size: 0.62rem;
-}
+  .sol-hero__badge {
+    margin-bottom: 1rem;
+    padding: 0.28rem 0.8rem;
+    font-size: 0.62rem;
+  }
 
-.sol-hero__cta-primary,
-.sol-hero__cta-secondary {
-  padding: 0.62rem 1.25rem;
-  font-size: 0.76rem;
-}
+  .sol-hero__cta-primary,
+  .sol-hero__cta-secondary {
+    padding: 0.62rem 1.25rem;
+    font-size: 0.76rem;
+  }
 
-.sol-hero__stats {
-  gap: 1.3rem;
-  margin-top: 1.7rem;
-  padding-top: 1.35rem;
-}
+  .sol-hero__stats {
+    gap: 1.3rem;
+    margin-top: 1.7rem;
+    padding-top: 1.35rem;
+  }
 
-.sol-hero__stat-num {
-  font-size: 1.35rem;
-}
+  .sol-hero__stat-num {
+    font-size: 1.35rem;
+  }
 
-.sol-hero__stat-label {
-  font-size: 0.64rem;
-}
+  .sol-hero__stat-label {
+    font-size: 0.64rem;
+  }
 
-.sol-hero__visual {
-  padding: 1.15rem;
-}
+  .sol-hero__visual {
+    padding: 1.15rem;
+  }
 
-.sol-hero__visual-tag {
-  margin-bottom: 0.85rem;
-}
+  .sol-hero__visual-tag {
+    margin-bottom: 0.85rem;
+  }
 
-.sol-hero__visual-item {
-  gap: 0.65rem;
-  margin-bottom: 0.45rem;
-  padding: 0.58rem 0.75rem;
-}
+  .sol-hero__visual-item {
+    gap: 0.65rem;
+    margin-bottom: 0.45rem;
+    padding: 0.58rem 0.75rem;
+  }
 
-.sol-hero__visual-icon {
-  width: 1.9rem;
-  height: 1.9rem;
-  font-size: 1rem;
-}
+  .sol-hero__visual-icon {
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 1rem;
+  }
 
-.sol-hero__visual-label {
-  font-size: 0.74rem;
-}
+  .sol-hero__visual-label {
+    font-size: 0.74rem;
+  }
 
-.sol-hero__visual-sublabel {
-  font-size: 0.64rem;
-}
+  .sol-hero__visual-sublabel {
+    font-size: 0.64rem;
+  }
 
-.sol-section {
-  padding: 3.5rem 0;
-}
+  .sol-section {
+    padding: 3.5rem 0;
+  }
 
-.sol-eyebrow {
-  margin-bottom: 0.45rem;
-  font-size: 0.62rem;
-}
+  .sol-eyebrow {
+    margin-bottom: 0.45rem;
+    font-size: 0.62rem;
+  }
 
-.sol-section-title {
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
-}
+  .sol-section-title {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+  }
 
-.sol-section-desc {
-  max-width: 520px;
-  margin-top: 0.75rem;
-  font-size: 0.82rem;
-  line-height: 1.65;
-}
+  .sol-section-desc {
+    max-width: 520px;
+    margin-top: 0.75rem;
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
 
-.sol-section-divider {
-  margin-top: 0.75rem;
-}
+  .sol-section-divider {
+    margin-top: 0.75rem;
+  }
 
-.sol-cards-grid {
-  gap: 1rem;
-}
+  .sol-cards-grid {
+    gap: 1rem;
+  }
 
-.sol-card {
-  min-height: 0;
-  padding: 1.35rem 1.1rem;
-}
+  .sol-card {
+    min-height: 0;
+    padding: 1.35rem 1.1rem;
+  }
 
-.sol-card__icon-wrap {
-  width: 42px;
-  height: 42px;
-  margin-bottom: 0.9rem;
-  border-radius: 11px;
-  font-size: 1.15rem;
-}
+  .sol-card__icon-wrap {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 0.9rem;
+    border-radius: 11px;
+    font-size: 1.15rem;
+  }
 
-.sol-card__title {
-  margin-bottom: 0.55rem;
-  font-size: 0.98rem;
-}
+  .sol-card__title {
+    margin-bottom: 0.55rem;
+    font-size: 0.98rem;
+  }
 
-.sol-card__desc {
-  font-size: 0.76rem;
-  line-height: 1.55;
-}
+  .sol-card__desc {
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
 
-.sol-card__tag-row {
-  gap: 0.3rem;
-  margin-top: 0.75rem;
-}
+  .sol-card__tag-row {
+    gap: 0.3rem;
+    margin-top: 0.75rem;
+  }
 
-.sol-card__tag {
-  font-size: 0.56rem;
-  padding: 0.16rem 0.42rem;
-}
+  .sol-card__tag {
+    font-size: 0.56rem;
+    padding: 0.16rem 0.42rem;
+  }
 
-.sol-card__cta {
-  margin-top: 1rem;
-  font-size: 0.72rem;
-}
+  .sol-card__cta {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+  }
 
-.sol-detail-list {
-  gap: 3.25rem;
-  margin-top: 2.7rem;
-}
+  .sol-detail-list {
+    gap: 3.25rem;
+    margin-top: 2.7rem;
+  }
 
-.sol-detail-item {
-  gap: 2rem;
-}
+  .sol-detail-item {
+    gap: 2rem;
+  }
 
-.sol-detail-item__num {
-  font-size: 2.65rem;
-}
+  .sol-detail-item__num {
+    font-size: 2.65rem;
+  }
 
-.sol-detail-item__tag {
-  margin-bottom: 0.6rem;
-  font-size: 0.58rem;
-}
+  .sol-detail-item__tag {
+    margin-bottom: 0.6rem;
+    font-size: 0.58rem;
+  }
 
-.sol-detail-item__title {
-  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
-}
+  .sol-detail-item__title {
+    font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+  }
 
-.sol-detail-item__desc {
-  margin-bottom: 1rem;
-  font-size: 0.8rem;
-  line-height: 1.65;
-}
+  .sol-detail-item__desc {
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
 
-.sol-detail-item__feature {
-  font-size: 0.75rem;
-}
+  .sol-detail-item__feature {
+    font-size: 0.75rem;
+  }
 
-.sol-detail-item__visual {
-  padding: 1.2rem;
-}
+  .sol-detail-item__visual {
+    padding: 1.2rem;
+  }
 
-.sol-detail-item__visual-row {
-  margin-bottom: 0.45rem;
-  padding: 0.58rem 0.75rem;
-}
+  .sol-detail-item__visual-row {
+    margin-bottom: 0.45rem;
+    padding: 0.58rem 0.75rem;
+  }
 
-.sol-metrics-grid,
-.sol-testimonials-grid {
-  gap: 1rem;
-}
+  .sol-metrics-grid,
+  .sol-testimonials-grid {
+    gap: 1rem;
+  }
 
-.sol-metric-card,
-.sol-testimonial-card {
-  padding: 1.2rem;
-}
+  .sol-metric-card,
+  .sol-testimonial-card {
+    padding: 1.2rem;
+  }
 
-.sol-metric-card__icon {
-  margin-bottom: 0.55rem;
-  font-size: 1.35rem;
-}
+  .sol-metric-card__icon {
+    margin-bottom: 0.55rem;
+    font-size: 1.35rem;
+  }
 
-.sol-metric-card__num {
-  font-size: 1.85rem;
-}
+  .sol-metric-card__num {
+    font-size: 1.85rem;
+  }
 
-.sol-industries-grid {
-  gap: 0.75rem;
-}
+  .sol-industries-grid {
+    gap: 0.75rem;
+  }
 
-.sol-industry-chip {
-  padding: 0.9rem 0.55rem;
-}
+  .sol-industry-chip {
+    padding: 0.9rem 0.55rem;
+  }
 
-.sol-industry-chip__icon {
-  font-size: 1.25rem;
-}
+  .sol-industry-chip__icon {
+    font-size: 1.25rem;
+  }
 
-.sol-process-steps {
-  gap: 1rem;
-  margin-top: 2rem;
-}
+  .sol-process-steps {
+    gap: 1rem;
+    margin-top: 2rem;
+  }
 
-.sol-process-step {
-  padding: 1.35rem 0.9rem;
-}
+  .sol-process-step {
+    padding: 1.35rem 0.9rem;
+  }
 
-.sol-process-step__node {
-  width: 46px;
-  height: 46px;
-  margin-bottom: 0.75rem;
-  font-size: 1.05rem;
-}
+  .sol-process-step__node {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+  }
 
-.sol-process-step__title {
-  font-size: 0.86rem;
-}
+  .sol-process-step__title {
+    font-size: 0.86rem;
+  }
 
-.sol-process-step__desc {
-  font-size: 0.72rem;
-  line-height: 1.55;
-}
+  .sol-process-step__desc {
+    font-size: 0.72rem;
+    line-height: 1.55;
+  }
 
-.sol-testimonial-card__quote {
-  font-size: 0.78rem;
-  line-height: 1.6;
-}
+  .sol-testimonial-card__quote {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
 
-.sol-cta-banner {
-  padding: 2.35rem 1.75rem;
-}
+  .sol-cta-banner {
+    padding: 2.35rem 1.75rem;
+  }
 
-.sol-cta-banner__title {
-  font-size: clamp(1.35rem, 3vw, 2rem);
-}
+  .sol-cta-banner__title {
+    font-size: clamp(1.35rem, 3vw, 2rem);
+  }
 
-.sol-cta-banner__desc {
-  margin-bottom: 1.45rem;
-  font-size: 0.82rem;
-  line-height: 1.6;
-}
+  .sol-cta-banner__desc {
+    margin-bottom: 1.45rem;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
 
-.sol-cta-banner__btn-primary,
-.sol-cta-banner__btn-secondary {
-  padding: 0.68rem 1.55rem;
-  font-size: 0.78rem;
+  .sol-cta-banner__btn-primary,
+  .sol-cta-banner__btn-secondary {
+    padding: 0.68rem 1.55rem;
+    font-size: 0.78rem;
+  }
 }
