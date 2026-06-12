@@ -53,6 +53,144 @@ const teamMembers = [
   }
 ];
 
+const employeeMembers = [
+  {
+    id: "emp-1",
+    name: "Aarav Sharma",
+    role: "Senior Frontend Engineer",
+    shortBio: "Crafts high-performance interfaces with seamless interactions and animations.",
+    fullBio: "Aarav is a senior frontend specialist with over 5 years of experience building modern web applications. He is obsessed with page performance, accessibility, and micro-animations that make user interfaces feel alive.",
+    tags: ["React.js", "TypeScript", "Tailwind CSS"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "aarav@bitbattles.in",
+    skills: ["React & Next.js", "TypeScript", "CSS Architecture", "Web Performance", "Framer Motion"]
+  },
+  {
+    id: "emp-2",
+    name: "Riya Verma",
+    role: "UI/UX Product Designer",
+    shortBio: "Designs intuitive user journeys, wireframes, and stunning design systems.",
+    fullBio: "Riya is a user-centric product designer who translates complex technical workflows into simple, beautiful, and intuitive interfaces. She works closely with developers to ensure designs are implemented to perfection.",
+    tags: ["Figma", "Design Systems", "Prototyping"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "riya@bitbattles.in",
+    skills: ["User Research", "Wireframing", "High-Fi Prototyping", "Figma Design Systems", "Information Architecture"]
+  },
+  {
+    id: "emp-3",
+    name: "Kabir Mehta",
+    role: "DevOps & Cloud Engineer",
+    shortBio: "Automates complex CI/CD pipelines and manages scalable cloud services.",
+    fullBio: "Kabir is our cloud infrastructure wizard, ensuring maximum uptime and automated deployments. He focuses on containerization, security policies, and optimizing cloud costs for our enterprise solutions.",
+    tags: ["AWS", "Docker", "Kubernetes"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "kabir@bitbattles.in",
+    skills: ["AWS Cloud Management", "Docker & Kubernetes", "CI/CD (GitHub Actions)", "Terraform IaC", "Linux Administration"]
+  },
+  {
+    id: "emp-4",
+    name: "Aditya Rao",
+    role: "Senior Backend Developer",
+    shortBio: "Architects scalable, highly secure database structures and microservices.",
+    fullBio: "Aditya designs the engine that runs our enterprise applications. He is an expert in Node.js microservices, Postgres optimization, and building highly secure, token-authorized APIs.",
+    tags: ["Node.js", "PostgreSQL", "Redis"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "aditya@bitbattles.in",
+    skills: ["Node.js & Express", "PostgreSQL Optimization", "Microservices", "REST & GraphQL APIs", "Data Encryption"]
+  },
+  {
+    id: "emp-5",
+    name: "Meera Nair",
+    role: "AI/ML Solutions Engineer",
+    shortBio: "Fine-tunes neural nets and builds customized LLM integration flows.",
+    fullBio: "Meera specializes in deploying custom AI solutions. She works on fine-tuning language models, prompt engineering pipelines, and connecting local intelligence systems to client backend APIs.",
+    tags: ["Python", "PyTorch", "LLMs"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "meera@bitbattles.in",
+    skills: ["Python Programming", "PyTorch & TensorFlow", "LLM Integration", "NLP Pipelines", "Model Quantization"]
+  },
+  {
+    id: "emp-6",
+    name: "Siddharth Sen",
+    role: "Cybersecurity Analyst",
+    shortBio: "Conducts pentesting and secures critical software against vulnerabilities.",
+    fullBio: "Siddharth is our security champion. He audits code bases, tests network infrastructure, and establishes Identity and Access Management policies to meet enterprise compliance standards.",
+    tags: ["PenTesting", "IAM", "OWASP top 10"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "siddharth@bitbattles.in",
+    skills: ["Vulnerability Assessment", "Penetration Testing", "Security Compliance", "Network Auditing", "Access Control"]
+  }
+];
+
+const internMembers = [
+  {
+    id: "int-1",
+    name: "Neha Gupta",
+    role: "Software Development Intern",
+    shortBio: "Assists the web development team with frontend features and bug fixes.",
+    fullBio: "Neha is a final-year CS student who is passionate about web development. She is currently contributing to our responsive layouts and user onboarding flows.",
+    tags: ["React", "JavaScript", "CSS"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "neha.intern@bitbattles.in",
+    skills: ["HTML5 & CSS3", "JavaScript (ES6+)", "React Basics", "Git & Version Control"]
+  },
+  {
+    id: "int-2",
+    name: "Aryan Joshi",
+    role: "AI Research Intern",
+    shortBio: "Explores generative AI architectures and prompt templates.",
+    fullBio: "Aryan is researching vector search optimization and Retrieval Augmented Generation (RAG) models to improve our internal document-search speeds.",
+    tags: ["Python", "Vector Databases", "RAG"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "aryan.intern@bitbattles.in",
+    skills: ["Python", "SQL Basics", "Vector Embeddings", "Data Processing"]
+  },
+  {
+    id: "int-3",
+    name: "Tanya Kapoor",
+    role: "UI/UX Design Intern",
+    shortBio: "Supports product design by creating wireframes and UI components.",
+    fullBio: "Tanya is learning how to maintain complex design libraries in Figma and supports the product team by crafting responsive layouts and icons.",
+    tags: ["Figma", "UI Design", "Wireframing"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "tanya.intern@bitbattles.in",
+    skills: ["Figma Basics", "Wireframing", "Visual Branding", "Typography"]
+  },
+  {
+    id: "int-4",
+    name: "QA Intern",
+    role: "QA Engineering Intern",
+    shortBio: "Writes automated integration tests and logs system issues.",
+    fullBio: "Vikram works closely with the core backend team to write end-to-end unit tests and logs usability issues in beta test builds.",
+    tags: ["Jest", "Playwright", "Test Automation"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "vikram.intern@bitbattles.in",
+    skills: ["Manual Testing", "Jest Framework", "Playwright Automation", "Bug Reporting"]
+  },
+  {
+    id: "int-5",
+    name: "Rohan Das",
+    role: "Backend Developer Intern",
+    shortBio: "Helps design APIs, microservices, and database query schemas.",
+    fullBio: "Rohan supports the API developers by writing database queries and integrating third-party notification APIs.",
+    tags: ["Express", "MongoDB", "Node.js"],
+    image: "",
+    linkedin: "https://linkedin.com/company/bitbattles",
+    email: "rohan.intern@bitbattles.in",
+    skills: ["Node.js", "Express basics", "MongoDB queries", "API testing (Postman)"]
+  }
+];
+
 const getInitials = (name) => {
   return name
     .split(" ")
@@ -77,6 +215,56 @@ const ImageWithFallback = ({ src, alt, fallbackInitials, className }) => {
       className={className}
       onError={() => setError(true)}
     />
+  );
+};
+
+const ScrollingMemberCard = ({ member, onClick }) => {
+  return (
+    <article
+      className="group relative cursor-pointer overflow-hidden rounded-2xl border border-bitOrange/25 bg-[linear-gradient(145deg,rgba(7,16,28,0.98),rgba(11,19,33,0.92))] p-5 shadow-[0_0_24px_rgba(255,78,18,0.08)] transition duration-300 hover:-translate-y-1.5 hover:border-bitOrange/85 hover:shadow-[0_0_40px_rgba(255,106,42,0.18)] flex flex-col h-full w-[280px] shrink-0"
+      onClick={onClick}
+    >
+      {/* Ambient glow inside card */}
+      <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-bitOrange/10 blur-2xl transition group-hover:bg-bitOrange/20 pointer-events-none" />
+      
+      {/* Visual Header */}
+      <div className="relative overflow-hidden aspect-[4/3] bg-[#050710]/50 rounded-xl border border-white/5 shrink-0 z-10">
+        <ImageWithFallback
+          src={member.image}
+          alt={member.name}
+          fallbackInitials={getInitials(member.name)}
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-bitPanel via-transparent to-transparent opacity-60" />
+        
+        {/* Floating Action Button */}
+        <div className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-bitCharcoal/80 border border-white/10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md">
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </div>
+      </div>
+      {/* Card Content */}
+      <div className="p-0 pt-4 flex flex-col flex-grow z-10">
+        <h3 className="text-base font-black text-white">{member.name}</h3>
+        <p className="mt-0.5 text-[11px] font-bold text-slate-400">{member.role}</p>
+        <p className="mt-3 text-[11px] font-semibold leading-relaxed text-slate-500 flex-grow line-clamp-2">
+          {member.shortBio}
+        </p>
+        
+        {/* Tags */}
+        <div className="mt-4 flex flex-wrap gap-1.5 shrink-0">
+          {member.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="inline-block rounded-full border border-bitOrange/30 bg-bitOrange/5 px-2 py-0.5 text-[9px] font-black text-bitOrange"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
   );
 };
 
@@ -272,10 +460,10 @@ export function AboutPage() {
       </section>
 
       {/* Leadership & Team Section */}
-      <section className="relative px-5 py-24 sm:px-6 lg:px-8">
+      <section className="relative px-5 py-24 sm:px-6 lg:px-8 overflow-hidden">
         <div className="mx-auto max-w-[1180px]">
           <div className="text-center max-w-2xl mx-auto">
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">Our Visionaries</p>
+            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-bitOrange">Our Visionaries & Builders</p>
             <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl text-white">
               Meet Our <span className="bg-gradient-to-r from-bitOrange via-orange-400 to-yellow-500 bg-clip-text text-transparent">Leadership</span> & Team
             </h2>
@@ -283,63 +471,112 @@ export function AboutPage() {
               Click on any team member to learn more about their expertise and experience.
             </p>
           </div>
-          <motion.div
-            className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={containerVariants}
-          >
-            {teamMembers.map((member) => (
-              <motion.article
-                className="group relative cursor-pointer overflow-hidden rounded-2xl border border-bitOrange/25 bg-[linear-gradient(145deg,rgba(7,16,28,0.98),rgba(11,19,33,0.92))] p-6 shadow-[0_0_34px_rgba(255,78,18,0.10)] transition hover:-translate-y-2 hover:border-bitOrange/80 hover:shadow-[0_0_54px_rgba(255,106,42,0.22)] flex flex-col h-full"
-                key={member.id}
-                variants={cardVariants}
-                onClick={() => setSelectedMember(member)}
-              >
-                {/* Ambient glow inside card */}
-                <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-bitOrange/10 blur-2xl transition group-hover:bg-bitOrange/20" />
-                
-                {/* Visual Header */}
-                <div className="relative overflow-hidden aspect-[4/3] sm:aspect-square bg-[#050710]/50 rounded-xl border border-white/5 shrink-0 z-10">
-                  <ImageWithFallback
-                    src={member.image}
-                    alt={member.name}
-                    fallbackInitials={getInitials(member.name)}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bitPanel via-transparent to-transparent opacity-60" />
+
+          {/* Section 1: Core Leadership */}
+          <div className="mt-16">
+            <h3 className="text-xl font-black tracking-tight text-white mb-8 border-l-2 border-bitOrange pl-3">
+              Core Leadership
+            </h3>
+            <motion.div
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={containerVariants}
+            >
+              {teamMembers.map((member) => (
+                <motion.article
+                  className="group relative cursor-pointer overflow-hidden rounded-2xl border border-bitOrange/25 bg-[linear-gradient(145deg,rgba(7,16,28,0.98),rgba(11,19,33,0.92))] p-6 shadow-[0_0_34px_rgba(255,78,18,0.10)] transition hover:-translate-y-2 hover:border-bitOrange/80 hover:shadow-[0_0_54px_rgba(255,106,42,0.22)] flex flex-col h-full"
+                  key={member.id}
+                  variants={cardVariants}
+                  onClick={() => setSelectedMember(member)}
+                >
+                  {/* Ambient glow inside card */}
+                  <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-bitOrange/10 blur-2xl transition group-hover:bg-bitOrange/20" />
                   
-                  {/* Floating Action Button */}
-                  <div className="absolute top-4 right-4 z-10 p-2 rounded-full bg-bitCharcoal/80 border border-white/10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
+                  {/* Visual Header */}
+                  <div className="relative overflow-hidden aspect-[4/3] sm:aspect-square bg-[#050710]/50 rounded-xl border border-white/5 shrink-0 z-10">
+                    <ImageWithFallback
+                      src={member.image}
+                      alt={member.name}
+                      fallbackInitials={getInitials(member.name)}
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bitPanel via-transparent to-transparent opacity-60" />
+                    
+                    {/* Floating Action Button */}
+                    <div className="absolute top-4 right-4 z-10 p-2 rounded-full bg-bitCharcoal/80 border border-white/10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
                   </div>
-                </div>
-                {/* Card Content */}
-                <div className="p-0 pt-6 flex flex-col flex-grow z-10">
-                  <h3 className="text-lg font-black text-white">{member.name}</h3>
-                  <p className="mt-1 text-xs font-bold text-slate-400">{member.role}</p>
-                  <p className="mt-4 text-xs font-semibold leading-relaxed text-slate-500 flex-grow">
-                    {member.shortBio}
-                  </p>
-                  
-                  {/* Tags */}
-                  <div className="mt-6 flex flex-wrap gap-1.5 shrink-0">
-                    {member.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-block rounded-full border border-bitOrange/30 bg-bitOrange/5 px-2.5 py-1 text-[10px] font-black text-bitOrange"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  {/* Card Content */}
+                  <div className="p-0 pt-6 flex flex-col flex-grow z-10">
+                    <h3 className="text-lg font-black text-white">{member.name}</h3>
+                    <p className="mt-1 text-xs font-bold text-slate-400">{member.role}</p>
+                    <p className="mt-4 text-xs font-semibold leading-relaxed text-slate-500 flex-grow">
+                      {member.shortBio}
+                    </p>
+                    
+                    {/* Tags */}
+                    <div className="mt-6 flex flex-wrap gap-1.5 shrink-0">
+                      {member.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-block rounded-full border border-bitOrange/30 bg-bitOrange/5 px-2.5 py-1 text-[10px] font-black text-bitOrange"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Section 2: Employees (Our Specialists) */}
+          <div className="mt-24">
+            <h3 className="text-xl font-black tracking-tight text-white mb-2 border-l-2 border-bitOrange pl-3">
+              Our Specialists
+            </h3>
+            <p className="text-xs font-semibold text-slate-400 mb-8 pl-3">
+              Our dedicated full-time engineering, design, and operations builders.
+            </p>
+            
+            <div className="relative flex overflow-hidden w-full py-4 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-16 sm:before:w-32 before:bg-gradient-to-r before:from-bitCharcoal before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-16 sm:after:w-32 after:bg-gradient-to-l after:from-bitCharcoal after:to-transparent">
+              <div className="flex gap-5 shrink-0 animate-scroll hover:[animation-play-state:paused]" style={{ '--animation-duration': '35s', '--animation-direction': 'forwards' }}>
+                {employeeMembers.map((member) => (
+                  <ScrollingMemberCard key={`emp-${member.id}`} member={member} onClick={() => setSelectedMember(member)} />
+                ))}
+                {employeeMembers.map((member) => (
+                  <ScrollingMemberCard key={`emp-dup-${member.id}`} member={member} onClick={() => setSelectedMember(member)} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Section 3: Interns (Rising Talents) */}
+          <div className="mt-24">
+            <h3 className="text-xl font-black tracking-tight text-white mb-2 border-l-2 border-bitOrange pl-3">
+              Rising Talents
+            </h3>
+            <p className="text-xs font-semibold text-slate-400 mb-8 pl-3">
+              Aspiring developers, researchers, and designers contributing fresh ideas to our core projects.
+            </p>
+            
+            <div className="relative flex overflow-hidden w-full py-4 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-16 sm:before:w-32 before:bg-gradient-to-r before:from-bitCharcoal before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-16 sm:after:w-32 after:bg-gradient-to-l after:from-bitCharcoal after:to-transparent">
+              <div className="flex gap-5 shrink-0 animate-scroll hover:[animation-play-state:paused]" style={{ '--animation-duration': '30s', '--animation-direction': 'reverse' }}>
+                {internMembers.map((member) => (
+                  <ScrollingMemberCard key={`int-${member.id}`} member={member} onClick={() => setSelectedMember(member)} />
+                ))}
+                {internMembers.map((member) => (
+                  <ScrollingMemberCard key={`int-dup-${member.id}`} member={member} onClick={() => setSelectedMember(member)} />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -431,7 +668,6 @@ export function AboutPage() {
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* CTA Section */}
       <section className="relative px-5 py-24 sm:px-6 lg:px-8 bg-bitCharcoal">
         <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-bitOrange/30 bg-black px-8 py-14 shadow-[0_0_55px_rgba(255,106,42,0.22)] text-center">
@@ -460,5 +696,4 @@ export function AboutPage() {
         </div>
       </section>
     </main>
-  );
-}
+  ); }
