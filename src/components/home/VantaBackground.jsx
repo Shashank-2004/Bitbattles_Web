@@ -38,9 +38,9 @@ export function VantaBackground() {
           baseColor: 0x040816,
 
           // MORE 3D / DEPTH
-          blurFactor: 0.59,
+          blurFactor: 0.68,
           speed: 2.5,
-          zoom: 1.2,
+          zoom: 1.0,
         });
       } catch (error) {
         console.error("Vanta background failed to load:", error);

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "seed:portfolio": "node scripts/seedPortfolio.js"
+    "seed:portfolio": "node scripts/seedPortfolio.js",
+    "seed:careers": "node scripts/seedCareers.js"
   },
   "keywords": [],
   "author": "",

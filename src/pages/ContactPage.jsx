@@ -6,7 +6,7 @@ import { services } from "../data/services";
 const supportOptions = services.map((service) => service.title);
 const companyTypes = ["Startup", "Growing Business", "Agency / Partner"];
 const deadlines = ["1 month - 2 months", "2 months - 4 months", "4 months - 6 months", "6 months - 1 year", "Other"];
-const budgets = ["Please select", "Under Rs. 50,000", "Rs. 50,000 - Rs. 2,00,000", "Rs. 2,00,000 - Rs. 5,00,000", "Rs. 5,00,000+", "Not sure yet"];
+const budgets = ["Under Rs. 50,000", "Rs. 50,000 - Rs. 2,00,000", "Rs. 2,00,000 - Rs. 5,00,000", "Rs. 5,00,000+", "Not sure yet"];
 const initialFormData = { firstName: "", lastName: "", email: "", phone: "", company: "", companyType: "", support: [], summary: "", reference: "", attachmentName: "", attachment: null, website: "", deadline: "", budget: "Please select", comments: "" };
 const inputClass = "mt-2 w-full rounded-lg border border-white/10 bg-[#07101c] px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-bitOrange focus:bg-[#0b1321]";
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
@@ -98,36 +98,213 @@ export function ContactPage() {
           {status === "success" && <div className="mb-6 rounded-lg border border-green-300/30 bg-green-500/10 p-4 text-green-200"><p className="font-bold">Message sent successfully.</p><p className="text-sm">We will get back to you soon.</p></div>}
           {status === "error" && <div className="mb-6 rounded-lg border border-red-300/30 bg-red-500/10 p-4 text-red-200"><p className="font-bold">Error sending message</p><p className="text-sm">{errorMessage}</p></div>}
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <Field label="First Name" required><input className={inputClass} name="firstName" onChange={handleChange} required value={formData.firstName} /></Field>
-            <Field label="Last Name" required><input className={inputClass} name="lastName" onChange={handleChange} required value={formData.lastName} /></Field>
-            <Field label="Email" required><input className={inputClass} name="email" onChange={handleChange} required type="email" value={formData.email} /></Field>
-            <Field label="Phone number" required><input className={inputClass} name="phone" onChange={handleChange} required value={formData.phone} /></Field>
-            <Field label="Company name"><input className={inputClass} name="company" onChange={handleChange} value={formData.company} /></Field>
-            <div>
-              <p className="text-sm font-black text-white">You are a</p>
-              <div className="mt-3 flex flex-wrap gap-4">
-                {companyTypes.map((type) => <label className="flex items-center gap-2 text-sm text-slate-300" key={type}><input checked={formData.companyType === type} className="accent-bitOrange" name="companyType" onChange={handleChange} type="radio" value={type} />{type}</label>)}
-              </div>
-            </div>
-          </div>
+<div className="grid gap-6 md:grid-cols-2">
+  <Field label="First Name" required>
+    <input
+      className={inputClass}
+      name="firstName"
+      onChange={handleChange}
+      required
+      value={formData.firstName}
+    />
+  </Field>
 
-          <div className="mt-8">
-            <p className="text-sm font-black text-white">How can we support you?</p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {supportOptions.map((option) => <label className="flex items-center gap-3 rounded-lg border border-white/10 bg-[#0b1321] px-4 py-3 text-sm text-slate-300 transition hover:border-bitOrange/60" key={option}><input checked={formData.support.includes(option)} className="accent-bitOrange" name="support" onChange={handleChange} type="checkbox" value={option} />{option}</label>)}
-            </div>
-          </div>
+  <Field label="Last Name" required>
+    <input
+      className={inputClass}
+      name="lastName"
+      onChange={handleChange}
+      required
+      value={formData.lastName}
+    />
+  </Field>
 
-          <div className="mt-8"><Field label="Summary of the idea or product that you want us to work on" required><textarea className={`${inputClass} min-h-36`} name="summary" onChange={handleChange} required value={formData.summary} /></Field></div>
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            <Field label="Company website / Reference link"><input className={inputClass} name="reference" onChange={handleChange} type="url" value={formData.reference} /></Field>
-            <Field label="Attachments / Scope documents"><input className="mt-2 w-full rounded-lg border border-dashed border-white/15 bg-[#07101c] px-4 py-3 text-sm text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-bitOrange file:px-4 file:py-2 file:text-sm file:font-black file:text-white" name="attachment" onChange={handleChange} type="file" /></Field>
-          </div>
-          <div className="mt-8 grid gap-8 md:grid-cols-2">
-            <div><p className="text-sm font-black text-white">Deadline</p><div className="mt-3 space-y-3">{deadlines.map((deadline) => <label className="flex items-center gap-2 text-sm text-slate-300" key={deadline}><input checked={formData.deadline === deadline} className="accent-bitOrange" name="deadline" onChange={handleChange} type="radio" value={deadline} />{deadline}</label>)}</div></div>
-            <Field label="Your approximate budget?" required><select className={inputClass} name="budget" onChange={handleChange} required value={formData.budget}>{budgets.map((budget) => <option className="text-bitCharcoal" key={budget} value={budget}>{budget}</option>)}</select></Field>
-          </div>
+  <Field label="Email" required>
+    <input
+      className={inputClass}
+      name="email"
+      type="email"
+      placeholder="you@company.com"
+      onChange={handleChange}
+      required
+      value={formData.email}
+    />
+  </Field>
+
+  <Field label="Phone number" required>
+    <input
+      className={inputClass}
+      name="phone"
+      onChange={handleChange}
+      required
+      value={formData.phone}
+    />
+  </Field>
+
+  <Field label="Company name">
+    <input
+      className={inputClass}
+      name="company"
+      placeholder="Your company or startup"
+      onChange={handleChange}
+      value={formData.company}
+    />
+  </Field>
+
+  <div>
+    <p className="text-sm font-black text-white">
+      You are a
+    </p>
+
+    <div className="mt-3 flex flex-wrap gap-4">
+      {companyTypes.map((type) => (
+        <label
+          className="flex items-center gap-2 text-sm text-slate-300"
+          key={type}
+        >
+          <input
+            checked={formData.companyType === type}
+            className="accent-bitOrange"
+            name="companyType"
+            onChange={handleChange}
+            type="radio"
+            value={type}
+          />
+
+          {type}
+        </label>
+      ))}
+    </div>
+  </div>
+</div>
+
+<div className="mt-8">
+  <p className="text-sm font-black text-white">
+    How can we support you?
+  </p>
+
+  <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {supportOptions.map((option) => (
+      <label
+        className="
+          flex items-center gap-3 rounded-lg border
+          border-white/10 bg-[#0b1321]
+          px-4 py-3 text-sm text-slate-300
+          transition hover:border-bitOrange/60
+        "
+        key={option}
+      >
+        <input
+          checked={formData.support.includes(option)}
+          className="accent-bitOrange"
+          name="support"
+          onChange={handleChange}
+          type="checkbox"
+          value={option}
+        />
+
+        {option}
+      </label>
+    ))}
+  </div>
+</div>
+
+<div className="mt-8">
+  <Field
+    label="Summary of the idea or product that you want us to work on"
+    required
+  >
+    <textarea
+      className={`${inputClass} min-h-36`}
+      name="summary"
+      placeholder="Tell us about your idea, goals, features, timeline, or the problem you want to solve..."
+      onChange={handleChange}
+      required
+      value={formData.summary}
+    />
+  </Field>
+</div>
+
+<div className="mt-6 grid gap-6 md:grid-cols-2">
+  <Field label="Company website / Reference link">
+    <input
+      className={inputClass}
+      name="reference"
+      type="url"
+      placeholder="https://yourwebsite.com"
+      onChange={handleChange}
+      value={formData.reference}
+    />
+  </Field>
+
+  <Field label="Attachments / Scope documents">
+    <input
+      className="
+        mt-2 w-full rounded-lg border border-dashed
+        border-white/15 bg-[#07101c]
+        px-4 py-3 text-sm text-slate-300
+        file:mr-4 file:rounded-lg file:border-0
+        file:bg-bitOrange file:px-4 file:py-2
+        file:text-sm file:font-black file:text-white
+      "
+      name="attachment"
+      onChange={handleChange}
+      type="file"
+    />
+  </Field>
+</div>
+
+<div className="mt-8 grid gap-8 md:grid-cols-2">
+  <div>
+    <p className="text-sm font-black text-white">
+      Deadline
+    </p>
+
+    <div className="mt-3 space-y-3">
+      {deadlines.map((deadline) => (
+        <label
+          className="flex items-center gap-2 text-sm text-slate-300"
+          key={deadline}
+        >
+          <input
+            checked={formData.deadline === deadline}
+            className="accent-bitOrange"
+            name="deadline"
+            onChange={handleChange}
+            type="radio"
+            value={deadline}
+          />
+
+          {deadline}
+        </label>
+      ))}
+    </div>
+  </div>
+
+  <Field label="Your approximate budget?" required>
+    <select
+      className={inputClass}
+      name="budget"
+      onChange={handleChange}
+      required
+      value={formData.budget}
+    >
+      <option value="" className="bg-[#07101c] text-slate-400">
+        Select your budget range
+      </option>
+
+      {budgets.map((budget) => (
+        <option
+          className="bg-[#07101c] text-slate-400"
+          key={budget}
+          value={budget}
+        >
+          {budget}
+        </option>
+      ))}
+    </select>
+  </Field>
+</div>
           <div className="mt-8"><Field label="Any other comments?"><textarea className={`${inputClass} min-h-28`} name="comments" onChange={handleChange} value={formData.comments} /></Field></div>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs leading-6 text-slate-500">Your enquiry will be reviewed by the BitBattles team.</p>
@@ -136,15 +313,6 @@ export function ContactPage() {
             </motion.button>
           </div>
         </form>
-
-        <div className="mt-10 grid gap-4 text-sm text-slate-300 md:grid-cols-3">
-          {["Location", "Website", "Email"].map((label) => (
-            <div className="rounded-xl border border-bitOrange/25 bg-[#07101c] p-5" key={label}>
-              <p className="font-black text-white">{label}</p>
-              <p className="mt-2">{label === "Location" ? company.location : label === "Website" ? company.website : company.supportEmail}</p>
-            </div>
-          ))}
-        </div>
       </section>
     </main>
   );

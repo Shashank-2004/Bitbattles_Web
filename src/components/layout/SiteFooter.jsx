@@ -38,11 +38,15 @@ const socialLinks = [
   ["Facebook", company.facebook, <FaFacebookF />],
   ["Instagram", company.instagram, <FaInstagram />],
   ["Telegram", company.telegram, <FaTelegramPlane />],
-  ["Email", `mailto:${company.supportEmail}`, <MdEmail />],
+  [
+  "Email",
+  `https://mail.google.com/mail/?view=cm&fs=1&to=${company.supportEmail}`,
+  <MdEmail />
+],
 ];
 
 const legalLinks = [
-  ["Cookie Policy", "/privacy#cookies"],
+  ["Cookie Policy", "/privacy"],
   ["Privacy Policy", "/privacy"],
   ["Terms of Service", "/terms"],
 ];

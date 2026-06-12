@@ -9,10 +9,10 @@ export const company = {
   founded: "2023",
   size: "11-50 employees",
   website: "www.bitbattles.in",
-  supportEmail: "support@gmail.com",
-  inquiryEmail: "enquiry@gmail.com",
+  supportEmail: "support@bitbattles.in",
+  inquiryEmail: "enquiry@bitbattles.in",
   linkedin: "https://in.linkedin.com/company/bitbattles",
   facebook: "#",
-  instagram: "#",
+  instagram: "https://www.instagram.com/bitbattles_esp_pvt_ltd/",
   telegram: "#",
 };

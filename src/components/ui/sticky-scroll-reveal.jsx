@@ -55,10 +55,10 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="relative min-h-[96vh] overflow-hidden bg-transparent"
+      className="relative min-h-[84vh] overflow-hidden bg-transparent"
       ref={ref}>
-      <div className="sticky top-20 grid min-h-[54vh] items-center gap-8 bg-transparent py-4 md:grid-cols-[0.9fr_1fr]">
-        <div className="mx-auto w-full max-w-xl text-center md:mx-0 md:text-left">
+      <div className="sticky top-16 grid min-h-[48vh] items-center gap-8 bg-transparent py-0 md:grid-cols-[0.9fr_1fr]">
+        <div className="mx-auto w-full max-w-xl space-y-4 text-center md:mx-0 md:text-left">
           {content.map((item, index) => (
             <motion.div
               animate={{
@@ -66,8 +66,11 @@ export const StickyScroll = ({
                 scale: activeCard === index ? 1 : 0.97,
                 x: activeCard === index ? 0 : -8,
               }}
-              className="my-6 rounded-[1.4rem] bg-white/[0.035] px-6 py-5 shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-sm"
+              className="cursor-pointer rounded-[2rem] bg-white/[0.035] px-6 py-5 shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-sm transition hover:bg-white/[0.055]"
               key={item.title + index}
+              onFocus={() => setActiveCard(index)}
+              onMouseEnter={() => setActiveCard(index)}
+              tabIndex={0}
               transition={{ duration: 0.35, ease: "easeOut" }}
             >
               <div className="mb-4 h-px w-16 bg-gradient-to-r from-bitOrange via-orange-300 to-transparent md:mx-0 mx-auto" />
@@ -97,7 +100,7 @@ export const StickyScroll = ({
         <div
           style={{ background: backgroundGradient }}
 className={cn(
-  "hidden h-[24rem] w-full overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#0b1220]/95 via-[#07101c]/95 to-[#111827]/95 backdrop-blur-xl shadow-[0_0_80px_rgba(255,106,42,0.16)] lg:block",
+  "hidden h-[22rem] w-full overflow-hidden rounded-[3rem] bg-gradient-to-br from-[#0b1220]/95 via-[#07101c]/95 to-[#111827]/95 backdrop-blur-xl shadow-[0_0_80px_rgba(255,106,42,0.16)] lg:block",
   contentClassName
 )}>
           {content[activeCard].content ?? null}
